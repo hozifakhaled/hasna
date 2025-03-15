@@ -15,7 +15,7 @@ class SplashView extends StatelessWidget {
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashLoaded) {
-           GoRouter.of(context).push(Routes.home);
+           GoRouter.of(context).push(Routes.onboarding);
           }
         },
         child: SplashViewBody(),
