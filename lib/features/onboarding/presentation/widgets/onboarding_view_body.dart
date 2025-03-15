@@ -10,8 +10,8 @@ class OnboardingViewBody extends StatelessWidget {
       children: [
         Column(
           children: [
-            Text('حَسَنَةٌ',style:  TextStyles.text35.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
-            Text('حَسَنَةٌ',style:  TextStyles.text18.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
+            Text('حَسَنَةٌ',style:  TextStyles.text35.copyWith(color: Colors.white,fontWeight: FontWeight.w900),),
+            Text('حَسَنَةٌ',style:  TextStyles.text20.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
           MaterialButton(
             onPressed: (){},
             color: Colors.white,

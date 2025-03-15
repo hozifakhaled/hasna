@@ -24,10 +24,12 @@ class SplashViewBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("حَسَنَةٌ", style: TextStyles.splashscreenword),
+                Text("حَسَنَةٌ", style: TextStyles.text35.copyWith( fontWeight: FontWeight.w900,
+  color: Colors.white,)),
                 Text(
                   'HASNA',
-                  style: TextStyles.splashscreenword.copyWith(fontSize: 20.sp),
+                  style: TextStyles.text20.copyWith( fontWeight: FontWeight.w900,
+  color: Colors.white,),
                 ),
               ],
             ),
