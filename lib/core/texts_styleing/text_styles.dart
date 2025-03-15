@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TextStyles {
   static  TextStyle text18 = GoogleFonts.cairo(
     fontSize: 18.sp,
-   
+    fontWeight: FontWeight.w900,
   );
 static  TextStyle text20 = GoogleFonts.cairo(
     fontSize: 18.sp,
