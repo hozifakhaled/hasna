@@ -8,13 +8,11 @@ void main() {
 class Hasna extends StatelessWidget {
   const Hasna({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Hasna',
       routerConfig: AppRouting.router,
-     // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

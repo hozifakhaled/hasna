@@ -1,5 +1,6 @@
 class Routes {
-  static const String home = '/';
+  static const String splah = '/';
+  static const String home = '/home';
   static const String onboarding = '/onboarding';
   static const String prayTimers = '/prayTimers';
   static const String azkar = '/azkar';
