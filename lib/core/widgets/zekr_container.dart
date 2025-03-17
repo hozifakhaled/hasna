@@ -10,8 +10,6 @@ class ZekrContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        width: 107.w,
-        height: 107.h,
         decoration: BoxDecoration(
           color: AppColors.maincolor,
           borderRadius: BorderRadius.circular(15.r),
