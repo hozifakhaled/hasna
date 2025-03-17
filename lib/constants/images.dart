@@ -6,6 +6,22 @@ class Assets {
   /// assets/images/bearish 1.png
   static const String imagesBearish  = "assets/images/bearish 1.png";
 
+  /// Assets for imagesCornerbottomright
+  /// assets/images/cornerbottomright.png
+  static const String imagesCornerbottomright = "assets/images/cornerbottomright.png";
+
+  /// Assets for imagesCornerleftbottom
+  /// assets/images/cornerleftbottom.png
+  static const String imagesCornerleftbottom = "assets/images/cornerleftbottom.png";
+
+  /// Assets for imagesCornertopleft
+  /// assets/images/cornertopleft.png
+  static const String imagesCornertopleft = "assets/images/cornertopleft.png";
+
+  /// Assets for imagesCornertopright
+  /// assets/images/cornertopright.png
+  static const String imagesCornertopright = "assets/images/cornertopright.png";
+
   /// Assets for imagesOnbooardingimage
   /// assets/images/onbooardingimage.png
   static const String imagesOnbooardingimage = "assets/images/onbooardingimage.png";
