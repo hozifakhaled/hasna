@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
+import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
 import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
@@ -14,6 +15,10 @@ class AppRouting {
       GoRoute(
         path: Routes.onboarding,
         builder: (context, state) => const OnboardingView(),
+      ),
+          GoRoute(
+        path: Routes.hadith,
+        builder: (context, state) => const HadithView(),
       ),
       GoRoute(
         path: Routes.home,
