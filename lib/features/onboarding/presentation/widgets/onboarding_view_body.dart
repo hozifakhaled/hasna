@@ -36,7 +36,8 @@ class OnboardingViewBody extends StatelessWidget {
             child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){
              
             },))
-            child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){},))
+           // child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){},))
+
             ],
           ),
         ),
