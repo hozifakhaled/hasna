@@ -29,31 +29,11 @@ class OnboardingViewBody extends StatelessWidget {
             spacing: 20.h,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'حَسَنَةٌ',
-                style: TextStyles.text35.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              Text(
-                'اذكر الله يذكرك، واشكره يزدك',
-                style: TextStyles.text20.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: context.width * 0.6,
-                child: CustomButton(
-                  text: 'ابدأ الان',
-                  buttonbodycolor: Colors.white,
-                  textcolor: AppColors.maincolor,
-                  onTap: () {
-                    GoRouter.of(context).push(Routes.hadith);
-                  },
-                ),
-              ),
+              Text('حَسَنَةٌ',style:  TextStyles.text35.copyWith(color: Colors.white,fontWeight: FontWeight.w900),),
+              Text('اذكر الله يذكرك، واشكره يزدك',style:  TextStyles.text20.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
+          SizedBox(
+            width:context.width*0.6,
+            child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){},))
             ],
           ),
         ),

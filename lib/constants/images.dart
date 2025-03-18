@@ -2,7 +2,9 @@
 class Assets {
   Assets._();
   
-
+  /// Assets for imagesBearish1
+  /// assets/images/bearish1.png
+  static const String imagesBearish1 = "assets/images/bearish1.png";
 
   /// Assets for imagesCornerbottomright
   /// assets/images/cornerbottomright.png

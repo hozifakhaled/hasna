@@ -10,9 +10,10 @@ class CustomAppbar1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 25.w),
       width: double.infinity,
-      height: 70.h,
-      
+      height: 100.h,
+      color: AppColors.maincolor,
       decoration: BoxDecoration(
         color: AppColors.maincolor,
         borderRadius: BorderRadius.only(
@@ -21,7 +22,7 @@ class CustomAppbar1 extends StatelessWidget {
         ),
       ),
       child: Row(
-        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
         children: [
           Text(title,style:  TextStyles.text20.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
           Image.asset(Assets.imagesIconinappbar,width: 24.w,height: 24.h,)
