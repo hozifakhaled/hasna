@@ -10,12 +10,16 @@ class TextStyles {
 static  TextStyle text20 = GoogleFonts.cairo(
     fontSize: 18.sp,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: Colors.white,
   );
   static TextStyle text35 = GoogleFonts.cairo(
   fontSize: 35.sp,
   fontWeight: FontWeight.w900,
   color: Colors.white
 );
-
+static  TextStyle text21 = GoogleFonts.cairo(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w900,
+    color: Colors.white,
+  );
 }

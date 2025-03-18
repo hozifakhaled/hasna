@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hasna/constants/images.dart';
 import 'package:hasna/core/extention/extention.dart';
+import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/core/widgets/custom_button.dart';
@@ -31,7 +33,9 @@ class OnboardingViewBody extends StatelessWidget {
               Text('اذكر الله يذكرك، واشكره يزدك',style:  TextStyles.text20.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
           SizedBox(
             width:context.width*0.6,
-            child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){},))
+            child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){
+              GoRouter.of(context).push(Routes.prayes);
+            },))
             ],
           ),
         ),
