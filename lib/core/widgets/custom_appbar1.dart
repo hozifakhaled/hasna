@@ -12,7 +12,8 @@ class CustomAppbar1 extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25.w),
       width: double.infinity,
-      height: 50.h,
+      height: 100.h,
+      color: AppColors.maincolor,
       decoration: BoxDecoration(
         color: AppColors.maincolor,
         borderRadius: BorderRadius.only(

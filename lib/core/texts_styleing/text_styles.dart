@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import 'package:hasna/core/themeing/colors.dart';
 
 class TextStyles {
+   static  TextStyle text15 = GoogleFonts.cairo(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w900,
+color: Colors.black
+  );
   static  TextStyle text18 = GoogleFonts.cairo(
     fontSize: 18.sp,
     fontWeight: FontWeight.w900,

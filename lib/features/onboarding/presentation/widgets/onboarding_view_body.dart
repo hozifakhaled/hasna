@@ -17,11 +17,11 @@ class OnboardingViewBody extends StatelessWidget {
       children: [
         Positioned(
           bottom: 0,
-         // left: 0,
+          // left: 0,
           child: Image.asset(
             fit: BoxFit.fill,
-                  width: context.width,
-            Assets.imagesOnbooardingimage
+            width: context.width,
+            Assets.imagesOnbooardingimage,
           ),
         ),
         Center(
@@ -36,10 +36,10 @@ class OnboardingViewBody extends StatelessWidget {
             child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){
              
             },))
+            child: CustomButton(text: 'ابدأ الان',buttonbodycolor: Colors.white,textcolor: AppColors.maincolor,onTap: (){},))
             ],
           ),
         ),
-
       ],
     );
   }
