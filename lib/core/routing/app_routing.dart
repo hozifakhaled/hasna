@@ -20,6 +20,11 @@ class AppRouting {
         path: Routes.hadith,
         builder: (context, state) => const HadithView(),
       ),
+
+           GoRoute(
+        path: Routes.prayTimers,
+        builder: (context, state) => const PrayerstimersView(),
+      ),
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const HomeView(),
