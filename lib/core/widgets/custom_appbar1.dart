@@ -11,9 +11,10 @@ class CustomAppbar1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100.h,
-      color: AppColors.maincolor,
+      height: 70.h,
+      
       decoration: BoxDecoration(
+        color: AppColors.maincolor,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(15.r),
           bottomRight: Radius.circular(15.r),
