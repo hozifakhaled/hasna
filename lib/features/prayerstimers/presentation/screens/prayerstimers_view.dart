@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/features/prayerstimers/presentation/widgets/prayerstimers_view_body.dart';
 
 class PrayerstimersView extends StatelessWidget {
@@ -6,6 +7,11 @@ class PrayerstimersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PrayerstimersViewBody();
+    return SafeArea(
+      child: Scaffold(
+        body: PrayerstimersViewBody(),
+        backgroundColor: AppColors.thirdcolor,
+      ),
+    );
   }
 }

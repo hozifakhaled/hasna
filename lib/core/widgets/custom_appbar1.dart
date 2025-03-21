@@ -5,12 +5,13 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 
 class CustomAppbar1 extends StatelessWidget {
-  const CustomAppbar1({super.key, required this.title});
+  const CustomAppbar1({super.key, required this.title, this.image});
   final String title;
+  final String? image;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: double.infinity,
       height: 70.h,
      // color: AppColors.maincolor,
@@ -26,7 +27,7 @@ class CustomAppbar1 extends StatelessWidget {
         mainAxisAlignment:  MainAxisAlignment.spaceBetween,
         children: [
           Text(title,style:  TextStyles.text20.copyWith(color: Colors.white,fontWeight: FontWeight.bold),),
-          Image.asset(Assets.imagesIconinappbar,width: 24.w,height: 24.h,)
+          Image.asset(image?? Assets.imagesIconinappbar,width: 24.w,height: 24.h,)
         ],
       ),
     );

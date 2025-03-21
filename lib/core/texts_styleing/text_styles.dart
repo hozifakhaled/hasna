@@ -23,6 +23,11 @@ static  TextStyle text20 = GoogleFonts.cairo(
     fontWeight: FontWeight.w500,
 
   );
+    static TextStyle text30 = GoogleFonts.cairo(
+  fontSize: 30.sp,
+  fontWeight: FontWeight.w800,
+  //color: Colors.white
+);
   static TextStyle text35 = GoogleFonts.cairo(
   fontSize: 35.sp,
   fontWeight: FontWeight.w900,

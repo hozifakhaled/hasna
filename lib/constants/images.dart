@@ -29,6 +29,9 @@ class Assets {
   /// Assets for imagesMorevertical
   /// assets/images/Morevertical.png
   static const String imagesMorevertical = "assets/images/Morevertical.png";
+  /// Assets for imagesImageposla
+  /// assets/images/imageposla.png
+  static const String imagesImageposla = "assets/images/imageposla.png";
 
   /// Assets for imagesOnbooardingimage
   /// assets/images/onbooardingimage.png
