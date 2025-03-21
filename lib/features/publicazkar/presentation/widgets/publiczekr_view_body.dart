@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
-import 'package:hasna/features/publicazkar/presentation/widgets/container_in_zekrwidget.dart';
+import 'package:hasna/core/widgets/container_in_zekrwidget.dart';
 import 'package:hasna/features/publicazkar/presentation/widgets/zekr_wiget.dart';
 
 class PubliczekrViewBody extends StatelessWidget {
@@ -29,7 +29,8 @@ class PubliczekrViewBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, child: Icon(Icons.sync, color: AppColors.light,),),
+                    ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, color: AppColors.secondcolor,
+                    child: Icon(Icons.sync, color: AppColors.light,),),
                     Text(
                       'لَا يَزَالُ لِسَانُكَ رَطْبًا بِذِكْرِ اللَّهِ',
                       style: TextStyles.textwiget100.copyWith(color: AppColors.maincolor),
@@ -58,8 +59,10 @@ class PubliczekrViewBody extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                          ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, child: Icon(Icons.add, color: AppColors.light),),
-                        ContainerInZekrWidget(width: 120.0.w, height: 50.0.h, child: Row(
+                          ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, color: AppColors.secondcolor,
+                          child: Icon(Icons.add, color: AppColors.light,),),
+                        ContainerInZekrWidget(width: 120.0.w, height: 50.0.h, color: AppColors.secondcolor,
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('المجموع',style: TextStyles.textwiget100.copyWith(color: AppColors.light),),
