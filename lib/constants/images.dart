@@ -26,6 +26,10 @@ class Assets {
   /// assets/images/iconinappbar.png
   static const String imagesIconinappbar = "assets/images/iconinappbar.png";
 
+  /// Assets for imagesMorevertical
+  /// assets/images/Morevertical.png
+  static const String imagesMorevertical = "assets/images/Morevertical.png";
+
   /// Assets for imagesOnbooardingimage
   /// assets/images/onbooardingimage.png
   static const String imagesOnbooardingimage = "assets/images/onbooardingimage.png";

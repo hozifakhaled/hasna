@@ -18,6 +18,11 @@ static  TextStyle text20 = GoogleFonts.cairo(
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
+  static  TextStyle textwiget100 = GoogleFonts.cairo(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+
+  );
   static TextStyle text35 = GoogleFonts.cairo(
   fontSize: 35.sp,
   fontWeight: FontWeight.w900,
