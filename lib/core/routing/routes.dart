@@ -7,4 +7,6 @@ class Routes {
   static const String hadith = '/hadith';
   static const String tasbih = '/tasbih';
   static const String prayes = '/prayes';
+  static const String zaker = '/zaker';
+
 }
