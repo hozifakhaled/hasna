@@ -9,7 +9,7 @@ class Routes {
   static const String prayes = '/prayes';
 
   static const String publicazkar = '/publicazkar';
-
+static const String dpublicazkar = '/dpublicazkar';
   static const String zaker = '/zaker';
 
 }
