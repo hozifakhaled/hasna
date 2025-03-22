@@ -20,10 +20,7 @@ class TasbihaViewBody extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            /// ✅ يجعل الـ AppBar ثابتًا في الأعلى
             CustomeAppbar2(title: 'تسبيحه'),
-
-            /// ✅ يجعل العنصر في المنتصف بدون تحريك الـ AppBar
             Expanded(
               child: Center(
                 child: Container(
@@ -78,8 +75,6 @@ class TasbihaViewBody extends StatelessWidget {
                 ),
               ),
             ),
-
-            /// ✅ تحديد ارتفاع ثابت للـ `ListView.builder` لحل مشكلة unbounded height
           SizedBox(
   height: 80.h, // 🔹 تحديد ارتفاع مناسب للـ ListView
   child: ListView.builder(
@@ -87,12 +82,12 @@ class TasbihaViewBody extends StatelessWidget {
     scrollDirection: Axis.horizontal,
     itemCount: 4,
     itemBuilder: (context, index) => Padding(
-      padding: EdgeInsets.symmetric(horizontal: 11.w,vertical: 12.h), // ✅ إضافة مسافة بين العناصر
+      padding: EdgeInsets.symmetric(horizontal: 11.w,vertical: 12.h),
       child: ContainerInZekrWidget(
         width: 60,
-        height: 60, // 🔹 تأكد من ارتفاع مناسب
-        child:icons[index] == Icons.play_arrow ? Icon(icons[index],color: AppColors.light,) : Icon(icons[index],color: AppColors.secondcolor,),
+        height: 60,
         color: AppColors.thirdcolor,
+        child:icons[index] == Icons.play_arrow ? Icon(icons[index],color: AppColors.light,) : Icon(icons[index],color: AppColors.secondcolor,),
       ),
     ),
   ),
