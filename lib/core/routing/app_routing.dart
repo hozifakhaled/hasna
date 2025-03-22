@@ -7,7 +7,6 @@ import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_deta
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
 import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
-import 'package:hasna/features/tasbiha/presentation/screens/tasbiha_view.dart';
 import 'package:hasna/features/zeker/presentation/pages/zaker_view.dart';
 
 class AppRouting {

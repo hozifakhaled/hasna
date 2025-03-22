@@ -92,7 +92,6 @@ class TasbihaViewBody extends StatelessWidget {
     ),
   ),
 ),
-
           ],
         ),
       ),
