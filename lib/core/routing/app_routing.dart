@@ -38,6 +38,9 @@ class AppRouting {
       ),
       GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),
       GoRoute(path: Routes.publicazkar, builder: (context, state) => const PubliczekrView()),
+       GoRoute(path: Routes.dpublicazkar, builder: (context, state) => const PubliczakerDeatilsView()),
+      
+      
     ],
   );
 }
