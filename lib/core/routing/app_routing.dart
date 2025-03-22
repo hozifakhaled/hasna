@@ -3,6 +3,7 @@ import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
+import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
 import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
@@ -37,7 +38,9 @@ class AppRouting {
       ),
       GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),
       GoRoute(path: Routes.publicazkar, builder: (context, state) => const PubliczekrView()),
-      GoRoute(path: Routes.tasbiha, builder: (context, state) => const TasbihaView()),
+       GoRoute(path: Routes.dpublicazkar, builder: (context, state) => const PubliczakerDeatilsView()),
+      
+      
     ],
   );
 }
