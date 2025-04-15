@@ -26,8 +26,8 @@ class EveningRepositryImpli implements EveningRepositry {
       }
     } else {
      try {
-  final localUser = await local.getLastEveningZaker(page.toString());
-  return left(localUser);
+  final localEvening = await local.getLastEveningZaker(page.toString());
+  return left(localEvening);
 }  on ServerException catch (e) {
         return right(Failure(errMessage: e.errorModel.errorMessage));
       }
@@ -36,20 +36,3 @@ class EveningRepositryImpli implements EveningRepositry {
   }
  
   
-/*
- try {
-        final remoteUser = await remote.getUser(params);
-
-        local.cacheUser(remoteUser);
-        return Right(remoteUser);
-      } on ServerException catch (e) {
-        return Left(Failure(errMessage: e.errorModel.errorMessage));
-      }
-      
-        try {
-  final localUser = await local.getLastUser();
-  return right(localUser);
-}  on ServerException catch (e) {
-        return Left(Failure(errMessage: e.errorModel.errorMessage));
-      }
-      */

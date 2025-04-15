@@ -13,6 +13,7 @@ class DioConsumer implements ApiConsumer {
   final Dio dio;
 
   DioConsumer({required this.dio}) {
+    // ignore: deprecated_member_use
     (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =

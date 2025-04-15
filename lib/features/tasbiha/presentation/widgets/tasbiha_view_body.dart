@@ -60,6 +60,7 @@ class TasbihaViewBody extends StatelessWidget {
                             color: AppColors.light,
                             boxShadow:  [
                               BoxShadow(
+                                // ignore: deprecated_member_use
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 5,
                                 blurRadius: 7,

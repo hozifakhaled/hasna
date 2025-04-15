@@ -56,7 +56,7 @@ class ZakerBottomBar extends StatelessWidget {
                 ),
                 SizedBox(width: 10.w),
                 Text(
-                  '${totalAzker}/${currentAzker}',
+                  '$totalAzker/$currentAzker',
                   style: TextStyles.text20.copyWith(color: AppColors.maincolor),
                 ),
               ],

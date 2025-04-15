@@ -1,18 +1,18 @@
 import 'package:hasna/core/databases/api/dio_consumer.dart';
 import 'package:hasna/core/databases/api/endpoints.dart';
-import 'package:hasna/features/eveningazker/data/models/evening_model.dart';
+import 'package:hasna/features/morningazker/data/models/morning_model.dart';
 
-class EveningazkerDatasourceRemote {
+class MorningazkerDatasourceRemote {
   final DioConsumer dioConsumer;
-  EveningazkerDatasourceRemote({required this.dioConsumer});
+  MorningazkerDatasourceRemote({required this.dioConsumer});
 
-  Future<EveningModel> getEveningAzker({
+  Future<MorningModel> getMorningAzker({
     required int page,
   }) async {
     final response = await dioConsumer.get(
       path: Endpoints.eveningazkarsEndpoint,
       queryParameters: {'page': page},
     );
-    return EveningModel.fromJson(response);
+    return MorningModel.fromJson(response);
   }
 }

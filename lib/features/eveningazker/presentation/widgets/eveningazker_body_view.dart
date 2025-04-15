@@ -10,7 +10,7 @@ class EveningazkerBodyView extends StatefulWidget {
 
 class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
   final PageController _pageController = PageController();
-  int _currentPage = 0;
+  //int _currentPage = 0;
   final List<Widget> pages = [
     // Replace with your actual pages
     Zaker(
@@ -41,7 +41,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
       controller: _pageController,
       onPageChanged: (index) {
         setState(() {
-          _currentPage = index;
+       //   _currentPage = index;
         });
       },
       itemCount: 10,
