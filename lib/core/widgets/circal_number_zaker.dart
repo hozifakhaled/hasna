@@ -5,9 +5,9 @@ import 'package:hasna/core/themeing/colors.dart';
 
 class CircalNumberZaker extends StatelessWidget {
   const CircalNumberZaker({
-    super.key,
+    super.key, required this.number,
   });
-
+final int number ;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -23,7 +23,7 @@ class CircalNumberZaker extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            '1',
+           number.toString() ,
             style: TextStyles.text30.copyWith(color: AppColors.secondcolor),
           ),
         ),

@@ -4,37 +4,48 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/widgets/custome_appbar2.dart';
 
 class ColumnTextZaker extends StatelessWidget {
-  const ColumnTextZaker({
-    super.key,
-  });
-
+  const ColumnTextZaker({super.key, required this.zaker, required this.numberofzaker, required this.asnad});
+  
+  final String zaker;
+  final String numberofzaker;
+  final String asnad;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: CustomeAppbar2(title: 'أذكار المساء'),
-        ),
+       
         SizedBox(height: 30.h),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّةِ مِنْ شَرِّ مَا خَلَقَ',
+            zaker,
             style: TextStyles.text21.copyWith(color: Colors.white),
           ),
         ),
-        SizedBox(height: 20.h),
+         SizedBox(height: 20.h),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Divider(color: Colors.white, endIndent: 3, height: 3),
         ),
-        SizedBox(height: 10.h),
-    
+         SizedBox(height: 10.h),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'ثلاث مرات',
+            asnad,
+            style: TextStyles.text12.copyWith(
+              color: Colors.white,
+              
+            ),
+          ),
+        ),
+
+       
+        SizedBox(height: 10.h),
+
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            numberofzaker,
             style: TextStyles.text15.copyWith(color: Colors.white),
           ),
         ),
@@ -42,5 +53,3 @@ class ColumnTextZaker extends StatelessWidget {
     );
   }
 }
-
-
