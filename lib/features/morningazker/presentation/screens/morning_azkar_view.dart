@@ -5,12 +5,14 @@ import 'package:hasna/features/morningazker/presentation/cubit/morningazker_cubi
 import 'package:hasna/features/morningazker/presentation/widgets/morning_azkar_view_body.dart';
 
 class MorningAzkarView extends StatelessWidget {
-  const MorningAzkarView({super.key});
- 
+  const MorningAzkarView({super.key, required this.page});
+  final int page;
+  
   @override
   Widget build(BuildContext context) {
+    
     return BlocProvider(
-      create: (context) => sl<MorningazkerCubit>()..getMorningAzker(2),
+      create: (context) => sl<MorningazkerCubit>()..getMorningAzker( page),
       child: MorningAzkarViewBody(),
     );
   }

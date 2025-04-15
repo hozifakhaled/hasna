@@ -39,7 +39,15 @@ class AppRouting {
       GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),
       GoRoute(path: Routes.publicazkar, builder: (context, state) => const PubliczekrView()),
        GoRoute(path: Routes.dpublicazkar, builder: (context, state) => const PubliczakerDeatilsView()),
-      GoRoute(path: Routes.morningazkar, builder: (context, state) => const MorningAzkarView()),
+     GoRoute(
+  path: Routes.morningazkar,
+  builder: (context, state) {
+    // نحاول نجيب قيمة page من query parameters مثلاً: /morningazkar?page=2
+    final page = int.tryParse(state.uri.queryParameters['page'] ?? '1') ?? 1;
+    return MorningAzkarView(page: page);
+  },
+),
+
       
       
     ],
