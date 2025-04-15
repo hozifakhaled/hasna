@@ -9,7 +9,7 @@ class EveingazkerDatasourceLocal {
   final String keys = "CachedEveningAzker";
   EveingazkerDatasourceLocal({required this.cache});
 
-  cacheUser(EveningModel? eveningToCache,String key) {
+  cacheEveningzaker(EveningModel? eveningToCache,String key) {
     if (eveningToCache != null) {
       cache.saveData(
         key:keys+ key,
