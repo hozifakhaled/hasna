@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasna/core/databases/cache/cache_helper.dart';
 import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/routing/app_routing.dart';
 import 'package:hasna/core/themeing/themeapp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // مهم لتأجيل التشغيل
-
+   CacheHelper().init(); // استدعاء دالة إعداد موفر الخدمة
    setup(); // استدعاء الإعدادات وانتظار تهيئة SharedPreferences
 
   runApp(const Hasna());

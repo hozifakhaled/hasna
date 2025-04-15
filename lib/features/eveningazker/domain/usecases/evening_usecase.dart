@@ -6,7 +6,7 @@ import 'package:hasna/features/eveningazker/domain/repositories/evening_repositr
 class EveningUseCase {
   final EveningRepositry eveningRepositry;
   EveningUseCase({required this.eveningRepositry});
-  Future<Either<EveningModel, Failure>> getEveningAzker({int page = 1}) async {
+  Future<Either<EveningModel, Failure>> getEveningAzker({required int page }) async {
     return await eveningRepositry.getEveningAzker(page: page);
   }
 }

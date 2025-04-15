@@ -13,6 +13,20 @@ class EveningazkerDatasourceRemote {
       path: Endpoints.eveningazkarsEndpoint,
       queryParameters: {'page': page},
     );
-    return EveningModel.fromJson(response);
+    return response.fold(
+      (error) {
+        throw Exception("خطأ في الاتصال: $error");
+      },
+      (response) {
+        final data = response.data;
+
+        if (data is Map<String, dynamic>) {
+          return EveningModel.fromJson(data);
+        } else {
+          throw Exception("شكل البيانات غير صحيح");
+        }
+      },
+    );
   }
-}
+  }
+

@@ -10,7 +10,7 @@ class EveningModel extends EveningakerEntitiy {
     required super.totalAzkar,
   });
 
-  factory EveningModel.fromJson( json) {
+  factory EveningModel.fromJson(Map<String, dynamic> json) {
     final zekr = json['zekr'];
 
     return EveningModel(

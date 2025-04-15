@@ -7,16 +7,16 @@ import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart
 part 'eveningazker_state.dart';
 
 class EveningazkerCubit extends Cubit<EveningazkerState> {
-  EveningazkerCubit() : super(EveningazkerInitial());
+  EveningazkerCubit(this.eveningUseCase) : super(EveningazkerInitial());
 
   
-    EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
+   final EveningUseCase eveningUseCase ;
    
 
-  void getEveningAzker() async {
+  void getEveningAzker(int page) async {
     EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
     emit(EveningazkerLoading());
-    final result = await eveningUseCase.getEveningAzker();
+    final result = await eveningUseCase.getEveningAzker(page:page );
     result.fold(
       (eveningModel) {
         emit(EveningazkerLoaded(eveningakerEntitiy: eveningModel));
