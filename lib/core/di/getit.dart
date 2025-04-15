@@ -9,6 +9,7 @@ import 'package:hasna/features/eveningazker/data/datasources/eveningazker_dataso
 import 'package:hasna/features/eveningazker/data/repositories/evening_repositry_impli.dart';
 import 'package:hasna/features/eveningazker/domain/repositories/evening_repositry.dart';
 import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart';
+import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
 import 'package:hasna/features/morningazker/data/datasources/morningazker_datasource_local.dart';
 import 'package:hasna/features/morningazker/data/datasources/morningazker_datasource_remote.dart';
 import 'package:hasna/features/morningazker/data/repositories/morning_repositry_impli.dart';
@@ -63,4 +64,6 @@ sl.registerLazySingleton<MorningazkerDatasourceRemote>(
   
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
+  //cubit 
+  sl.registerFactory<EveningazkerCubit>( () => EveningazkerCubit());
 }

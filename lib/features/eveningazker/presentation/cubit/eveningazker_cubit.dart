@@ -13,10 +13,10 @@ class EveningazkerCubit extends Cubit<EveningazkerState> {
     EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
    
 
-  void getEveningAzker() async {
+  void getEveningAzker(int page) async {
     EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
     emit(EveningazkerLoading());
-    final result = await eveningUseCase.getEveningAzker();
+    final result = await eveningUseCase.getEveningAzker(page:page );
     result.fold(
       (eveningModel) {
         emit(EveningazkerLoaded(eveningakerEntitiy: eveningModel));
