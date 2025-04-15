@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/routing/app_routing.dart';
 import 'package:hasna/core/themeing/themeapp.dart';
 
-void main() {
+void main()async {
+  setup();
   runApp(const Hasna());
 }
 
