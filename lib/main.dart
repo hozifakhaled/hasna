@@ -5,8 +5,11 @@ import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/routing/app_routing.dart';
 import 'package:hasna/core/themeing/themeapp.dart';
 
-void main()async {
-  setup();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // مهم لتأجيل التشغيل
+
+   setup(); // استدعاء الإعدادات وانتظار تهيئة SharedPreferences
+
   runApp(const Hasna());
 }
 
@@ -16,22 +19,21 @@ class Hasna extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-       designSize: const Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
         theme: themeApp,
-         locale: Locale('ar', 'EG'), // تعيين اللغة إلى العربية (مصر)
-  supportedLocales: [
-    Locale('en', 'US'), // اللغة الإنجليزية
-    Locale('ar', 'EG'), // اللغة العربية
-  ],
-  localizationsDelegates: [
-    // ... app-specific localization delegate[s] here
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
+        locale: const Locale('ar', 'EG'),
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ar', 'EG'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         debugShowCheckedModeBanner: false,
         title: 'Hasna',
         routerConfig: AppRouting.router,
@@ -39,4 +41,3 @@ class Hasna extends StatelessWidget {
     );
   }
 }
-

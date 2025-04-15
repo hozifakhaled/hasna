@@ -9,10 +9,25 @@ class MorningazkerDatasourceRemote {
   Future<MorningModel> getMorningAzker({
     required int page,
   }) async {
-    final response = await dioConsumer.get(
+    final either = await dioConsumer.get(
       path: Endpoints.eveningazkarsEndpoint,
       queryParameters: {'page': page},
     );
-    return MorningModel.fromJson(response);
+
+    // تفكيك Either
+    return either.fold(
+      (error) {
+        throw Exception("خطأ في الاتصال: $error");
+      },
+      (response) {
+        final data = response.data;
+
+        if (data is Map<String, dynamic>) {
+          return MorningModel.fromJson(data);
+        } else {
+          throw Exception("شكل البيانات غير صحيح");
+        }
+      },
+    );
   }
 }

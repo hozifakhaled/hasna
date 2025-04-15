@@ -6,7 +6,7 @@ import 'package:hasna/features/morningazker/domain/repositories/morning_repositr
 class MorningingUsecase {
   final MorningRepositry morningRepositry;
   MorningingUsecase({required this.morningRepositry});
-  Future<Either<MorningModel, Failure>> getEveningAzker({required int page }) async {
+  Future<Either<MorningModel, Failure>> getmorningAzker({required int page }) async {
     return await morningRepositry.getMorningAzker(page: page);
   }
 }
