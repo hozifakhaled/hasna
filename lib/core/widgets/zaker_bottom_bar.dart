@@ -5,10 +5,9 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 
 class ZakerBottomBar extends StatelessWidget {
-  const ZakerBottomBar({
-    super.key,
-  });
-
+  const ZakerBottomBar({super.key, required this.totalAzker, required this.currentAzker});
+ final int totalAzker ;
+ final int currentAzker ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,16 +36,14 @@ class ZakerBottomBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10.w),
-        
+
                 Text(
                   'x1',
-                  style: TextStyles.text20.copyWith(
-                    color: AppColors.maincolor,
-                  ),
+                  style: TextStyles.text20.copyWith(color: AppColors.maincolor),
                 ),
               ],
             ),
-        
+
             Row(
               children: [
                 IconButton(
@@ -59,10 +56,8 @@ class ZakerBottomBar extends StatelessWidget {
                 ),
                 SizedBox(width: 10.w),
                 Text(
-                  '25/2',
-                  style: TextStyles.text20.copyWith(
-                    color: AppColors.maincolor,
-                  ),
+                  '${totalAzker}/${currentAzker}',
+                  style: TextStyles.text20.copyWith(color: AppColors.maincolor),
                 ),
               ],
             ),
