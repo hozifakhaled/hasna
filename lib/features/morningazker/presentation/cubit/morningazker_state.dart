@@ -8,3 +8,23 @@ abstract class MorningazkerState extends Equatable {
 }
 
 class MorningazkerInitial extends MorningazkerState {}
+
+class MorningazkerLoaded extends MorningazkerState {
+  final MorningakerEntitiy morningazkerEntitiy;
+
+  const MorningazkerLoaded({required this.morningazkerEntitiy});
+
+  @override
+  List<Object> get props => [morningazkerEntitiy];
+}
+
+class MorningazkerLoading extends MorningazkerState {}
+
+class MorningazkerError extends MorningazkerState {
+  final String errorMessage;
+
+  const MorningazkerError({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}

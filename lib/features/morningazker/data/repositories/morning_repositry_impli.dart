@@ -17,7 +17,7 @@ class MorningRepositryImpli implements MorningRepositry {
   @override
   Future<Either<MorningModel, Failure>> getMorningAzker({required int page})async {
   
-    if (await networkInfo.isConnected!) {
+    if (await networkInfo.isConnected) {
      try {
         final remoteMorning = await remote.getMorningAzker(page: page);
 

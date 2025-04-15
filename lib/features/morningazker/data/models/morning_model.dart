@@ -10,16 +10,16 @@ class MorningModel extends MorningakerEntitiy {
     required super.totalAzkar,
   });
 
-  factory MorningModel.fromJson( json) {
+  factory MorningModel.fromJson(Map<String, dynamic> json) {
     final zekr = json['zekr'];
 
     return MorningModel(
-      id: zekr['id'] as String,
-      description: zekr['description'] as String,
-      audioUrl: zekr['audioUrl'] as String,
-      esnadname: zekr['esnadname'] as String,
-      count: zekr['count'] as int,
-      totalAzkar: json['totalAzkar'] as int,
+      id: zekr['id'].toString(),
+      description: zekr['description'] ?? '',
+      audioUrl: zekr['audioUrl'] ?? '',
+      esnadname: zekr['esnadname'] ?? '',
+      count: zekr['count'] ?? 1,
+      totalAzkar: json['totalAzkar'] ?? 0,
     );
   }
 
