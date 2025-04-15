@@ -20,28 +20,20 @@ import 'package:hasna/features/morningazker/presentation/cubit/morningazker_cubi
 
 final sl = GetIt.instance;
 
-Future<void> setup() async {
-  // ✅ تسجيل CacheHelper وتهيئة SharedPreferences
-  sl.registerLazySingleton(() => CacheHelper());
-  await sl<CacheHelper>().init();
-
-  // ✅ تسجيل DataConnectionChecker
-  sl.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
-
-  // ✅ تسجيل Interceptor
+void setup() {
+  // Interceptor
   sl.registerLazySingleton<LoggerInterceptor>(() => LoggerInterceptor());
 
-  // ✅ تسجيل DioConsumer مع Interceptor
+  // Dio + LoggerInterceptor
   sl.registerLazySingleton(() {
     final dio = Dio();
     dio.interceptors.add(sl<LoggerInterceptor>());
     return DioConsumer(dio: dio);
   });
-
-  // ✅ تسجيل NetworkInfoImpl باستخدام DataConnectionChecker
+  // NetworkInfo
+    sl.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-
-  // ✅ تسجيل DataSources
+  // Datasource
   sl.registerLazySingleton<EveingazkerDatasourceLocal>(
     () => EveingazkerDatasourceLocal(cache: sl()),
   );
@@ -54,19 +46,22 @@ Future<void> setup() async {
   sl.registerLazySingleton<MorningazkerDatasourceRemote>(
     () => MorningazkerDatasourceRemote(dioConsumer: sl()),
   );
-
-  // ✅ تسجيل UseCases
+  // UseCase
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
-
-  // ✅ تسجيل Repositories
+  // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
   sl.registerLazySingleton<MorningRepositry>(
     () => MorningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
-  
+
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
+  //cubit
+  sl.registerFactory(() => EveningazkerCubit(sl()));
+
+
+  sl.registerFactory(() => MorningazkerCubit(sl()));
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
@@ -12,7 +13,7 @@ class EvenazkerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EveningazkerCubit()..getEveningAzker(1),
+      create: (context) => sl.get<EveningazkerCubit>()..getEveningAzker(1),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
