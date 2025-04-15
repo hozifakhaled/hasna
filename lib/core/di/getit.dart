@@ -5,6 +5,7 @@ import 'package:hasna/core/databases/api/interceptors.dart';
 import 'package:hasna/core/databases/cache/cache_helper.dart';
 import 'package:hasna/features/eveningazker/data/datasources/eveingazker_datasource_local.dart';
 import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_remote.dart';
+import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart';
 
 final sl = GetIt.instance;
 
@@ -25,6 +26,11 @@ void setup() {
   sl.registerLazySingleton<EveingazkerDatasourceLocal>(
     () => EveingazkerDatasourceLocal(cache: sl()),
   );
+
+  // UseCase
+   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
+  // Repository
+  
   sl.registerLazySingleton<EveningazkerDatasourceRemote>(
     () => EveningazkerDatasourceRemote(dioConsumer: sl()),
   );
