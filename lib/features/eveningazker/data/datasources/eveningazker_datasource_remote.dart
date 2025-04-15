@@ -18,7 +18,7 @@ class EveningazkerDatasourceRemote {
       (error) => Right("Error: $error"),
       (res) {
         if (res.data is Map<String, dynamic>) {
-          final model = EveningModel.fromJson(res.data['zekr']); // ملاحظة مهمة هنا
+          final model = EveningModel.fromJson(res.data['zekr']);
           return Left(model);
         } else {
           return Right("Invalid data format");
