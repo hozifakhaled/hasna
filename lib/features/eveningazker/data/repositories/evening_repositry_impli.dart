@@ -5,8 +5,10 @@ import 'package:hasna/features/eveningazker/domain/repositories/evening_repositr
 
 class EveningRepositryImpli implements EveningRepositry {
   @override
-  Either<Future<EveningModel>, Failure> getEveningAzker({int page = 1}) {
+  Future<Either<EveningModel, Failure>> getEveningAzker({required int page}) {
     // TODO: implement getEveningAzker
     throw UnimplementedError();
   }
+ 
+  
 }
