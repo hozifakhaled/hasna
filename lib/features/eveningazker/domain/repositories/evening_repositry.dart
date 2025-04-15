@@ -3,6 +3,6 @@ import 'package:hasna/core/errors/failure.dart';
 import 'package:hasna/features/eveningazker/data/models/evening_model.dart';
 
 abstract class EveningRepositry {
-  Either<Future<EveningModel>,Failure> getEveningAzker({int page = 1}); 
+  Future<Either<EveningModel, Failure>> getEveningAzker({int page = 1}); 
   // This method should be implemented in the concrete repository class.
 }
