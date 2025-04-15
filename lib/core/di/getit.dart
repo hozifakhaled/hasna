@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hasna/core/databases/api/dio_consumer.dart';
 import 'package:hasna/core/databases/api/interceptors.dart';
 import 'package:hasna/core/databases/cache/cache_helper.dart';
+import 'package:hasna/features/eveningazker/data/datasources/eveingazker_datasource_local.dart';
 import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_remote.dart';
 
 final sl = GetIt.instance;
@@ -21,11 +22,12 @@ void setup() {
   });
 
   // Datasource
+  sl.registerLazySingleton<EveingazkerDatasourceLocal>(
+    () => EveingazkerDatasourceLocal(cache: sl()),
+  );
   sl.registerLazySingleton<EveningazkerDatasourceRemote>(
     () => EveningazkerDatasourceRemote(dioConsumer: sl()),
   );
-
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
 }
-
