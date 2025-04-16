@@ -10,7 +10,7 @@ class MorningazkerDatasourceRemote {
     required int page,
   }) async {
     final either = await dioConsumer.get(
-      path: Endpoints.eveningazkarsEndpoint,
+      path: Endpoints.morningazkarsEndpoint,
       queryParameters: {'page': page},
     );
 
