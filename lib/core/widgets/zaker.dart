@@ -10,7 +10,7 @@ class Zaker extends StatelessWidget {
     required this.totalAzker,
     required this.currentAzker,
     required this.number,
-    required this.numberofzaker,
+    required this.numberofzaker, required this.onTap,
   });
  
   final String zaker;
@@ -19,6 +19,7 @@ class Zaker extends StatelessWidget {
   final int currentAzker;
   final int number;
   final String numberofzaker;
+   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,6 +32,7 @@ class Zaker extends StatelessWidget {
           number: number,
           numberofzaker: numberofzaker,
           currentAzker: currentAzker,
+          onTap: onTap,
         ),
       ),
     );

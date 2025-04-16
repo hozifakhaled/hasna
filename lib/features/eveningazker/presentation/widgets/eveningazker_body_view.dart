@@ -28,6 +28,13 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
             itemCount: state.eveningakerEntitiy.length,
             itemBuilder: (context, index) {
               return Zaker(
+                onTap: () {
+                  _pageController.animateToPage(
+                    index + 1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                  );
+                },
                 zaker: state.eveningakerEntitiy[index].description,
                 asnad: state.eveningakerEntitiy[index].esnadname,
                 totalAzker: state.eveningakerEntitiy.length,

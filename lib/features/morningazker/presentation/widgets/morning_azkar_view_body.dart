@@ -21,6 +21,9 @@ class MorningAzkarViewBody extends StatelessWidget {
           itemCount: state.morningazkerEntitiy.totalAzkar,
           itemBuilder: (context, index) {
             return Zaker(
+              onTap: () {
+                  
+                },
               zaker: state.morningazkerEntitiy.description,
               asnad: state.morningazkerEntitiy.esnadname,
               totalAzker: state.morningazkerEntitiy.totalAzkar,
