@@ -6,13 +6,14 @@ class EveningazkerDatasourceRemote {
   final DioConsumer dioConsumer;
   EveningazkerDatasourceRemote({required this.dioConsumer});
 
-  Future<EveningModel> getEveningAzker({
-    required int page,
-  }) async {
+  Future<List<EveningModel>> getEveningAzker(
+
+  ) async {
     final response = await dioConsumer.get(
       path: Endpoints.eveningazkarsEndpoint,
-      queryParameters: {'page': page},
+    
     );
+    List<EveningModel> eveningAzkarList = [];
     return response.fold(
       (error) {
         throw Exception("خطأ في الاتصال: $error");
@@ -21,7 +22,11 @@ class EveningazkerDatasourceRemote {
         final data = response.data;
 
         if (data is Map<String, dynamic>) {
-          return EveningModel.fromJson(data);
+         for (var item in data['azkar']) {
+            eveningAzkarList.add(EveningModel.fromJson(item));
+           
+          }
+           return eveningAzkarList;
         } else {
           throw Exception("شكل البيانات غير صحيح");
         }

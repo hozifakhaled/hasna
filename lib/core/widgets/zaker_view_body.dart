@@ -16,7 +16,7 @@ class ZakerViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ColumnTextZaker(zaker: zaker, numberofzaker: numberofzaker, asnad: asnad,),
+        Positioned.fill(child: ColumnTextZaker(zaker: zaker, numberofzaker: numberofzaker, asnad: asnad,)),
         Positioned(bottom: 0, child: ZakerBottomBar(totalAzker: totalAzker, currentAzker: currentAzker,)),
         CircalNumberZaker(number: number,),
       ],

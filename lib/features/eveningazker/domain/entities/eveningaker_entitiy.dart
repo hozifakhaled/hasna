@@ -4,7 +4,7 @@ class EveningakerEntitiy {
   final String audioUrl;
   final String esnadname;
   final int count;
-  final int totalAzkar;
+ 
 
   EveningakerEntitiy({
     required this.id,
@@ -12,6 +12,6 @@ class EveningakerEntitiy {
     required this.audioUrl,
     required this.esnadname,
     required this.count,
-    required this.totalAzkar,
+   
   });
 }

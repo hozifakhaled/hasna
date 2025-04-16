@@ -14,19 +14,19 @@ class EveningRepositryImpli implements EveningRepositry {
 
   EveningRepositryImpli(this.remote, this.local, {required this.networkInfo});
   @override
-  Future<Either<EveningModel, Failure>> getEveningAzker({required int page})async {
+  Future<Either<List<EveningModel>, Failure>> getEveningAzker()async {
     if (await networkInfo.isConnected!) {
      try {
-        final remoteEvening = await remote.getEveningAzker(page: page);
+        final remoteEvening = await remote.getEveningAzker();
 
-        local.cacheEveningzaker(remoteEvening, page.toString());
+        local.cacheEveningzaker(remoteEvening, );
         return left(remoteEvening);
       } on ServerException catch (e) {
         return right(Failure(errMessage: e.errorModel.errorMessage));
       }
     } else {
      try {
-  final localEvening = await local.getLastEveningZaker(page.toString());
+  final localEvening = await local.getLastEveningZaker();
   return left(localEvening);
 }  on ServerException catch (e) {
         return right(Failure(errMessage: e.errorModel.errorMessage));

@@ -10,45 +10,53 @@ class ColumnTextZaker extends StatelessWidget {
   final String asnad;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-       
-        SizedBox(height: 30.h),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            zaker,
-            style: TextStyles.text21.copyWith(color: Colors.white),
+    return SingleChildScrollView(
+     
+    
+      child: Column(
+        children: [
+         
+          SizedBox(height: 10.h),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              zaker,
+              style: TextStyles.text15.copyWith(color: Colors.white),
+            ),
           ),
-        ),
-         SizedBox(height: 20.h),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Divider(color: Colors.white, endIndent: 3, height: 3),
-        ),
-         SizedBox(height: 10.h),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            asnad,
-            style: TextStyles.text12.copyWith(
-              color: Colors.white,
+           SizedBox(height: 20.h),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Divider(color: Colors.white, endIndent: 3, height: 3),
+          ),
+           SizedBox(height: 10.h),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              asnad,
+              style: TextStyles.text12.copyWith(
+                color: Colors.white,
+                
+              ),
               
             ),
           ),
-        ),
-
-       
-        SizedBox(height: 10.h),
-
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            numberofzaker,
-            style: TextStyles.text15.copyWith(color: Colors.white),
+      
+         
+          SizedBox(height: 10.h),
+      
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              numberofzaker,
+              style: TextStyles.text15.copyWith(color: Colors.white),
+            ),
           ),
-        ),
-      ],
+
+           SizedBox(height: 150.h),
+      
+        ],
+      ),
     );
   }
 }
