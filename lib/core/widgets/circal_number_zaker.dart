@@ -15,8 +15,7 @@ final int number ;
       bottom: context.height * 0.03,
       right: context.width * 0.375,
       child: InkWell(
-          splashColor: Colors.grey,
-        highlightColor:Colors.grey.shade300 ,
+       
         onTap: onTap,
         child: Container(
           width: context.width * 0.25,

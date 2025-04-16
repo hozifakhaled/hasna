@@ -20,11 +20,8 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
         if (state is EveningazkerLoaded) {
           return PageView.builder(
             controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                //   _currentPage = index;
-              });
-            },
+       
+            
             itemCount: state.eveningakerEntitiy.length,
             itemBuilder: (context, index) {
               return Zaker(

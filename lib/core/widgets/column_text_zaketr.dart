@@ -15,8 +15,7 @@ class ColumnTextZaker extends StatelessWidget {
      
     
       child: InkWell(
-        splashColor: Colors.grey,
-        highlightColor:Colors.grey.shade300 ,
+        
         onTap: onTap,
         child: Column(
           children: [
