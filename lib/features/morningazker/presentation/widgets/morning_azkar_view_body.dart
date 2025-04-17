@@ -39,15 +39,15 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
       builder: (context, state) {
         if (state is MorningazkerLoaded) {
             return PageView.builder(
-          itemCount: state.morningazkerEntitiy.totalAzkar,
+          itemCount: state.morningazkerEntitiy.length,
           itemBuilder: (context, index) {
             return Zaker(
-              zaker: state.morningazkerEntitiy.description,
-              asnad: state.morningazkerEntitiy.esnadname,
-              totalAzker: state.morningazkerEntitiy.totalAzkar,
-              currentAzker: state.morningazkerEntitiy.totalAzkar,
-              number: state.morningazkerEntitiy.count,
-              numberofzaker: state.morningazkerEntitiy.count.toString(),
+              zaker: state.morningazkerEntitiy[index].description,
+              asnad: state.morningazkerEntitiy[index].esnadname,
+              totalAzker: state.morningazkerEntitiy[index].totalAzkar,
+              currentAzker: state.morningazkerEntitiy[index].count,
+              number: state.morningazkerEntitiy[index].count,
+              numberofzaker: state.morningazkerEntitiy[index].count.toString(),
             );
           },
         );
