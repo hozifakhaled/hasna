@@ -20,20 +20,24 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
         if (state is EveningazkerLoaded) {
           return PageView.builder(
             controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                //   _currentPage = index;
-              });
-            },
-            itemCount: state.eveningakerEntitiy.totalAzkar,
+       
+            
+            itemCount: state.eveningakerEntitiy.length,
             itemBuilder: (context, index) {
               return Zaker(
-                zaker: state.eveningakerEntitiy.description,
-                asnad: state.eveningakerEntitiy.esnadname,
-                totalAzker: state.eveningakerEntitiy.totalAzkar,
+                onTap: () {
+                  _pageController.animateToPage(
+                    index + 1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                  );
+                },
+                zaker: state.eveningakerEntitiy[index].description,
+                asnad: state.eveningakerEntitiy[index].esnadname,
+                totalAzker: state.eveningakerEntitiy.length,
                 currentAzker: index + 1,
-                number: state.eveningakerEntitiy.count,
-                numberofzaker: ' مرات ${state.eveningakerEntitiy.count} ',
+                number: state.eveningakerEntitiy[index].count,
+                numberofzaker: '${state.eveningakerEntitiy[index].count} مرات  ',
               );
             },
           );

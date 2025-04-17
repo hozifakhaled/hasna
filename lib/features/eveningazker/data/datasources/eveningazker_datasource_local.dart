@@ -9,12 +9,12 @@ class EveingazkerDatasourceLocal {
   final String keys = "CachedEveningAzker";
   EveingazkerDatasourceLocal({required this.cache});
 
-  cacheEveningzaker(EveningModel? eveningToCache,String key) {
+  cacheEveningzaker(List<EveningModel>? eveningToCache) {
     if (eveningToCache != null) {
       cache.saveData(
-        key:keys+ key,
+        key:keys,
         value: json.encode(
-          eveningToCache.toJson(),
+          eveningToCache.map((zaker)=>zaker.toJson()).toList(),
         ),
       );
     } else {
@@ -22,11 +22,14 @@ class EveingazkerDatasourceLocal {
     }
   }
 
-  Future<EveningModel> getLastEveningZaker(String key) {
-    final jsonString = cache.getDataString(key:keys+ key);
+  Future<List<EveningModel>> getLastEveningZaker() {
+    final jsonString = cache.getDataString(key:keys);
 
     if (jsonString != null) {
-      return Future.value(EveningModel.fromJson(json.decode(jsonString)));
+  final List<dynamic> decodedJson = json.decode(jsonString);
+    final List<EveningModel> eveningList = decodedJson.map((jsonItem) => EveningModel.fromJson(jsonItem)).toList();
+     
+      return Future.value(eveningList);
     } else {
       throw CacheExeption(errorMessage: "No Internet Connection");
     }

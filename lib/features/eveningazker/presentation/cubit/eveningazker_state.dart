@@ -10,7 +10,7 @@ abstract class EveningazkerState extends Equatable {
 class EveningazkerInitial extends EveningazkerState {}
 class EveningazkerLoading extends EveningazkerState {}
 class EveningazkerLoaded extends EveningazkerState {
-  final EveningakerEntitiy eveningakerEntitiy;
+  final List<EveningakerEntitiy> eveningakerEntitiy;
 
   const EveningazkerLoaded({required this.eveningakerEntitiy});
 

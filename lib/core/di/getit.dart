@@ -60,7 +60,7 @@ void setup() {
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
   //cubit
-  sl.registerFactory(() => EveningazkerCubit(sl()));
+  sl.registerLazySingleton(() => EveningazkerCubit(sl()));
 
 sl.registerLazySingleton(() => MorningazkerCubit(sl()));
 

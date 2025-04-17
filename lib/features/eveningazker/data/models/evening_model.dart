@@ -7,19 +7,18 @@ class EveningModel extends EveningakerEntitiy {
     required super.audioUrl,
     required super.esnadname,
     required super.count,
-    required super.totalAzkar,
+   
   });
 
   factory EveningModel.fromJson(Map<String, dynamic> json) {
-    final zekr = json['zekr'];
-
+  
     return EveningModel(
-      id: zekr['id'] as String,
-      description: zekr['description'] as String,
-      audioUrl: zekr['audioUrl'] as String,
-      esnadname: zekr['esnadname'] as String,
-      count: zekr['count'] as int,
-      totalAzkar: json['totalAzkar'] as int,
+      id: json['id'] as String,
+      description: json['description'] as String,
+      audioUrl: json['audioUrl'] as String,
+      esnadname: json['esnadname'] as String,
+      count: json['count'] as int,
+    
     );
   }
 
@@ -30,7 +29,7 @@ class EveningModel extends EveningakerEntitiy {
       'audioUrl': audioUrl,
       'esnadname': esnadname,
       'count': count,
-      'totalAzkar': totalAzkar,
+      
     };
   }
 }

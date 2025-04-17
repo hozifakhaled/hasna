@@ -27,66 +27,37 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
     super.dispose();
   }
 
- @override
-Widget build(BuildContext context) {
-  return BlocConsumer<MorningazkerCubit, MorningazkerState>(
-    listener: (context, state) {
-      if (state is MorningazkerError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(state.errorMessage)),
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<MorningazkerCubit, MorningazkerState>(
+      listener: (context, state) {
+        if (state is MorningazkerError) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+      },
+      builder: (context, state) {
+        if (state is MorningazkerLoaded) {
+            return PageView.builder(
+          itemCount: state.morningazkerEntitiy.totalAzkar,
+          itemBuilder: (context, index) {
+            return Zaker(
+              zaker: state.morningazkerEntitiy.description,
+              asnad: state.morningazkerEntitiy.esnadname,
+              totalAzker: state.morningazkerEntitiy.totalAzkar,
+              currentAzker: state.morningazkerEntitiy.totalAzkar,
+              number: state.morningazkerEntitiy.count,
+              numberofzaker: state.morningazkerEntitiy.count.toString(),
+            );
+          },
         );
-      }
-    },
-    builder: (context, state) {
-      if (state is MorningazkerLoading) {
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(), // عرض التحميل هنا بدلاً من شاشة سوداء
-          ),
-        );
-      } else if (state is MorningazkerLoaded) {
-        final azkarList = state.morningazkerEntitiy;
-        
-  return Scaffold(
-  body: SafeArea(
-    child: Column(
-      children: [
-        CustomeAppbar2(title: 'أذكار الصباح',),
-        const SizedBox(height: 20),
-        Expanded(
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: azkarList.length,
-            physics: const BouncingScrollPhysics(),
-            onPageChanged: (index) {
-              // final nextPage = index + 1;
-              // GoRouter.of(context).go('/morningazkar?page=$nextPage');
-            },
-            itemBuilder: (context, index) {
-              final zeker = azkarList[index];
-              return Zaker(
-                zaker: zeker.description,
-                asnad: zeker.esnadname,
-                totalAzker: azkarList.length,
-                currentAzker: index + 1,
-                number: zeker.count,
-                numberofzaker: zeker.count.toString(),
-              );
-            },
-          ),
-        ),
-      ],
-    ),
-  ),
-);
-
-      } else {
-        return const Scaffold(
-          body: Center(child: Text('لا توجد بيانات')),
-        );
-      }
-    },
-  );
-}
-
+        } else if (state is MorningazkerLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return const Center(child: Text('Error loading azkar'));
+        }
+      
+      },
+    );
+  }
 }
