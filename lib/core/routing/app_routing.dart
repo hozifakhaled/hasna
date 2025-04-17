@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
+import 'package:hasna/features/azkar/presentation/screens/azkar_view.dart';
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
@@ -39,14 +40,16 @@ class AppRouting {
       GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),
       GoRoute(path: Routes.publicazkar, builder: (context, state) => const PubliczekrView()),
        GoRoute(path: Routes.dpublicazkar, builder: (context, state) => const PubliczakerDeatilsView()),
-     GoRoute(
+    GoRoute(
   path: Routes.morningazkar,
   builder: (context, state) {
-    // نحاول نجيب قيمة page من query parameters مثلاً: /morningazkar?page=2
-    final page = int.tryParse(state.uri.queryParameters['page'] ?? '1') ?? 1;
-    return MorningAzkarView(page: page);
+  
+    return MorningAzkarView();
   },
 ),
+GoRoute(path: Routes.azkar, builder: (context, state) => const AZkarView()),
+
+
 
       
       

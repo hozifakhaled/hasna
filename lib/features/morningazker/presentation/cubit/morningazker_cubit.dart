@@ -7,18 +7,32 @@ part 'morningazker_state.dart';
 
 class MorningazkerCubit extends Cubit<MorningazkerState> {
   final MorningingUsecase morningingUsecase;
+
   MorningazkerCubit(this.morningingUsecase) : super(MorningazkerInitial());
 
-  void getMorningAzker(int page) async {
+  void getAllMorningAzker() async {
     emit(MorningazkerLoading());
-    final result = await morningingUsecase.getmorningAzker(page: page);
+    final result = await morningingUsecase.getmorningAzker(); // بدون صفحة
+
     result.fold(
-      (morningModel) {
-        emit(MorningazkerLoaded(morningazkerEntitiy: morningModel));
+      (azkarList) {
+        emit(MorningazkerLoaded(morningazkerEntitiy: azkarList));
       },
       (error) {
         emit(MorningazkerError(errorMessage: error.toString()));
       },
     );
+  }
+
+  void initializeIfNeeded() {
+  if (state is! MorningazkerLoaded) {
+    getAllMorningAzker();
+  }
+}
+
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }

@@ -1,31 +1,29 @@
 import 'package:hasna/core/databases/api/dio_consumer.dart';
 import 'package:hasna/core/databases/api/endpoints.dart';
+import 'package:hasna/core/errors/error_model.dart';
+import 'package:hasna/core/errors/expentions.dart';
 import 'package:hasna/features/morningazker/data/models/morning_model.dart';
 
 class MorningazkerDatasourceRemote {
   final DioConsumer dioConsumer;
+
   MorningazkerDatasourceRemote({required this.dioConsumer});
 
-  Future<MorningModel> getMorningAzker({
-    required int page,
-  }) async {
-    final either = await dioConsumer.get(
-      path: Endpoints.morningazkarsEndpoint,
-      queryParameters: {'page': page},
-    );
+  Future<List<MorningModel>> getMorningAzker() async {
+    final either = await dioConsumer.get(path: Endpoints.morningazkarsEndpoint);
 
-    // تفكيك Either
     return either.fold(
       (error) {
-        throw Exception("خطأ في الاتصال: $error");
+        throw ServerException(ErrorModel(
+            status: 500, errorMessage: "خطأ في الاتصال: $error"));
       },
       (response) {
         final data = response.data;
-
         if (data is Map<String, dynamic>) {
-          return MorningModel.fromJson(data);
+          return MorningModel.fromJsonList(data);
         } else {
-          throw Exception("شكل البيانات غير صحيح");
+          throw ServerException(
+              ErrorModel(errorMessage: "Invalid data format", status: 500));
         }
       },
     );

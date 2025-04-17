@@ -10,7 +10,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // مهم لتأجيل التشغيل
    CacheHelper().init(); // استدعاء دالة إعداد موفر الخدمة
    setup(); // استدعاء الإعدادات وانتظار تهيئة SharedPreferences
-
   runApp(const Hasna());
 }
 
