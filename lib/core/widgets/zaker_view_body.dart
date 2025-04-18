@@ -19,7 +19,7 @@ class ZakerViewBody extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(child: ColumnTextZaker( onTap: onTap,zaker: zaker, numberofzaker: numberofzaker, asnad: asnad,)),
-        Positioned(bottom: 0, child: ZakerBottomBar(totalAzker: totalAzker, currentAzker: currentAzker,)),
+        Positioned(bottom: 0, child: ZakerBottomBar(totalAzker: totalAzker, currentAzker: currentAzker, audioUrl: audioUrl,)),
         CircalNumberZaker(number: number, onTap: onTap,),
       ],
     );
