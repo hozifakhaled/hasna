@@ -17,17 +17,22 @@ class MorningModel extends MorningakerEntitiy {
       audioUrl: json['audioUrl'] ?? '',
       esnadname: json['esnadname'] ?? '',
       count: int.tryParse(json['count'].toString()) ?? 1,
-      totalAzkar: int.tryParse(json['totalAzkar'].toString()) ?? 0,
+      totalAzkar: 0, // هيتم تحديثها بعدين باستخدام copyWith
     );
   }
 
   static List<MorningModel> fromJsonList(Map<String, dynamic> json) {
     final azkarList = json['azkar'] as List<dynamic>?;
+    final totalAzkar = int.tryParse(json['totalAzkar'].toString()) ?? 0;
 
     if (azkarList == null) return [];
 
     return azkarList
-        .map((item) => MorningModel.fromJson(item as Map<String, dynamic>))
+        .map((item) {
+          final parsedItem =
+              MorningModel.fromJson(item as Map<String, dynamic>);
+          return parsedItem.copyWith(totalAzkar: totalAzkar);
+        })
         .toList();
   }
 
@@ -42,7 +47,21 @@ class MorningModel extends MorningakerEntitiy {
     };
   }
 
-   
-
-  
+  MorningModel copyWith({
+    String? id,
+    String? description,
+    String? audioUrl,
+    String? esnadname,
+    int? count,
+    int? totalAzkar,
+  }) {
+    return MorningModel(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      audioUrl: audioUrl ?? this.audioUrl,
+      esnadname: esnadname ?? this.esnadname,
+      count: count ?? this.count,
+      totalAzkar: totalAzkar ?? this.totalAzkar,
+    );
+  }
 }

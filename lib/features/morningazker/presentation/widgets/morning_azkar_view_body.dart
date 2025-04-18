@@ -70,11 +70,11 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
                 onTap: () {
                   BlocProvider.of<MorningazkerCubit>(context).EcdCount(index);
                 },
-                audioUrl: item.audioUrl ?? 'https://res.cloudinary.com/dtb8omfnm/video/upload/v1743514371/WhatsApp_Audio_2025-04-01_at_3.02.41_PM_uvyfbv.m4a',
+                audioUrl: item.audioUrl,
                 zaker: item.description,
                 asnad: item.esnadname,
-                totalAzker: item.totalAzkar,
-                currentAzker: item.count,
+                totalAzker:state.morningazkerEntitiy.length,
+                currentAzker: index + 1,
                 number: item.count,
                 numberofzaker: item.count.toString(),
               );
