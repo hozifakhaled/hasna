@@ -34,7 +34,7 @@ class AppRouting {
         builder: (context, state) => const HomeView(),
       ),
        GoRoute(
-        path: Routes.zaker,
+        path: Routes.eveningazkar,
         builder: (context, state) => const EvenazkerView(),
       ),
       GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),

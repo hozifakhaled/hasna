@@ -42,7 +42,6 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
                     }
                   });
                 },
-                audioUrl: state.eveningakerEntitiy[index].audioUrl,
                 zaker: state.eveningakerEntitiy[index].description,
                 asnad: state.eveningakerEntitiy[index].esnadname,
                 totalAzker: state.eveningakerEntitiy.length,
@@ -50,6 +49,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
                 number: counts![index],
                 numberofzaker:
                     '${state.eveningakerEntitiy[index].count} مرات  ',
+                audioUrl: state.eveningakerEntitiy[index].audioUrl,
               );
             },
           );
@@ -62,4 +62,3 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
     );
   }
 }
-

@@ -23,20 +23,34 @@ class ZakerBottomBar extends StatefulWidget {
 
 class _ZakerBottomBarState extends State<ZakerBottomBar> {
   late AudioPlayer _audioPlayer;
+  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
+
+    // عند انتهاء الصوت، نرجع حالة التشغيل إلى false
+    _audioPlayer.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
+        setState(() {
+          _isPlaying = false;
+        });
+      }
+    });
   }
 
-  Future<void> _playAudio() async {
+  Future<void> _togglePlayPause() async {
     try {
-      if (_audioPlayer.playing) {
-        await _audioPlayer.stop();
+      if (_isPlaying) {
+        await _audioPlayer.pause();
+      } else {
+        await _audioPlayer.setUrl(widget.audioUrl);
+        await _audioPlayer.play();
       }
-      await _audioPlayer.setUrl(widget.audioUrl);
-      await _audioPlayer.play();
+      setState(() {
+        _isPlaying = !_isPlaying;
+      });
     } catch (e) {
       debugPrint("❌ Error playing audio: $e");
       ScaffoldMessenger.of(context).showSnackBar(
@@ -71,11 +85,11 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
             Row(
               children: [
                 IconButton(
-                  onPressed: _playAudio,
-                  icon: const Icon(
-                    Icons.arrow_left,
+                  onPressed: _togglePlayPause,
+                  icon: Icon(
+                    _isPlaying ? Icons.pause : Icons.play_arrow,
                     color: AppColors.maincolor,
-                    size: 55,
+                    size: 35,
                   ),
                 ),
                 SizedBox(width: 10.w),
@@ -88,7 +102,7 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {}, // نجمة المفضلة، يمكنك ربطها بالـ Cubit لاحقًا
+                  onPressed: () {}, // زر المفضلة، لاحقًا
                   icon: const Icon(
                     Icons.star_border,
                     color: AppColors.maincolor,

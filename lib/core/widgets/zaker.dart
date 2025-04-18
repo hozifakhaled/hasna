@@ -33,7 +33,7 @@ class Zaker extends StatelessWidget {
           number: number,
           numberofzaker: numberofzaker,
           currentAzker: currentAzker,
-          onTap: onTap, audioUrl: '',
+          onTap: onTap, audioUrl: audioUrl,
         ),
       ),
     );
