@@ -1,0 +1,38 @@
+// build.gradle (Project level)
+
+buildscript {
+    ext.kotlin_version = '1.9.10' // ✅ تحديث كوتلن
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.1.0" // ✅ تحديث الجريدل
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+allprojects {
+    repositories {
+        google()  // استخدام مستودع جوجل
+        mavenCentral()  // استخدام مستودع Maven
+    }
+}
+
+rootProject.buildDir = "../build" // تحديد مسار مجلد البناء للمشروع الجذري
+
+subprojects {
+    // تخصيص مجلد البناء لكل مشروع فرعي
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+subprojects {
+    // التأكد من أن المشروع الفرعي 'app' يتم تحليله قبل المشاريع الأخرى
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    // تعريف مهمة تنظيف لحذف مجلد البناء
+    delete rootProject.buildDir
+}
