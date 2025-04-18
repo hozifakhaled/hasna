@@ -30,12 +30,14 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
     super.initState();
     _audioPlayer = AudioPlayer();
 
-    // عند انتهاء الصوت، نرجع حالة التشغيل إلى false
+    // عند انتهاء الصوت نرجع زر التشغيل
     _audioPlayer.playerStateStream.listen((state) {
       if (state.processingState == ProcessingState.completed) {
-        setState(() {
-          _isPlaying = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isPlaying = false;
+          });
+        }
       }
     });
   }
@@ -44,18 +46,30 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
     try {
       if (_isPlaying) {
         await _audioPlayer.pause();
+        if (mounted) {
+          setState(() {
+            _isPlaying = false;
+          });
+        }
       } else {
+        if (mounted) {
+          setState(() {
+            _isPlaying = true; // تظهر الأيقونة مباشرة
+          });
+        }
         await _audioPlayer.setUrl(widget.audioUrl);
         await _audioPlayer.play();
       }
-      setState(() {
-        _isPlaying = !_isPlaying;
-      });
     } catch (e) {
       debugPrint("❌ Error playing audio: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("فشل في تشغيل الصوت")),
-      );
+      if (mounted) {
+        setState(() {
+          _isPlaying = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("فشل في تشغيل الصوت")),
+        );
+      }
     }
   }
 
@@ -102,7 +116,7 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {}, // زر المفضلة، لاحقًا
+                  onPressed: () {}, // زر المفضلة لاحقًا
                   icon: const Icon(
                     Icons.star_border,
                     color: AppColors.maincolor,

@@ -73,7 +73,7 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
                 audioUrl: item.audioUrl,
                 zaker: item.description,
                 asnad: item.esnadname,
-                totalAzker:state.morningazkerEntitiy.length,
+                totalAzker: state.morningazkerEntitiy.length,
                 currentAzker: index + 1,
                 number: item.count,
                 numberofzaker: item.count.toString(),
