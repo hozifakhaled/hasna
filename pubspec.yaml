@@ -51,6 +51,8 @@ dependencies:
   logger: ^2.5.0
   shared_preferences: ^2.5.3
   data_connection_checker_tv: ^0.3.5-nullsafety
+  flutter_launcher_icons: ^0.14.3
+  just_audio: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +106,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/hasnasafill.png"
+  min_sdk_android: 21
+
 flutter_assets:
   assets_path: assets/images
   output_path: lib/constants/

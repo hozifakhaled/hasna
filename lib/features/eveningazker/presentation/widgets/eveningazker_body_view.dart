@@ -42,6 +42,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
                     }
                   });
                 },
+                audioUrl: state.eveningakerEntitiy[index].audioUrl,
                 zaker: state.eveningakerEntitiy[index].description,
                 asnad: state.eveningakerEntitiy[index].esnadname,
                 totalAzker: state.eveningakerEntitiy.length,

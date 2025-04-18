@@ -10,7 +10,7 @@ class Zaker extends StatelessWidget {
     required this.totalAzker,
     required this.currentAzker,
     required this.number,
-    required this.numberofzaker, required this.onTap,
+    required this.numberofzaker, required this.onTap, required this.audioUrl,
   });
  
   final String zaker;
@@ -18,6 +18,7 @@ class Zaker extends StatelessWidget {
   final int totalAzker;
   final int currentAzker;
   final int number;
+  final String audioUrl;
   final String numberofzaker;
    final void Function() onTap;
   @override
@@ -32,7 +33,7 @@ class Zaker extends StatelessWidget {
           number: number,
           numberofzaker: numberofzaker,
           currentAzker: currentAzker,
-          onTap: onTap,
+          onTap: onTap, audioUrl: '',
         ),
       ),
     );

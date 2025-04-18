@@ -13,38 +13,29 @@ class MorningRepositryImpli implements MorningRepositry {
   final MorningazkerDatasourceLocal local;
 
   MorningRepositryImpli(this.remote, this.local, {required this.networkInfo});
-  
+
   @override
-  Future<Either<MorningModel, Failure>> getMorningAzker({required int page}) async {
-    // التحقق من الاتصال بالإنترنت
+  Future<Either<List<MorningModel>, Failure>> getMorningAzker() async {
     if (await networkInfo.isConnected) {
       try {
-        // جلب البيانات من الـ API البعيد
-        final remoteMorning = await remote.getMorningAzker(page: page);
-
-        // تخزين البيانات في الذاكرة المحلية
-        local.cacheMorningzaker(remoteMorning, page.toString());
-        
-        // إرجاع البيانات في حال نجاح الاتصال
-        return left(remoteMorning);
+        final remoteMorningList = await remote.getMorningAzker();
+        for (var morningModel in remoteMorningList) {
+          local.cacheMorningzaker(morningModel , morningModel.id.toString());
+        }
+        return left(remoteMorningList);
       } on ServerException catch (e) {
-        // في حال حدوث خطأ في السيرفر
         return right(Failure(errMessage: e.errorModel.errorMessage));
       }
     } else {
       try {
-        // في حال عدم وجود اتصال بالإنترنت، حاول جلب البيانات من الذاكرة المحلية
-        final localMorning = await local.getLastMorningingZaker(page.toString());
-
-        // إذا كانت البيانات المحلية موجودة
+        final localMorning = await local.getLastMorningingZaker( '1');
         if (localMorning != null) {
-          return left(localMorning);
+          return left([localMorning]);
         } else {
-          return right(Failure(errMessage: "لا توجد بيانات محلية"));
+          return right(Failure(errMessage: 'No cached data available'));
         }
-      } on ServerException catch (e) {
-        // في حال فشل في استرجاع البيانات المحلية أيضًا
-        return right(Failure(errMessage: e.errorModel.errorMessage));
+      } on CacheExeption catch (e) {
+        return right(Failure(errMessage: e.errorMessage));
       }
     }
   }

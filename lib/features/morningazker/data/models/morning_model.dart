@@ -11,16 +11,24 @@ class MorningModel extends MorningakerEntitiy {
   });
 
   factory MorningModel.fromJson(Map<String, dynamic> json) {
-    final zekr = json['zekr'];
-
     return MorningModel(
-      id: zekr['id'].toString(),
-      description: zekr['description'] ?? '',
-      audioUrl: zekr['audioUrl'] ?? '',
-      esnadname: zekr['esnadname'] ?? '',
-      count: zekr['count'] ?? 1,
-      totalAzkar: json['totalAzkar'] ?? 0,
+      id: json['id'] ?? '',
+      description: json['description'] ?? '',
+      audioUrl: json['audioUrl'] ?? '',
+      esnadname: json['esnadname'] ?? '',
+      count: int.tryParse(json['count'].toString()) ?? 1,
+      totalAzkar: int.tryParse(json['totalAzkar'].toString()) ?? 0,
     );
+  }
+
+  static List<MorningModel> fromJsonList(Map<String, dynamic> json) {
+    final azkarList = json['azkar'] as List<dynamic>?;
+
+    if (azkarList == null) return [];
+
+    return azkarList
+        .map((item) => MorningModel.fromJson(item as Map<String, dynamic>))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -33,4 +41,8 @@ class MorningModel extends MorningakerEntitiy {
       'totalAzkar': totalAzkar,
     };
   }
+
+   
+
+  
 }

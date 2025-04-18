@@ -62,6 +62,7 @@ void setup() {
   //cubit
   sl.registerLazySingleton(() => EveningazkerCubit(sl()));
 
+sl.registerLazySingleton(() => MorningazkerCubit(sl() ,0));
 
-  sl.registerFactory(() => MorningazkerCubit(sl()));
+
 }
