@@ -7,8 +7,8 @@ part 'morningazker_state.dart';
 
 class MorningazkerCubit extends Cubit<MorningazkerState> {
   final MorningingUsecase morningingUsecase;
-
-  MorningazkerCubit(this.morningingUsecase) : super(MorningazkerInitial());
+   int count;
+  MorningazkerCubit(this.morningingUsecase, this.count) : super(MorningazkerInitial());
 
   void getAllMorningAzker() async {
     emit(MorningazkerLoading());
@@ -29,6 +29,21 @@ class MorningazkerCubit extends Cubit<MorningazkerState> {
     getAllMorningAzker();
   }
 }
+
+void EcdCount(int index) {
+  if (state is MorningazkerLoaded) {
+    final currentState = state as MorningazkerLoaded;
+    final list = List<MorningakerEntitiy>.from(currentState.morningazkerEntitiy);
+
+    if (list[index].count > 0) {
+      list[index] = list[index].copyWith(count: list[index].count - 1);
+      emit(MorningazkerLoaded(morningazkerEntitiy: list));
+    } else {
+      emit(Morningzekrtransaction());
+    }
+  }
+}
+
 
 
   @override

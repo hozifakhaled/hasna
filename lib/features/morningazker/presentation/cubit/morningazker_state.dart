@@ -28,3 +28,7 @@ class MorningazkerError extends MorningazkerState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class Morningzekrtransaction extends MorningazkerState {
+
+}

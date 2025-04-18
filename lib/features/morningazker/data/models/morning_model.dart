@@ -41,4 +41,8 @@ class MorningModel extends MorningakerEntitiy {
       'totalAzkar': totalAzkar,
     };
   }
+
+   
+
+  
 }

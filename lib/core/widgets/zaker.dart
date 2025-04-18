@@ -10,7 +10,7 @@ class Zaker extends StatelessWidget {
     required this.totalAzker,
     required this.currentAzker,
     required this.number,
-    required this.numberofzaker,  this.onTap,
+    required this.numberofzaker, required this.onTap, required this.audioUrl,
   });
  
   final String zaker;
@@ -18,8 +18,9 @@ class Zaker extends StatelessWidget {
   final int totalAzker;
   final int currentAzker;
   final int number;
+  final String audioUrl;
   final String numberofzaker;
-   final void Function()? onTap;
+   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,11 +33,7 @@ class Zaker extends StatelessWidget {
           number: number,
           numberofzaker: numberofzaker,
           currentAzker: currentAzker,
-          onTap: onTap??() {
-            // Handle the tap event here
-            // For example, you can navigate to another screen or show a dialog
-            print('Zaker tapped!');
-          },
+          onTap: onTap, audioUrl: '',
         ),
       ),
     );

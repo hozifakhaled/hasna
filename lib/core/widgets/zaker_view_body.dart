@@ -4,7 +4,7 @@ import 'package:hasna/core/widgets/column_text_zaketr.dart';
 import 'package:hasna/core/widgets/zaker_bottom_bar.dart';
 
 class ZakerViewBody extends StatelessWidget {
-  const ZakerViewBody({super.key, required this.zaker, required this.asnad, required this.totalAzker, required this.currentAzker, required this.number, required this.numberofzaker, required this.onTap});
+  const ZakerViewBody({super.key, required this.zaker, required this.asnad, required this.totalAzker, required this.currentAzker, required this.number, required this.numberofzaker, required this.onTap, required this.audioUrl});
 
  final String zaker ;
  final String numberofzaker  ;
@@ -13,12 +13,13 @@ class ZakerViewBody extends StatelessWidget {
  final int currentAzker ;
  final int number ;
  final void Function() onTap;
+ final String audioUrl;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned.fill(child: ColumnTextZaker( onTap: onTap,zaker: zaker, numberofzaker: numberofzaker, asnad: asnad,)),
-        Positioned(bottom: 0, child: ZakerBottomBar(totalAzker: totalAzker, currentAzker: currentAzker,)),
+        Positioned(bottom: 0, child: ZakerBottomBar(totalAzker: totalAzker, currentAzker: currentAzker, audioUrl: audioUrl,)),
         CircalNumberZaker(number: number, onTap: onTap,),
       ],
     );
