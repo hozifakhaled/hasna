@@ -14,7 +14,7 @@ class ColumnTextZaker extends StatelessWidget {
     return SingleChildScrollView(
      
     
-      child: InkWell(
+      child: GestureDetector(
         
         onTap: onTap,
         child: Column(

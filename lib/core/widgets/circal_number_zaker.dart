@@ -14,7 +14,7 @@ final int number ;
     return Positioned(
       bottom: context.height * 0.03,
       right: context.width * 0.375,
-      child: InkWell(
+      child: GestureDetector(
        
         onTap: onTap,
         child: Container(
