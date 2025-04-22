@@ -47,6 +47,7 @@ class MorningModel extends MorningakerEntitiy {
     };
   }
 
+  @override
   MorningModel copyWith({
     String? id,
     String? description,

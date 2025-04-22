@@ -30,6 +30,7 @@ class MorningazkerCubit extends Cubit<MorningazkerState> {
   }
 }
 
+// ignore: non_constant_identifier_names
 void EcdCount(int index) {
   if (state is MorningazkerLoaded) {
     final currentState = state as MorningazkerLoaded;
@@ -46,8 +47,4 @@ void EcdCount(int index) {
 
 
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 }

@@ -15,7 +15,7 @@ class EveningRepositryImpli implements EveningRepositry {
   EveningRepositryImpli(this.remote, this.local, {required this.networkInfo});
   @override
   Future<Either<List<EveningModel>, Failure>> getEveningAzker()async {
-    if (await networkInfo.isConnected!) {
+    if (await networkInfo.isConnected) {
      try {
         final remoteEvening = await remote.getEveningAzker();
 
