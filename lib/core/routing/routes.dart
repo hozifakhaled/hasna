@@ -13,5 +13,6 @@ static const String dpublicazkar = '/dpublicazkar';
   static const String tasbiha = '/tasbiha';
   static const String morningazkar = '/morningazkar';
     static const String eveningazkar = '/eveningazkar';
+    static const String beforesleepazkar = '/beforesleepazkar';
 
 }

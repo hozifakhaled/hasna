@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasna/core/widgets/zaker.dart';
-import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
+import 'package:hasna/features/beforesleepazker/presentation/cubit/beforesleepazkar_cubit.dart';
 
 class BeforeSleepAzkarBodyView extends StatefulWidget {
   const BeforeSleepAzkarBodyView({super.key});
@@ -16,15 +16,15 @@ class _BeforeSleepAzkarBodyViewState extends State<BeforeSleepAzkarBodyView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EveningazkerCubit, EveningazkerState>(
+    return BlocBuilder<BeforesleepazkarCubit, BeforesleepazkarState>(
       builder: (context, state) {
-        if (state is EveningazkerLoaded) {
+        if (state is BeforesleepazkarLoaded) {
           // لو counts لسه متعملتش، ننسخ القيم الأصلية من الكيوبت
-          counts ??= state.eveningakerEntitiy.map((e) => e.count).toList();
+          counts ??= state.beforesleepazkarEntitiy.map((e) => e.count).toList();
 
           return PageView.builder(
             controller: _pageController,
-            itemCount: state.eveningakerEntitiy.length,
+            itemCount: state.beforesleepazkarEntitiy.length,
             itemBuilder: (context, index) {
               return Zaker(
                 onTap: () {
@@ -42,18 +42,18 @@ class _BeforeSleepAzkarBodyViewState extends State<BeforeSleepAzkarBodyView> {
                     }
                   });
                 },
-                zaker: state.eveningakerEntitiy[index].description,
-                asnad: state.eveningakerEntitiy[index].esnadname,
-                totalAzker: state.eveningakerEntitiy.length,
+                zaker: state.beforesleepazkarEntitiy[index].description,
+                asnad: state.beforesleepazkarEntitiy[index].esnadname,
+                totalAzker: state.beforesleepazkarEntitiy.length,
                 currentAzker: index + 1,
                 number: counts![index],
                 numberofzaker:
-                    '${state.eveningakerEntitiy[index].count} مرات  ',
-                audioUrl: state.eveningakerEntitiy[index].audioUrl,
+                    '${state.beforesleepazkarEntitiy[index].count} مرات  ',
+                audioUrl: state.beforesleepazkarEntitiy[index].audioUrl,
               );
             },
           );
-        } else if (state is EveningazkerError) {
+        } else if (state is BeforesleepazkarError) {
           return Center(child: Text(state.error));
         } else {
           return Center(child: CircularProgressIndicator());

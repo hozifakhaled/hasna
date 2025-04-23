@@ -5,6 +5,12 @@ import 'package:hasna/core/connections/network_info.dart';
 import 'package:hasna/core/databases/api/dio_consumer.dart';
 import 'package:hasna/core/databases/api/interceptors.dart';
 import 'package:hasna/core/databases/cache/cache_helper.dart';
+import 'package:hasna/features/beforesleepazker/data/datasources/beforesleepazkar_datasource_local.dart';
+import 'package:hasna/features/beforesleepazker/data/datasources/beforesleepazkar_datasource_remote.dart';
+import 'package:hasna/features/beforesleepazker/data/repositories/beforesleepazkar_repositry_impli.dart';
+import 'package:hasna/features/beforesleepazker/domain/repositories/beforesleepazkar_repositry.dart';
+import 'package:hasna/features/beforesleepazker/domain/usecases/beforesleepazkar_usecase.dart';
+import 'package:hasna/features/beforesleepazker/presentation/cubit/beforesleepazkar_cubit.dart';
 import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_local.dart';
 import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_remote.dart';
 import 'package:hasna/features/eveningazker/data/repositories/evening_repositry_impli.dart';
@@ -43,12 +49,19 @@ void setup() {
   sl.registerLazySingleton<MorningazkerDatasourceLocal>(
     () => MorningazkerDatasourceLocal(cache: sl()),
   );
+   sl.registerLazySingleton<BeforesleepazkarDatasourceLocal>(
+    () => BeforesleepazkarDatasourceLocal(cache: sl()),
+  );
+   sl.registerLazySingleton<BeforesleepazkarDatasourceRemote>(
+    () => BeforesleepazkarDatasourceRemote(dioConsumer: sl()),
+  );
   sl.registerLazySingleton<MorningazkerDatasourceRemote>(
     () => MorningazkerDatasourceRemote(dioConsumer: sl()),
   );
   // UseCase
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
+  sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
@@ -56,13 +69,15 @@ void setup() {
   sl.registerLazySingleton<MorningRepositry>(
     () => MorningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
-
+sl.registerLazySingleton<BeforesleepazkarRepositry>(
+    () => BeforesleepazkarRepositryImpli(sl(), sl(), networkInfo: sl()),
+  );
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
   //cubit
   sl.registerLazySingleton(() => EveningazkerCubit(sl()));
 
-sl.registerLazySingleton(() => MorningazkerCubit(sl() ,0));
+sl.registerLazySingleton(() => MorningazkerCubit(sl(),3));
 
-
+sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
 }

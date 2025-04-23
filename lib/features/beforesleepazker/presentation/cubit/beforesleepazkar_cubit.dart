@@ -1,16 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hasna/core/di/getit.dart';
-import 'package:hasna/features/eveningazker/domain/entities/eveningaker_entitiy.dart';
-import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart';
+import 'package:hasna/features/beforesleepazker/domain/entities/beforesleepazkar_entitiy.dart';
+import 'package:hasna/features/beforesleepazker/domain/usecases/beforesleepazkar_usecase.dart';
 
 part 'beforesleepazkar_state.dart';
 
 class BeforesleepazkarCubit extends Cubit<BeforesleepazkarState> {
-  BeforesleepazkarCubit(this.eveningUseCase) : super(BeforesleepazkarInitial());
+  BeforesleepazkarCubit(this.beforesleepazkarUseCase) : super(BeforesleepazkarInitial());
 
-  
-   final EveningUseCase eveningUseCase ;
+   final BeforesleepazkarUseCase beforesleepazkarUseCase ;
    
 void initIfNeedes() {
     if (state is BeforesleepazkarLoaded) {
@@ -18,12 +17,12 @@ void initIfNeedes() {
     }
   }
   void getEveningAzker( ) async {
-    EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
-    emit(EveningazkerLoading());
-    final result = await eveningUseCase.getEveningAzker();
+    BeforesleepazkarUseCase beforesleepazkarUseCase= BeforesleepazkarUseCase(beforesleepazkarRepositry: sl());
+    emit(BeforesleepazkarLoading());
+    final result = await beforesleepazkarUseCase.getBeforesleepazker();
     result.fold(
-      (eveningModel) {
-        emit(BeforesleepazkarLoaded(eveningakerEntitiy: eveningModel));
+      (beforemodel) {
+        emit(BeforesleepazkarLoaded(beforesleepazkarEntitiy: beforemodel));
       },
       (error) {
         emit(BeforesleepazkarError(error: error.toString()));

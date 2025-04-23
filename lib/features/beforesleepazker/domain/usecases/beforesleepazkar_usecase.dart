@@ -6,7 +6,7 @@ import 'package:hasna/features/beforesleepazker/domain/repositories/beforesleepa
 class BeforesleepazkarUseCase {
   final BeforesleepazkarRepositry beforesleepazkarRepositry ;
   BeforesleepazkarUseCase({required this.beforesleepazkarRepositry});
-  Future<Either<List<BeforesleepazkarEntitiy>, Failure>> getEveningAzker() async {
+  Future<Either<List<BeforesleepazkarEntitiy>, Failure>> getBeforesleepazker () async {
     return await beforesleepazkarRepositry.getBeforesleepazker();
   }
 }

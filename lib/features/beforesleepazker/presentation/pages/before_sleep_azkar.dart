@@ -4,15 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/features/beforesleepazker/presentation/cubit/beforesleepazkar_cubit.dart';
 import 'package:hasna/features/beforesleepazker/presentation/widgets/before_sleep_azkar_body_view.dart';
-import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
 class BeforeSleepAzkar extends StatelessWidget {
   const  BeforeSleepAzkar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl.get<EveningazkerCubit>()..initIfNeedes(),
+      create: (context) => sl.get<BeforesleepazkarCubit>()..initIfNeedes(),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,

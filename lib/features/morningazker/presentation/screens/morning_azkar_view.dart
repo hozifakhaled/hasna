@@ -13,8 +13,8 @@ class MorningAzkarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: sl<MorningazkerCubit>()..initializeIfNeeded(),
+    return BlocProvider(
+      create: (context)=> sl<MorningazkerCubit>()..initializeIfNeeded(),
       child: Scaffold(
          appBar: AppBar(
           automaticallyImplyLeading: true,
