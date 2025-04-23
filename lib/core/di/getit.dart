@@ -49,12 +49,6 @@ void setup() {
   sl.registerLazySingleton<MorningazkerDatasourceLocal>(
     () => MorningazkerDatasourceLocal(cache: sl()),
   );
-  sl.registerLazySingleton<BeforesleepazkarDatasourceRemote>(
-    () => BeforesleepazkarDatasourceRemote(dioConsumer: sl()),
-  );
-    sl.registerLazySingleton<BeforesleepazkarDatasourceLocal>(
-    () => BeforesleepazkarDatasourceLocal(cache: sl()),
-  );
   sl.registerLazySingleton<MorningazkerDatasourceRemote>(
     () => MorningazkerDatasourceRemote(dioConsumer: sl()),
   );
@@ -62,6 +56,7 @@ void setup() {
    sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
+  sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
@@ -72,15 +67,15 @@ void setup() {
   sl.registerLazySingleton<MorningRepositry>(
     () => MorningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
-
+sl.registerLazySingleton<BeforesleepazkarRepositry>(
+    () => BeforesleepazkarRepositryImpli(sl(), sl(), networkInfo: sl()),
+  );
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
   //cubit
   sl.registerLazySingleton(() => EveningazkerCubit(sl()));
- //sl.registerLazySingleton(() => EveningazkerCubit(sl()));
-  sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
-  
+
 sl.registerLazySingleton(() => MorningazkerCubit(sl() ,0));
 
-
+sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
 }

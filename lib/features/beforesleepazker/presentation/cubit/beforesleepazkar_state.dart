@@ -10,12 +10,12 @@ abstract class BeforesleepazkarState extends Equatable {
 class BeforesleepazkarInitial extends BeforesleepazkarState {}
 class BeforesleepazkarLoading extends BeforesleepazkarState {}
 class BeforesleepazkarLoaded extends BeforesleepazkarState {
-  final List<BeforesleepazkarEntitiy> before;
+  final List<EveningakerEntitiy> eveningakerEntitiy;
 
-  const BeforesleepazkarLoaded({required this.before});
+  const BeforesleepazkarLoaded({required this.eveningakerEntitiy});
 
   @override
-  List<Object> get props => [before];
+  List<Object> get props => [eveningakerEntitiy];
 }
 class BeforesleepazkarError extends BeforesleepazkarState {
   final String error;

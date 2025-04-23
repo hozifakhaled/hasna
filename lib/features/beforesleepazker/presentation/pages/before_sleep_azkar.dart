@@ -12,7 +12,7 @@ class BeforeSleepAzkar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl.get<BeforesleepazkarCubit>()..initIfNeeded(),
+      create: (context) => sl.get<EveningazkerCubit>()..initIfNeedes(),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/features/azkar/presentation/screens/azkar_view.dart';
+import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_azkar.dart';
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
@@ -48,7 +49,7 @@ class AppRouting {
   },
 ),
 GoRoute(path: Routes.azkar, builder: (context, state) => const AZkarView()),
-
+GoRoute(path: Routes.beforesleepazkar, builder: (context, state) => const BeforeSleepAzkar()),
 
 
       

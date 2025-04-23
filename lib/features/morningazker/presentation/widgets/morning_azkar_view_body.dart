@@ -13,6 +13,7 @@ class MorningAzkarViewBody extends StatefulWidget {
 class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
   late PageController _pageController;
   int currentPage = 0;
+  bool isTransitioning = false; // <- لحماية التنقل السريع
 
   @override
   void initState() {
@@ -27,13 +28,16 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
   }
 
   void _nextPage(int itemCount) {
-    if (currentPage < itemCount - 1) {
+    if (currentPage < itemCount - 1 && !isTransitioning) {
+      isTransitioning = true; // ← نمنع أي تنقل جديد
       currentPage += 1;
       _pageController.animateToPage(
         currentPage,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-      );
+      ).then((_) {
+        isTransitioning = false; // ← نرجّع الوضع بعد ما يخلص التنقل
+      });
     }
   }
 
@@ -46,9 +50,15 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
             SnackBar(content: Text(state.errorMessage)),
           );
         } else if (state is MorningazkerLoaded) {
-          if (state.morningazkerEntitiy[currentPage].count == 0) {
+          if (currentPage < state.morningazkerEntitiy.length &&
+              state.morningazkerEntitiy[currentPage].count == 0 &&
+              !isTransitioning) {
             Future.delayed(const Duration(milliseconds: 300), () {
-              _nextPage(state.morningazkerEntitiy.length);
+              if (mounted &&
+                  currentPage < state.morningazkerEntitiy.length &&
+                  state.morningazkerEntitiy[currentPage].count == 0) {
+                _nextPage(state.morningazkerEntitiy.length);
+              }
             });
           }
         }
@@ -68,7 +78,10 @@ class _MorningAzkarViewBodyState extends State<MorningAzkarViewBody> {
 
               return Zaker(
                 onTap: () {
-                  BlocProvider.of<MorningazkerCubit>(context).EcdCount(index);
+                   final cubit = BlocProvider.of<MorningazkerCubit>(context);
+  if (item.count > 0) {
+    cubit.EcdCount(index);
+  }
                 },
                 audioUrl: item.audioUrl,
                 zaker: item.description,

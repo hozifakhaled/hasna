@@ -12,7 +12,7 @@ class MorningModel extends MorningakerEntitiy {
 
   factory MorningModel.fromJson(Map<String, dynamic> json) {
     return MorningModel(
-      id: json['id'] ?? '',
+      id: json['id']?.toString() ?? '',
       description: json['description'] ?? '',
       audioUrl: json['audioUrl'] ?? '',
       esnadname: json['esnadname'] ?? '',

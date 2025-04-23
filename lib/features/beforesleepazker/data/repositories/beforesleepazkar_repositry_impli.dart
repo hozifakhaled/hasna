@@ -19,7 +19,7 @@ class BeforesleepazkarRepositryImpli implements BeforesleepazkarRepositry  {
      try {
         final remoteSleep = await remote.getBeforesleepazkar();
 
-        local.cacheBeforesleepazkar(remoteSleep, );
+        local.cacheBeforesleepazkar(remoteSleep);
         return left(remoteSleep);
       } on ServerException catch (e) {
         return right(Failure(errMessage: e.errorModel.errorMessage));

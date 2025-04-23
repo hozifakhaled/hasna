@@ -39,11 +39,11 @@ void EcdCount(int index) {
     if (list[index].count > 0) {
       list[index] = list[index].copyWith(count: list[index].count - 1);
       emit(MorningazkerLoaded(morningazkerEntitiy: list));
-    } else {
-      emit(Morningzekrtransaction());
     }
+    // لو العداد صفر، لا تعمل emit لأي حالة.
   }
 }
+
 
 
 

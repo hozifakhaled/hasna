@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasna/core/widgets/zaker.dart';
-import 'package:hasna/features/beforesleepazker/presentation/cubit/beforesleepazkar_cubit.dart';
+import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
+
 class BeforeSleepAzkarBodyView extends StatefulWidget {
   const BeforeSleepAzkarBodyView({super.key});
 
@@ -19,11 +20,11 @@ class _BeforeSleepAzkarBodyViewState extends State<BeforeSleepAzkarBodyView> {
       builder: (context, state) {
         if (state is BeforesleepazkarLoaded) {
           // لو counts لسه متعملتش، ننسخ القيم الأصلية من الكيوبت
-          counts ??= state.before.map((e) => e.count).toList();
+          counts ??= state.eveningakerEntitiy.map((e) => e.count).toList();
 
           return PageView.builder(
             controller: _pageController,
-            itemCount: state.before.length,
+            itemCount: state.eveningakerEntitiy.length,
             itemBuilder: (context, index) {
               return Zaker(
                 onTap: () {
@@ -41,14 +42,14 @@ class _BeforeSleepAzkarBodyViewState extends State<BeforeSleepAzkarBodyView> {
                     }
                   });
                 },
-                zaker: state.before[index].description,
-                asnad: state.before[index].esnadname,
-                totalAzker: state.before.length,
+                zaker: state.eveningakerEntitiy[index].description,
+                asnad: state.eveningakerEntitiy[index].esnadname,
+                totalAzker: state.eveningakerEntitiy.length,
                 currentAzker: index + 1,
                 number: counts![index],
                 numberofzaker:
-                    '${state.before[index].count} مرات  ',
-                audioUrl: state.before[index].audioUrl,
+                    '${state.eveningakerEntitiy[index].count} مرات  ',
+                audioUrl: state.eveningakerEntitiy[index].audioUrl,
               );
             },
           );
