@@ -52,6 +52,12 @@ void setup() {
   sl.registerLazySingleton<MorningazkerDatasourceRemote>(
     () => MorningazkerDatasourceRemote(dioConsumer: sl()),
   );
+    sl.registerLazySingleton<BeforesleepazkarDatasourceRemote>(
+    () => BeforesleepazkarDatasourceRemote(dioConsumer: sl()),
+  );
+    sl.registerLazySingleton<BeforesleepazkarDatasourceLocal>(
+    () => BeforesleepazkarDatasourceLocal(cache: sl()),
+  );
   // UseCase
    sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
