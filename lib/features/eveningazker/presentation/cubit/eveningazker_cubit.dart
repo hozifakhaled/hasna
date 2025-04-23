@@ -1,26 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/features/eveningazker/domain/entities/eveningaker_entitiy.dart';
 import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart';
 
 part 'eveningazker_state.dart';
 
 class EveningazkerCubit extends Cubit<EveningazkerState> {
-  EveningazkerCubit(this.eveningUseCase) : super(EveningazkerInitial());
+  EveningazkerCubit(this._eveningUseCase) : super(EveningazkerInitial());
 
   
-   final EveningUseCase eveningUseCase ;
+   final EveningUseCase _eveningUseCase ;
    
 void initIfNeedes() {
-    if (state is EveningazkerInitial) {
+    if (state is !EveningazkerLoaded) {
       getEveningAzker();
     }
   }
   void getEveningAzker( ) async {
-    EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
+  //  EveningUseCase eveningUseCase = EveningUseCase(eveningRepositry: sl());
     emit(EveningazkerLoading());
-    final result = await eveningUseCase.getEveningAzker();
+    final result = await _eveningUseCase.getEveningAzker();
     result.fold(
       (eveningModel) {
         emit(EveningazkerLoaded(eveningakerEntitiy: eveningModel));

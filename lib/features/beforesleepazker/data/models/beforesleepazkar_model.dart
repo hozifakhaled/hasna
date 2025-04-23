@@ -15,7 +15,7 @@ class BeforesleepazkarModel  extends BeforesleepazkarEntitiy {
     return BeforesleepazkarModel(
       id: json['id'] as String,
       description: json['description'] as String,
-      audioUrl: json['audioUrl'] as String,
+      audioUrl: json['audioUrl'] ??"",
       esnadname: json['esnadname'] as String,
       count: json['count'] as int,
     
