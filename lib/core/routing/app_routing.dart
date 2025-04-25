@@ -5,8 +5,8 @@ import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
-import 'package:hasna/features/morningazker/presentation/screens/morning_azkar_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
+import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
@@ -14,46 +14,53 @@ import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
 
 class AppRouting {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.splah, // التأكد أن initialLocation يطابق Route موجود
+    initialLocation:
+        Routes.splah, // التأكد أن initialLocation يطابق Route موجود
     routes: <GoRoute>[
-   
       GoRoute(
         path: Routes.onboarding,
         builder: (context, state) => const OnboardingView(),
       ),
-          GoRoute(
+      GoRoute(
         path: Routes.hadith,
         builder: (context, state) => const HadithView(),
       ),
 
-           GoRoute(
+      GoRoute(
         path: Routes.prayTimers,
         builder: (context, state) => const PrayerstimersView(),
       ),
+      GoRoute(path: Routes.home, builder: (context, state) => const HomeView()),
       GoRoute(
-        path: Routes.home,
-        builder: (context, state) => const HomeView(),
-      ),
-       GoRoute(
         path: Routes.eveningazkar,
         builder: (context, state) => const EvenazkerView(),
       ),
-      GoRoute(path: Routes.splah, builder: (context, state) => const SplashView()),
-      GoRoute(path: Routes.publicazkar, builder: (context, state) => const PubliczekrView()),
-       GoRoute(path: Routes.dpublicazkar, builder: (context, state) => const PubliczakerDeatilsView()),
-    GoRoute(
-  path: Routes.morningazkar,
-  builder: (context, state) {
-  
-    return MorningAzkarView();
-  },
-),
-GoRoute(path: Routes.azkar, builder: (context, state) => const AZkarView()),
-GoRoute(path: Routes.beforesleepazkar, builder: (context, state) => const BeforeSleepAzkar()),
-
-
-      
-      
+      GoRoute(
+        path: Routes.splah,
+        builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
+        path: Routes.publicazkar,
+        builder: (context, state) => const PubliczekrView(),
+      ),
+      GoRoute(
+        path: Routes.dpublicazkar,
+        builder: (context, state) => const PubliczakerDeatilsView(),
+      ),
+      GoRoute(
+        path: Routes.morningazkar,
+        builder: (context, state) {
+          return EvenazkerView();
+        },
+      ),
+      GoRoute(
+        path: Routes.azkar,
+        builder: (context, state) => const AZkarView(),
+      ),
+      GoRoute(
+        path: Routes.beforesleepazkar,
+        builder: (context, state) => const BeforeSleepAzkar(),
+      ),
     ],
   );
 }

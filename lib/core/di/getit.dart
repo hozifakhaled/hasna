@@ -62,8 +62,7 @@ void setup() {
    sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
-  sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
-  // Repository
+    // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
@@ -73,9 +72,7 @@ void setup() {
   sl.registerLazySingleton<MorningRepositry>(
     () => MorningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
-sl.registerLazySingleton<BeforesleepazkarRepositry>(
-    () => BeforesleepazkarRepositryImpli(sl(), sl(), networkInfo: sl()),
-  );
+
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
   //cubit
