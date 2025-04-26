@@ -1,75 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasna/core/extention/extention.dart';
-import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/features/prayerstimers/domain/entities/prayers_timers_entity.dart';
 
 class PrayerTimesContainer extends StatelessWidget {
-  const PrayerTimesContainer({super.key});
+  final PrayersTimersEntity prayerTimes;
+
+  const PrayerTimesContainer({super.key, required this.prayerTimes});
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> prayerTimes = [
-      {"name": "الفجر", "time": "5:00"},
-      {"name": "الشروق", "time": "6:15"},
-      {"name": "الظهر", "time": "12:30"},
-      {"name": "العصر", "time": "3:45"},
-      {"name": "المغرب", "time": "6:20"},
-      {"name": "العشاء", "time": "8:00"},
-    ];
-
     return Material(
       elevation: 5,
-      borderRadius: BorderRadius.circular(20.r),
+      borderRadius: BorderRadius.circular(20),
       shadowColor: Colors.black26,
       child: Container(
-        width: context.width * 0.9,
+        width: double.infinity,
+        // زودنا هنا padding داخلي و minHeight لو حبيت تتحكم في الحجم
+        padding: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
           color: AppColors.maincolor,
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             // العنوان العلوي
             Container(
               width: double.infinity,
-              height: context.height * 0.07,
-              decoration: BoxDecoration(
+              height: 50,
+              decoration: const BoxDecoration(
                 color: AppColors.secondcolor,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: const Center(
+                child: Text(
+                  'أوقات الصلاة',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
-            
+
+            // عرض الأوقات مع dividers
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
-                children: prayerTimes.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final prayer = entry.value;
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(prayer["name"]!, style: TextStyles.text20),
-                            Text(prayer["time"]!, style: TextStyles.text20),
-                          ],
-                        ),
-                      ),
-                      if (index < prayerTimes.length - 1)
-                        Divider(color: Colors.white, thickness: 2),
-                    ],
-                  );
-                }).toList(),
+                children: [
+                  _buildPrayerRow('الفجر', prayerTimes.fajr!),
+                  _buildDivider(),
+                  _buildPrayerRow('الظهر', prayerTimes.dhuhr!),
+                  _buildDivider(),
+                  _buildPrayerRow('العصر', prayerTimes.asr!),
+                  _buildDivider(),
+                  _buildPrayerRow('المغرب', prayerTimes.maghrib!),
+                  _buildDivider(),
+                  _buildPrayerRow('العشاء', prayerTimes.isha!),
+                ],
               ),
             ),
-            
-            SizedBox(height: 10.h), // تحسين التباعد السفلي
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildPrayerRow(String prayerName, String time) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(prayerName, style: const TextStyle(fontSize: 18, color: Colors.white)),
+          Text(time, style: const TextStyle(fontSize: 18, color: Colors.white)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDivider() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Divider(color: Colors.white, thickness: 1.2),
     );
   }
 }

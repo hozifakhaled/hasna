@@ -54,6 +54,8 @@ dependencies:
   flutter_launcher_icons: ^0.14.3
   just_audio: ^0.9.33
   audio_session: ^0.1.10
+  geolocator: ^9.0.1
+  flutter_qiblah: ^2.1.0
 
 
 

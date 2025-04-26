@@ -8,3 +8,23 @@ abstract class PrayerstimersState extends Equatable {
 }
 
 class PrayerstimersInitial extends PrayerstimersState {}
+
+class PrayerstimersLoading extends PrayerstimersState {}
+
+class PrayerstimersSuccess extends PrayerstimersState {
+  final PrayersTimersEntity prayersTimers;
+
+  const PrayerstimersSuccess({required this.prayersTimers});
+
+  @override
+  List<Object> get props => [prayersTimers];
+}
+
+class PrayerstimersError extends PrayerstimersState {
+  final String message;
+
+  const PrayerstimersError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
