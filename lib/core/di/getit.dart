@@ -23,6 +23,14 @@ import 'package:hasna/features/morningazker/data/repositories/morning_repositry_
 import 'package:hasna/features/morningazker/domain/repositories/morning_repositry.dart';
 import 'package:hasna/features/morningazker/domain/usecases/morninging_usecase.dart';
 import 'package:hasna/features/morningazker/presentation/cubit/morningazker_cubit.dart';
+import 'package:hasna/features/prayers/data/datasources/prayers_datasource_remote.dart';
+import 'package:hasna/features/prayers/data/datasources/prayers_datasourse_local.dart';
+import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli.dart';
+import 'package:hasna/features/prayers/domain/repositories/prayer_repositry.dart';
+import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
+import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
+import 'package:hasna/features/prayerstimers/data/repositories/prayers_timers_repositry_Impl.dart';
+import 'package:hasna/features/prayerstimers/domain/repositories/prayers_timers_repositry.dart';
 
 final sl = GetIt.instance;
 

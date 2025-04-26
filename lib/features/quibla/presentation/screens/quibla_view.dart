@@ -8,7 +8,10 @@ class QuiblaView extends StatelessWidget {
   return Scaffold(
       appBar: AppBar(title: Text("اتجاه القبلة")),
       body: Center(
-        child: QiblahCompass(),
+        child: Text(
+          "اتجاه القبلة هنا",
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }
