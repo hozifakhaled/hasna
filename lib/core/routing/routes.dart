@@ -14,5 +14,6 @@ static const String dpublicazkar = '/dpublicazkar';
   static const String morningazkar = '/morningazkar';
     static const String eveningazkar = '/eveningazkar';
     static const String beforesleepazkar = '/beforesleepazkar';
+  static const String quibla = '/quibla';
 
 }

@@ -10,6 +10,7 @@ import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
+import 'package:hasna/features/quibla/presentation/screens/quibla_view.dart';
 import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
 
 class AppRouting {
@@ -60,6 +61,10 @@ class AppRouting {
       GoRoute(
         path: Routes.beforesleepazkar,
         builder: (context, state) => const BeforeSleepAzkar(),
+      ),
+      GoRoute(
+        path: Routes.quibla,
+        builder: (context, state) => const QuiblaView(),
       ),
     ],
   );
