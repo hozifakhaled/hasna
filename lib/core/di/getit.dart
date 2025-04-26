@@ -23,6 +23,12 @@ import 'package:hasna/features/morningazker/data/repositories/morning_repositry_
 import 'package:hasna/features/morningazker/domain/repositories/morning_repositry.dart';
 import 'package:hasna/features/morningazker/domain/usecases/morninging_usecase.dart';
 import 'package:hasna/features/morningazker/presentation/cubit/morningazker_cubit.dart';
+import 'package:hasna/features/prayers/data/datasources/prayers_datasource_remote.dart';
+import 'package:hasna/features/prayers/data/datasources/prayers_datasourse_local.dart';
+import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli.dart';
+import 'package:hasna/features/prayers/domain/repositories/prayer_repositry.dart';
+import 'package:hasna/features/prayers/domain/usecases/prayers_usecase.dart';
+import 'package:hasna/features/prayers/presentation/cubit/prayers_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -58,10 +64,17 @@ void setup() {
     sl.registerLazySingleton<BeforesleepazkarDatasourceLocal>(
     () => BeforesleepazkarDatasourceLocal(cache: sl()),
   );
+    sl.registerLazySingleton<PrayersDatasourceRemote>(
+    () => PrayersDatasourceRemote(dioConsumer: sl()),
+  );
+    sl.registerLazySingleton<PrayersDatasourseLocal>(
+    () => PrayersDatasourseLocal(cache: sl()),
+  );
   // UseCase
    sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
+   sl.registerLazySingleton(() => PrayersUsecase(repositry: sl()));
     // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
@@ -72,6 +85,9 @@ void setup() {
   sl.registerLazySingleton<MorningRepositry>(
     () => MorningRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
+   sl.registerLazySingleton<PrayerRepositry>(
+    () => PrayersRepositryImpli(local: sl(),  remote: sl(), networkInfo: sl()),
+  );
 
   // CacheHelper
   sl.registerLazySingleton(() => CacheHelper());
@@ -81,4 +97,5 @@ void setup() {
 sl.registerLazySingleton(() => MorningazkerCubit(sl() ,0));
 
 sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
+sl.registerLazySingleton(() => PrayersCubit(sl()));
 }

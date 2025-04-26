@@ -33,7 +33,7 @@ class AppRouting {
       GoRoute(path: Routes.home, builder: (context, state) => const HomeView()),
       GoRoute(
         path: Routes.eveningazkar,
-        builder: (context, state) => const EvenazkerView(),
+        builder: (context, state) => const PrayersView(),
       ),
       GoRoute(
         path: Routes.splah,
@@ -50,7 +50,7 @@ class AppRouting {
       GoRoute(
         path: Routes.morningazkar,
         builder: (context, state) {
-          return EvenazkerView();
+          return PrayersView();
         },
       ),
       GoRoute(
