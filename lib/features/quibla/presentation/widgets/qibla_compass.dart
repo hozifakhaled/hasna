@@ -71,10 +71,11 @@ class _QiblaCompassState extends State<QiblaCompass> {
 
   void _startListeningToMagnetometer() {
     _magnetometerSubscription = magnetometerEvents.listen((MagnetometerEvent event) {
-      double angle = math.atan2(event.y, event.x) * (180 / math.pi);
+      double angle = math.atan2(event.x, event.y) * (180 / math.pi);
       if (angle < 0) {
         angle += 360;
       }
+      angle = (360 - angle) % 360; // تصحيح الزاوية
       setState(() {
         _deviceDirection = angle;
       });
@@ -104,7 +105,15 @@ class _QiblaCompassState extends State<QiblaCompass> {
   Widget build(BuildContext context) {
     double? angleToQibla;
     if (_qiblaDirection != null) {
-      angleToQibla = (_qiblaDirection! - _deviceDirection) % 360;
+      angleToQibla = (_qiblaDirection! - _deviceDirection);
+      if (angleToQibla < 0) {
+        angleToQibla += 360;
+      }
+    }
+
+    Color arrowColor = Colors.red;
+    if (angleToQibla != null && (angleToQibla >= 350 || angleToQibla <= 10)) {
+      arrowColor = Colors.green;
     }
 
     return Scaffold(
@@ -116,7 +125,7 @@ class _QiblaCompassState extends State<QiblaCompass> {
         child: _error.isNotEmpty
             ? Text(
                 _error,
-                style: TextStyle(color: Colors.red, fontSize: 18),
+                style: const TextStyle(color: Colors.red, fontSize: 18),
               )
             : (_qiblaDirection == null)
                 ? const CircularProgressIndicator()
@@ -136,19 +145,23 @@ class _QiblaCompassState extends State<QiblaCompass> {
                           ),
                           Transform.rotate(
                             angle: (angleToQibla! * math.pi) / 180,
-                            child: Icon(Icons.arrow_upward, size: 100, color: Colors.green),
+                            child: Icon(
+                              Icons.arrow_upward,
+                              size: 100,
+                              color: arrowColor,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 20),
                       Text(
                         "زاوية القبلة: ${_qiblaDirection!.toStringAsFixed(2)}°",
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "اتبع السهم للقبلة",
-                        style: TextStyle(fontSize: 18),
+                        "اتبع السهم نحو القبلة",
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
