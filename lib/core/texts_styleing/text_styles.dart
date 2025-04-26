@@ -8,6 +8,11 @@ class TextStyles {
     fontWeight: FontWeight.w900,
 color: Colors.black
   );
+  static  TextStyle text16 = GoogleFonts.cairo(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+color: Colors.black
+  );
   static  TextStyle text12 = GoogleFonts.cairo(
     fontSize: 12.sp,
 color: Colors.white
