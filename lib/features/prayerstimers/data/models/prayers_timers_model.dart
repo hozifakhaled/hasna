@@ -12,6 +12,7 @@ class PrayersTimersModel extends PrayersTimersEntity {
     super.isha,
     super.previousPrayer,
     super.nextPrayer,
+    super.hijri,
   });
 
   factory PrayersTimersModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +21,12 @@ class PrayersTimersModel extends PrayersTimersEntity {
     final next = json['nextPrayer'] ?? {};
 
     return PrayersTimersModel(
+      hijri: Datehijri(
+        weekday: json['hijri']['weekday'],
+        day: json['hijri']['day'],
+        month: json['hijri']['month'],
+        year: json['hijri']['year'],
+      ),
       id: json['id'],
       fajr: azkar['fajr'],
       dhuhr: azkar['dhuhr'],
@@ -54,6 +61,12 @@ class PrayersTimersModel extends PrayersTimersEntity {
       "nextPrayer": {
         "name": nextPrayer?.name,
         "time": nextPrayer?.time,
+      },
+      "hijri": {
+        "weekday": hijri?.weekday,
+        "day": hijri?.day,
+        "month": hijri?.month,
+        "year": hijri?.year,
       },
     };
   }
