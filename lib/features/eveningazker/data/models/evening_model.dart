@@ -13,7 +13,7 @@ class EveningModel extends EveningakerEntitiy {
   factory EveningModel.fromJson(Map<String, dynamic> json) {
   
     return EveningModel(
-      id: json['id'] as String,
+      id: json['id'] ??1,
       description: json['description'] as String,
       audioUrl: json['audioUrl'] as String,
       esnadname: json['esnadname'] as String,

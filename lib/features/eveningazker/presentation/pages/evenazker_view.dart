@@ -12,8 +12,8 @@ class EvenazkerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl.get<EveningazkerCubit>()..initIfNeedes(),
+    return BlocProvider.value(
+      value:  sl.get<EveningazkerCubit>()..initIfNeedes(),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
