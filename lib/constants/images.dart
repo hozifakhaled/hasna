@@ -66,9 +66,11 @@ class Assets {
   /// assets/images/imageposla.png
   static const String imagesImageposla = "assets/images/imageposla.png";
 
-  /// Assets for imagesKabba 1
-  /// assets/images/kabba 1.png
-  static const String imagesKabba1 = "assets/images/kabba 1.png";
+  /// Assets for imagesKabaa
+  /// assets/images/kabaa.png
+  static const String imagesKabaa = "assets/images/kabaa.png";
+
+
 
   /// Assets for imagesMorevertical
   /// assets/images/Morevertical.png
@@ -90,8 +92,5 @@ class Assets {
   /// assets/images/zaker.png
   static const String imagesZaker = "assets/images/zaker.png";
 
-  /// Assets for imagesحسنه
-  /// assets/images/حسنه.png
-  static const String images = "assets/images/حسنه.png";
 }
 

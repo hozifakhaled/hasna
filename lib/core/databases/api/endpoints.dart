@@ -3,6 +3,7 @@ class Endpoints {
   static String morningazkarsEndpoint = 'morningazkar';
   static String eveningazkarsEndpoint = 'eveningazkar';
   static String prayerstimersEndpoint = 'prayerstimers';
-  static String prayersEndpoint = 'prayers';
   static String beforesleepazkersEndpoint = 'beforesleepazkar';
+  static String aftersleepazkersEndpoint = 'afterprayazkar';
+  static String prayersEndpoint = 'prayers';
 }

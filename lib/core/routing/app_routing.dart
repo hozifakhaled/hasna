@@ -5,6 +5,7 @@ import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
+import 'package:hasna/features/morningazker/presentation/screens/morning_azkar_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
 import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
@@ -51,7 +52,7 @@ class AppRouting {
       GoRoute(
         path: Routes.morningazkar,
         builder: (context, state) {
-          return HomeView();
+          return MorningAzkarView();
         },
       ),
       GoRoute(

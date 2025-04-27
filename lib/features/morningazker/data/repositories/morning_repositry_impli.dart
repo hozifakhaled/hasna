@@ -20,7 +20,7 @@ class MorningRepositryImpli implements MorningRepositry {
       try {
         final remoteMorningList = await remote.getMorningAzker();
         for (var morningModel in remoteMorningList) {
-          local.cacheMorningzaker(morningModel , morningModel.id.toString());
+          local.cacheMorningzaker(morningModel , morningModel.id);
         }
         return left(remoteMorningList);
       } on ServerException catch (e) {
