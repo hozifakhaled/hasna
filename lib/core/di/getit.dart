@@ -31,6 +31,8 @@ import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_dat
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
 import 'package:hasna/features/prayerstimers/data/repositories/prayers_timers_repositry_Impl.dart';
 import 'package:hasna/features/prayerstimers/domain/repositories/prayers_timers_repositry.dart';
+import 'package:hasna/features/prayerstimers/domain/usecases/prayers_timers_usecase.dart';
+import 'package:hasna/features/prayerstimers/presentation/cubit/prayerstimers_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -85,6 +87,7 @@ void setup() {
    sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
   sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
   sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
+   sl.registerLazySingleton(() => PrayersTimersUsecase(prayersTimersRepositry: sl()));
     // Repository
   sl.registerLazySingleton<EveningRepositry>(
     () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
@@ -113,4 +116,5 @@ void setup() {
 sl.registerLazySingleton(() => MorningazkerCubit(sl() ,0));
 
 sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
+sl.registerFactory(() => PrayerstimersCubit(sl()));
 }

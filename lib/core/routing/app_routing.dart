@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
-import 'package:hasna/features/azkar/presentation/screens/azkar_view.dart';
 import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_azkar.dart';
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
+import 'package:hasna/features/morningazker/presentation/screens/morning_azkar_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
 import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
@@ -29,12 +29,16 @@ class AppRouting {
 
       GoRoute(
         path: Routes.prayTimers,
-        builder: (context, state) => const PrayerstimersView(),
+        builder: (context, state) => const PrayersView(),
+      ),
+      GoRoute(
+        path: Routes.prayes,
+        builder: (context, state) => const PrayersView(),
       ),
       GoRoute(path: Routes.home, builder: (context, state) => const HomeView()),
       GoRoute(
         path: Routes.eveningazkar,
-        builder: (context, state) => const PrayersView(),
+        builder: (context, state) => const EvenazkerView(),
       ),
       GoRoute(
         path: Routes.splah,
@@ -51,7 +55,7 @@ class AppRouting {
       GoRoute(
         path: Routes.morningazkar,
         builder: (context, state) {
-          return HomeView();
+          return MorningAzkarView();
         },
       ),
       GoRoute(

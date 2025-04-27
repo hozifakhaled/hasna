@@ -22,7 +22,7 @@ class PrayersTimersRepositryImpl extends PrayersTimersRepositry {
         final remoteMorningModel = await remote.getPrayersTimers();
 
         // تخزين البيانات في الكاش
-        local.cachePrayerstimers(remoteMorningModel, remoteMorningModel.id.toString());
+        local.cachePrayerstimers(remoteMorningModel,);
 
         // إرجاع البيانات من الـ API
         return left(remoteMorningModel);
@@ -31,7 +31,7 @@ class PrayersTimersRepositryImpl extends PrayersTimersRepositry {
       }
     } else {
       try {
-        final localPrayerstimers = await local.getLastPrayerstimers('1');
+        final localPrayerstimers = await local.getLastPrayerstimers();
         if (localPrayerstimers != null) {
           return left(localPrayerstimers);
         } else {

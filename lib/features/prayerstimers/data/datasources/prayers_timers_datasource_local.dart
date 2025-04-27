@@ -5,14 +5,14 @@ import 'package:hasna/features/prayerstimers/data/models/prayers_timers_model.da
 
 class PrayersTimersDatasourceLocal {
   final CacheHelper cache;
-  final String keys = "CachedMorningAzker";
+  final String keys = "CachedPrayerstimers";
   
   PrayersTimersDatasourceLocal({required this.cache});
 
-  void cachePrayerstimers(PrayersTimersModel? prayerstimersToCache, String key) {
+  void cachePrayerstimers(PrayersTimersModel? prayerstimersToCache) {
     if (prayerstimersToCache != null) {
       cache.saveData(
-        key: keys + key,
+        key: keys ,
         value: json.encode(prayerstimersToCache.toJson()),
       );
     } else {
@@ -20,8 +20,8 @@ class PrayersTimersDatasourceLocal {
     }
   }
 
-  Future<PrayersTimersModel?> getLastPrayerstimers(String key) async {
-    final jsonString = cache.getDataString(key: keys + key);
+  Future<PrayersTimersModel?> getLastPrayerstimers() async {
+    final jsonString = cache.getDataString(key: keys );
 
     if (jsonString != null) {
       return Future.value(PrayersTimersModel.fromJson(json.decode(jsonString)));
