@@ -182,7 +182,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 import 'package:vibration/vibration.dart'; // جديد: مكتبة الاهتزاز
 
 class QiblaCompass extends StatefulWidget {
-  const QiblaCompass({Key? key}) : super(key: key);
+  const QiblaCompass({super.key});
 
   @override
   State<QiblaCompass> createState() => _QiblaCompassState();
@@ -248,6 +248,7 @@ class _QiblaCompassState extends State<QiblaCompass> {
   }
 
   void _startListeningToMagnetometer() {
+    // ignore: deprecated_member_use
     _magnetometerSubscription = magnetometerEvents.listen((MagnetometerEvent event) {
       double angle = math.atan2(event.x, event.y) * (180 / math.pi);
       if (angle < 0) {

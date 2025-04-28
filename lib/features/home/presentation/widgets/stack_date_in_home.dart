@@ -13,7 +13,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
     required this.year
   });
   
-  final String day; // هنا استقبلنا المتغير
+  final String day; 
   final String month;
   final String weekday;
   final String year;
@@ -36,6 +36,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
               width: double.infinity,
               height: 170.h,
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: AppColors.maincolor.withOpacity(0.6),
               ),
             ),
