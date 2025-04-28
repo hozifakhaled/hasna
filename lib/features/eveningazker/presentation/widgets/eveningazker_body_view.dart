@@ -54,7 +54,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
             },
           );
         } else if (state is EveningazkerError) {
-          return Center(child: Text(state.error));
+          return Center(child:  Text('تعذر تحميل الأذكار'));
         } else {
           return Center(child: CircularProgressIndicator());
         }

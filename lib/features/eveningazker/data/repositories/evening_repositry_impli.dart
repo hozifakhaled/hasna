@@ -28,8 +28,8 @@ class EveningRepositryImpli implements EveningRepositry {
      try {
   final localEvening = await local.getLastEveningZaker();
   return left(localEvening);
-}  on ServerException catch (e) {
-        return right(Failure(errMessage: e.errorModel.errorMessage));
+}  on CacheExeption  {
+        return right(Failure(errMessage:'no internet'));
       }
     }
   }

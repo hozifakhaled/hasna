@@ -15,7 +15,7 @@ class PrayersTimersDatasourceRemote {
     return either.fold(
       (error) {
         throw ServerException(ErrorModel(
-            status: 500, errorMessage: "خطأ في الاتصال: $error"));
+            status: 400, errorMessage: "خطأ في الاتصال: $error"));
       },
       (response) {
         final data = response.data;
@@ -23,7 +23,7 @@ class PrayersTimersDatasourceRemote {
           return PrayersTimersModel.fromJson(data);
         } else {
           throw ServerException(
-              ErrorModel(errorMessage: "Invalid data format", status: 500));
+              ErrorModel(errorMessage: "Invalid data format", status: 400));
         }
       },
     );

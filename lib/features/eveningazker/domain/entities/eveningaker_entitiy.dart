@@ -1,5 +1,5 @@
 class EveningakerEntitiy {
-  final String id;
+  final int id;
   final String description;
   final String audioUrl;
   final String esnadname;
