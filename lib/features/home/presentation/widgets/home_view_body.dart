@@ -45,7 +45,13 @@ class HomeViewBody extends StatelessWidget {
   ],
 );
 
-        } else {
+        }if (state is PrayerstimersError) {
+          return Center(
+            child: Text("لا يوجد انترنت"),
+          );
+        } 
+        
+        else {
           return const Center(child: CircularProgressIndicator());
         }
       },

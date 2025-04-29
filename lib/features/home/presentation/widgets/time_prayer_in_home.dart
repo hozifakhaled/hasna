@@ -7,13 +7,13 @@ import 'package:hasna/core/themeing/colors.dart';
 class TimePrayerinHome extends StatefulWidget {
   final String timeFromApi;
   final String? prayerName;
-  final bool is24HourFormat; // ✅ جديد
+  final bool is24HourFormat;
 
   const TimePrayerinHome({
     super.key,
     required this.timeFromApi,
     this.prayerName,
-    this.is24HourFormat = true, // ✅ افتراضي 24 ساعة
+    this.is24HourFormat = true,
   });
 
   @override
@@ -24,31 +24,35 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
   Timer? _timer;
   Duration _remaining = Duration();
   late DateTime _targetTime;
-  
+
   @override
   void initState() {
     super.initState();
     _startTimer();
   }
 
+  @override
+  void didUpdateWidget(covariant TimePrayerinHome oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.timeFromApi != widget.timeFromApi) {
+      _timer?.cancel();
+      _startTimer();
+    }
+  }
+
   void _startTimer() {
     List<String> parts = widget.timeFromApi.split(":");
+
     int hours = int.parse(parts[0]);
     int minutes = int.parse(parts[1]);
 
     final now = DateTime.now();
-    _targetTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      hours,
-      minutes,
-    );
+    _targetTime = DateTime(now.year, now.month, now.day, hours, minutes);
 
     if (_targetTime.isBefore(now)) {
       _targetTime = _targetTime.add(Duration(days: 1));
     }
-
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       final now = DateTime.now();
@@ -61,7 +65,6 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
       }
     });
   }
-
 
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
