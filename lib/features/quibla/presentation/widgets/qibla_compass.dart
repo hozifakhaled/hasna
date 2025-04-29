@@ -19,39 +19,73 @@ class _QiblaCompassState extends State<QiblaCompass> {
   double _deviceDirection = 0;
   String _error = '';
   bool _isAligned = false;
+  bool _isLoadingLocation = true;
   StreamSubscription<MagnetometerEvent>? _magnetometerSubscription;
+  StreamSubscription<ServiceStatus>? _locationServiceStatusSubscription;
 
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+    _startLocationServiceStatusListener();
     _startListeningToMagnetometer();
+    _getCurrentLocation();
   }
 
   @override
   void dispose() {
     _magnetometerSubscription?.cancel();
+    _locationServiceStatusSubscription?.cancel();
     super.dispose();
   }
 
+  // إضافة مراقب لحالة خدمة الموقع
+  void _startLocationServiceStatusListener() async {
+    _locationServiceStatusSubscription = Geolocator.getServiceStatusStream().listen(
+      (ServiceStatus status) {
+        if (status == ServiceStatus.enabled) {
+          // إذا تم تفعيل خدمة الموقع، قم بإعادة محاولة الحصول على الموقع
+          setState(() {
+            _error = '';
+            _isLoadingLocation = true;
+          });
+          _getCurrentLocation();
+        } else {
+          setState(() {
+            _error = 'من فضلك قم بتفعيل خدمة الموقع';
+            _isLoadingLocation = false;
+          });
+        }
+      },
+    );
+  }
+
   Future<void> _getCurrentLocation() async {
+    setState(() {
+      _isLoadingLocation = true;
+      _error = '';
+    });
+
     bool serviceEnabled;
     LocationPermission permission;
 
+    // تحقق من تفعيل خدمة الموقع
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       setState(() {
-        _error = 'خدمة تحديد الموقع غير مفعلة';
+        _error = 'من فضلك قم بتفعيل خدمة الموقع';
+        _isLoadingLocation = false;
       });
       return;
     }
 
+    // تحقق من إذن الوصول إلى الموقع
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         setState(() {
           _error = 'تم رفض إذن تحديد الموقع';
+          _isLoadingLocation = false;
         });
         return;
       }
@@ -60,17 +94,26 @@ class _QiblaCompassState extends State<QiblaCompass> {
     if (permission == LocationPermission.deniedForever) {
       setState(() {
         _error = 'إذن تحديد الموقع مرفوض نهائياً';
+        _isLoadingLocation = false;
       });
       return;
     }
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
 
-    double direction = _calculateQiblaDirection(position.latitude, position.longitude);
-    setState(() {
-      _qiblaDirection = direction;
-    });
+      double direction = _calculateQiblaDirection(position.latitude, position.longitude);
+      setState(() {
+        _qiblaDirection = direction;
+        _isLoadingLocation = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = 'حدث خطأ أثناء تحديد الموقع: ${e.toString()}';
+        _isLoadingLocation = false;
+      });
+    }
   }
 
   void _startListeningToMagnetometer() {
@@ -125,6 +168,25 @@ class _QiblaCompassState extends State<QiblaCompass> {
     }
   }
 
+  // زر إعادة تحميل يدوي
+  Widget _buildRetryButton() {
+    return ElevatedButton.icon(
+      onPressed: _getCurrentLocation,
+      icon: const Icon(Icons.refresh, color: Colors.white),
+      label: const Text(
+        "إعادة المحاولة",
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF8B9E8D),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double? angleToQibla;
@@ -142,6 +204,14 @@ class _QiblaCompassState extends State<QiblaCompass> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          // زر إعادة تحميل في شريط التطبيق
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: _getCurrentLocation,
+            tooltip: 'إعادة تحميل',
+          )
+        ],
       ),
       extendBodyBehindAppBar: true,
       body: Container(
@@ -150,13 +220,20 @@ class _QiblaCompassState extends State<QiblaCompass> {
         ),
         child: _error.isNotEmpty
             ? Center(
-                child: Text(
-                  _error,
-                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _error,
+                      style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    _buildRetryButton(),
+                  ],
                 ),
               )
-            : (_qiblaDirection == null)
+            : (_isLoadingLocation)
                 ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
