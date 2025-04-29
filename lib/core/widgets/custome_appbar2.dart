@@ -15,6 +15,10 @@ class CustomeAppbar2 extends StatelessWidget {
           /// أيقونة الرجوع إلى الخلف
 
           /// المسافة بين الأيقونة والعنوان
+           Opacity(
+            opacity: 0,
+            child: Icon(Icons.arrow_back_ios, color: Colors.white),
+          ),
           Expanded(child: Center(child: Text(title, style: TextStyles.text21))),
           GestureDetector(
             onTap: () {
@@ -23,10 +27,7 @@ class CustomeAppbar2 extends StatelessWidget {
             child: Icon(Icons.arrow_forward, color: Colors.white)),
 
           /// عنصر شفاف ليوازن الأيقونة على الطرف الآخر
-          Opacity(
-            opacity: 0,
-            child: Icon(Icons.arrow_forward, color: Colors.white),
-          ),
+         
         ],
       ),
     );

@@ -8,7 +8,7 @@ abstract class PrayersState extends Equatable {
 }
 
 class PrayersInitial extends PrayersState {}
-class PrayersLoading extends PrayersState {}
+
 class PrayersLoaded extends PrayersState {
   final List<PrayersEntitiy> prayersList;
   const PrayersLoaded({required this.prayersList});

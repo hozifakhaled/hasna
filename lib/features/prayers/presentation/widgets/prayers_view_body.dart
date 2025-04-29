@@ -27,13 +27,16 @@ class PrayersViewBody extends StatelessWidget {
           ),
 
           /// المحتوى القابل للتمرير
-          Column(
-            children: [
-              CustomeAppbar2(title: 'أدعية من القرآن '),
-              SizedBox(
-                height: 10.h,
+          CustomScrollView(
+           
+            slivers: [
+              SliverToBoxAdapter(child: CustomeAppbar2(title: 'أدعية من القرآن ')),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 10.h,
+                ),
               ),
-             ListItemPrayer()
+             SliverToBoxAdapter(child: ListItemPrayer())
                    
             ],
           ),

@@ -12,22 +12,22 @@ class ListItemPrayer extends StatelessWidget {
     return BlocBuilder<PrayersCubit, PrayersState>(
       builder: (context, state) {
    if (state is PrayersLoaded) {
-          return Expanded(
-            child: ListView.separated(
-            itemCount:state. prayersList.length,
-            separatorBuilder:
-                (context, index) => Separatorprayers(
-                  text: state.prayersList[index].souraname ?? 'لا يوجد وصف',
+          return ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+          itemCount:state. prayersList.length,
+          separatorBuilder:
+              (context, index) => Separatorprayers(
+                text: state.prayersList[index].souraname ?? 'لا يوجد وصف',
+              ),
+          itemBuilder:
+              (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: PrayerItem(
+                  text: state.prayersList[index].description ?? 'لا يوجد اسم',
                 ),
-            itemBuilder:
-                (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: PrayerItem(
-                    text: state.prayersList[index].description ?? 'لا يوجد اسم',
-                  ),
-                ),
-                    ),
-          );
+              ),
+                  );
     
    }else if (state is PrayersError) {
                       return Center(

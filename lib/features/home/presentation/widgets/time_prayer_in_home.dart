@@ -5,13 +5,15 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 
 class TimePrayerinHome extends StatefulWidget {
-  final String timeFromApi; // هنا استقبلنا المتغير
+  final String timeFromApi;
   final String? prayerName;
+  final bool is24HourFormat; // ✅ جديد
 
   const TimePrayerinHome({
     super.key,
     required this.timeFromApi,
     this.prayerName,
+    this.is24HourFormat = true, // ✅ افتراضي 24 ساعة
   });
 
   @override
@@ -21,7 +23,8 @@ class TimePrayerinHome extends StatefulWidget {
 class _TimePrayerinHomeState extends State<TimePrayerinHome> {
   Timer? _timer;
   Duration _remaining = Duration();
-
+  late DateTime _targetTime;
+  
   @override
   void initState() {
     super.initState();
@@ -34,7 +37,7 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
     int minutes = int.parse(parts[1]);
 
     final now = DateTime.now();
-    DateTime targetTime = DateTime(
+    _targetTime = DateTime(
       now.year,
       now.month,
       now.day,
@@ -42,16 +45,15 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
       minutes,
     );
 
-    // ✅ الحل: لو الوقت اللي جاي أصغر من الآن، نزوده يوم
-    if (targetTime.isBefore(now)) {
-      targetTime = targetTime.add(Duration(days: 1));
+    if (_targetTime.isBefore(now)) {
+      _targetTime = _targetTime.add(Duration(days: 1));
     }
+
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       final now = DateTime.now();
       setState(() {
-        _remaining = targetTime.difference(now);
-      //  print("Remaining time: $now");
+        _remaining = _targetTime.difference(now);
       });
 
       if (_remaining.isNegative) {
@@ -60,18 +62,19 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
     });
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
 
-  String formatDuration(Duration duration) {
+  String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return "$hours:$minutes:$seconds";
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -81,7 +84,6 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          // ignore: deprecated_member_use
           color: AppColors.maincolor.withOpacity(.30),
           borderRadius: BorderRadius.circular(10.r),
         ),
@@ -90,7 +92,7 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
           child: Text(
             _remaining.isNegative
                 ? "انتهى الوقت!"
-                : "باقي على  صلاة ${widget.prayerName} :  ${formatDuration(_remaining)}",
+                : "باقي على صلاة ${widget.prayerName} : ${_formatDuration(_remaining)}",
             style: TextStyles.text16.copyWith(
               color: AppColors.maincolor,
               fontWeight: FontWeight.bold,

@@ -8,6 +8,9 @@ import 'package:hasna/core/databases/api/interceptors.dart';
 import 'package:hasna/core/databases/cache/cache_helper.dart';
 import 'package:hasna/features/azker/data/datasources/azker_datasource_local.dart';
 import 'package:hasna/features/azker/data/datasources/azker_datasource_remote.dart';
+import 'package:hasna/features/azker/data/repositories/azkar_repositry_impli.dart';
+import 'package:hasna/features/azker/domain/repositories/azkar_repositry.dart';
+import 'package:hasna/features/azker/domain/usecases/azkar_usecase.dart';
 import 'package:hasna/features/azker/presentation/cubit/azker_cubit.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_local_datasource.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_remote_datasource.dart';
@@ -19,6 +22,7 @@ import 'package:hasna/features/prayers/data/datasources/prayers_datasource_remot
 import 'package:hasna/features/prayers/data/datasources/prayers_datasourse_local.dart';
 import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli.dart';
 import 'package:hasna/features/prayers/domain/repositories/prayer_repositry.dart';
+import 'package:hasna/features/prayers/domain/usecases/prayers_usecase.dart';
 import 'package:hasna/features/prayers/presentation/cubit/prayers_cubit.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
@@ -85,6 +89,8 @@ void setup() async {
 
    sl.registerLazySingleton(() => PrayersTimersUsecase(prayersTimersRepositry: sl()));
   sl.registerLazySingleton(() => HadithUsecase( sl()));
+    sl.registerLazySingleton(() => AzkarUsecase(repositry: sl()));
+      sl.registerLazySingleton(() => PrayersUsecase(repositry: sl()));
     // Repository
 
 
@@ -95,6 +101,9 @@ void setup() async {
   
   sl.registerLazySingleton<PrayerRepositry>(
     () => PrayersRepositryImpli(local: sl(), remote: sl(), networkInfo: sl()),
+  );
+  sl.registerLazySingleton<AzkarRepositry>(
+    () => AzkerRepositryImpli(sl(), sl(), networkInfo: sl()),
   );
   sl.registerLazySingleton<HadithRepositry>(
     () => HadithRepositryImpl( hadithRemoteDataSource: sl(), hadithLocalDataSource: sl(), networkInfo: sl()),
