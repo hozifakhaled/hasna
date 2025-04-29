@@ -17,7 +17,7 @@ class MainFeatruesInHome extends StatelessWidget {
           GoRouter.of(context).push(Routes.prayTimers);
           break;
         case 1:
-          GoRouter.of(context).push(Routes.prayes);
+          GoRouter.of(context).push(Routes.quibla);
           break;
         case 2:
           GoRouter.of(context).push(

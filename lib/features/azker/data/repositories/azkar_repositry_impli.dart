@@ -13,26 +13,39 @@ class AzkerRepositryImpli implements AzkarRepositry {
   final AzkerDatasourceLocal local;
 
   AzkerRepositryImpli(this.remote, this.local, {required this.networkInfo});
-  @override
-  Future<Either<List<AzkerModel>, Failure>> getAzker(String endpoint)async {
-    if (await networkInfo.isConnected) {
-     try {
-        final remoteAzker = await remote.getAzker(endpoint);
 
-        local.cacheAzaker(remoteAzker, endpoint);
-        return left(remoteAzker);
-      } on ServerException catch (e) {
-        return right(Failure(errMessage: e.errorModel.errorMessage));
-      }
-    } else {
-     try {
-  final localazker = await local.getLastZaker(endpoint);
-  return left(localazker);
-}  on CacheExeption  {
-        return right(Failure(errMessage:'no internet'));
+  @override
+  Future<Either<List<AzkerModel>, Failure>> getAzker(String endpoint) async {
+    try {
+      final localAzkar = await local.getLastZaker(endpoint);
+      _tryToUpdateData(endpoint); // لا تؤثر على النتيجة مباشرةً
+      return left(localAzkar);
+    } catch (_) {
+      // إذا فشل الـ local نحاول عبر الـ remote
+      if (await networkInfo.isConnected) {
+        try {
+          final remoteModel = await remote.getAzker(endpoint);
+          await local.cacheAzaker(remoteModel, endpoint);
+          return left(remoteModel);
+        } on ServerException catch (e) {
+          return right(Failure(errMessage: e.errorModel.errorMessage));
+        } catch (e) {
+          return right(Failure(errMessage: 'Unexpected error: $e'));
+        }
+      } else {
+        return right(Failure(errMessage: 'No internet connection'));
       }
     }
   }
+
+  void _tryToUpdateData(String endpoint) {
+    Future.microtask(() async {
+      if (await networkInfo.isConnected) {
+        try {
+          final remoteModel = await remote.getAzker(endpoint);
+          await local.cacheAzaker(remoteModel, endpoint);
+        } catch (_) {}
+      }
+    });
   }
- 
-  
+}

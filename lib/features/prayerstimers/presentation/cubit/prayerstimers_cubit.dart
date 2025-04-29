@@ -28,7 +28,7 @@ class PrayerstimersCubit extends Cubit<PrayerstimersState> {
   }
 
   Future<void> getPrayersTimers() async {
-    emit(PrayerstimersLoading(prayersTimers: loadinig()??PrayersTimersEntity(nextPrayer: PrayerInfo(name: 'الفجر', time: '4:30'),hijri: Datehijri(day: "3", month: "5", weekday: "9", year: "1446")) ));
+    emit(PrayerstimersLoading(prayersTimers: loadinig()??PrayersTimersEntity(nextPrayer: PrayerInfo(name: 'الفجر', time: '4:30'),hijri: Datehijri(day: "3", month: "ذو القعده", weekday: "الخميس", year: "1446")) ));
     final result = await prayersTimersUsecase.getPrayersTimers();
 
     result.fold(

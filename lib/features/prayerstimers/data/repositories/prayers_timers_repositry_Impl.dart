@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hasna/core/connections/network_info.dart';
 import 'package:hasna/core/errors/expentions.dart';
 import 'package:hasna/core/errors/failure.dart';
+import 'package:hasna/features/azker/data/models/azkar_model.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
 import 'package:hasna/features/prayerstimers/domain/entities/prayers_timers_entity.dart';
@@ -12,7 +13,11 @@ class PrayersTimersRepositryImpl extends PrayersTimersRepositry {
   final PrayersTimersDatasourceLocal local;
   final PrayersTimersDatasourceRemote remote;
 
-  PrayersTimersRepositryImpl(this.remote, this.local, {required this.networkInfo});
+  PrayersTimersRepositryImpl(
+    this.remote,
+    this.local, {
+    required this.networkInfo,
+  });
 
   @override
   Future<Either<PrayersTimersEntity, Failure>> getPrayersTimers() async {
@@ -22,7 +27,7 @@ class PrayersTimersRepositryImpl extends PrayersTimersRepositry {
         final remoteMorningModel = await remote.getPrayersTimers();
 
         // تخزين البيانات في الكاش
-        local.cachePrayerstimers(remoteMorningModel,);
+        local.cachePrayerstimers(remoteMorningModel);
 
         // إرجاع البيانات من الـ API
         return left(remoteMorningModel);

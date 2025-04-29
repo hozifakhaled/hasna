@@ -13,7 +13,7 @@ class PrayersCubit extends Cubit<PrayersState> {
     }
   }
   void getPrayers() async{
-emit(PrayersLoading());
+
     final result = await _prayersUsecase.call();
     result.fold(
       (prayersModel) {

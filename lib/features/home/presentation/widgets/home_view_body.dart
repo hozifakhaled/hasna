@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/features/home/presentation/widgets/gridview_azker_in_home.dart';
@@ -15,51 +16,81 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PrayerstimersCubit, PrayerstimersState>(
       builder: (context, state) {
-        if (state is PrayerstimersSuccess) {
-          return Column(
-            children: [
-              StackTimePrayerAnddateInHome(
-                day: state.prayersTimers.hijri!.day ?? "",
-                month: state.prayersTimers.hijri!.month ?? "",
-                weekday: state.prayersTimers.hijri!.weekday ?? "",
-                year: state.prayersTimers.hijri!.year ?? "",
-              ),
-              MainFeatruesInHome(),
-              TimePrayerinHome(
-                prayerName: state.prayersTimers.nextPrayer!.name,
-                timeFromApi: state.prayersTimers.nextPrayer!.time.toString(),
-              ),
-              GridViewAzkarInHome(),
-            ],
-          );
-        } else if (state is PrayerstimersLoading) {
-          return Column(
-            children: [
-              StackTimePrayerAnddateInHome(
-                day: state.prayersTimers.hijri!.day ?? "",
-                month: state.prayersTimers.hijri!.month ?? "",
-                weekday: state.prayersTimers.hijri!.weekday ?? "",
-                year: state.prayersTimers.hijri!.year ?? "",
-              ),
-              MainFeatruesInHome(),
-              TimePrayerinHome(
-                prayerName: state.prayersTimers.nextPrayer!.name,
-                timeFromApi: state.prayersTimers.nextPrayer!.time.toString(),
-              ),
-              GridViewAzkarInHome(),
-            ],
-          );
-        } else if (state is PrayerstimersError) {
-          return Center(
-            child: Text(
-              state.message,
-              style: TextStyles.text16.copyWith(color: AppColors.maincolor),
-            ),
-          );
+        if (state is PrayerstimersSuccess || state is PrayerstimersLoading) {
+          final prayers = state is PrayerstimersSuccess
+              ? state.prayersTimers
+              : (state as PrayerstimersLoading).prayersTimers;
+
+          return CustomScrollView(
+  slivers: [
+    SliverPersistentHeader(
+      pinned: true,
+      delegate: _StackHeaderDelegate(
+        child: StackTimePrayerAnddateInHome(
+          day: prayers.hijri?.day ?? "",
+          month: prayers.hijri?.month ?? "",
+          weekday: prayers.hijri?.weekday ?? "",
+          year: prayers.hijri?.year ?? "",
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(child: const MainFeatruesInHome()),
+    SliverToBoxAdapter(
+      child: TimePrayerinHome(
+        prayerName: prayers.nextPrayer?.name ?? "",
+        timeFromApi: prayers.nextPrayer?.time.toString() ?? "",
+      ),
+    ),
+    const SliverToBoxAdapter(child: GridViewAzkarInHome()),
+  ],
+);
+
         } else {
-          return const SizedBox.shrink(); // Return an empty widget if no state matches
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
   }
+}
+ 
+
+
+ class _StackHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _StackHeaderDelegate({required this.child});
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final bool isCollapsed = shrinkOffset > 50; // مقدار الـ scroll اللي نعتبره collapsed
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: isCollapsed
+          ? Container(
+              key: const ValueKey('collapsed'),
+              height: maxExtent,
+              color: AppColors.maincolor,
+              alignment: Alignment.center,
+              child: Text(
+                'حَسْنَة',
+                style: TextStyles.logo,
+              ),
+            )
+          : Container(
+              key: const ValueKey('expanded'),
+              color: Colors.white,
+              child: child,
+            ),
+    );
+  }
+
+  @override
+  double get maxExtent =>  150.h;
+
+  @override
+  double get minExtent => 60.h;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => true;
 }

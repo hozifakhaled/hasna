@@ -8,7 +8,6 @@ abstract class AzkerState extends Equatable {
 }
 
 class AzkerInitial extends AzkerState {}
-class AzkerLoading extends AzkerState {}
 class AzkerLoaded extends AzkerState {
   final List<AkerEntitiy> akerEntitiy;
 

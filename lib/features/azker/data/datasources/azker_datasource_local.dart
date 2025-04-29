@@ -6,7 +6,7 @@ import 'package:hasna/features/azker/data/models/azkar_model.dart';
 
 class AzkerDatasourceLocal {
   final CacheHelper cache;
-  final String keys = "CachedEAzker";
+  final String keys = "CacedEAzker";
   AzkerDatasourceLocal({required this.cache});
 
   cacheAzaker(List<AzkerModel>? azkerToCache, String key) {

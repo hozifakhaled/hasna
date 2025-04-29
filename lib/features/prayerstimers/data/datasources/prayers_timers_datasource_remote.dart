@@ -15,7 +15,7 @@ class PrayersTimersDatasourceRemote {
     return either.fold(
       (error) {
         throw ServerException(ErrorModel(
-            status: 400, errorMessage: "خطأ في الاتصال: $error"));
+            status: 500, errorMessage: "خطأ في الاتصال: $error"));
       },
       (response) {
         final data = response.data;

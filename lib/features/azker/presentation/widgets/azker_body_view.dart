@@ -60,21 +60,23 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
     return BlocBuilder<AzkerCubit, AzkerState>(
       builder: (context, state) {
         if (state is AzkerLoaded) {
-          counts ??= state.akerEntitiy.map((e) => e.count).toList();
+          final zaker = state.akerEntitiy;
+
+          counts ??= zaker.map((e) => e.count).toList();
 
           return Stack(
             children: [
               Positioned.fill(
                 child: PageView.builder(
                   controller: _pageController,
-                  itemCount: state.akerEntitiy.length,
+                  itemCount: zaker.length,
                   itemBuilder: (context, index) {
                     return Zaker(
                       onTap: () => onTap(index),
-                      zaker: state.akerEntitiy[index].description,
-                      asnad: state.akerEntitiy[index].esnadname,
+                      zaker: zaker[index].description,
+                      asnad: zaker[index].esnadname,
 
-                      numberofzaker: '${state.akerEntitiy[index].count} مرات',
+                      numberofzaker: '${zaker[index].count} مرات',
                     );
                   },
                 ),
@@ -82,9 +84,9 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
               Positioned(
                 bottom: 0,
                 child: ZakerBottomBar(
-                  totalAzker: state.akerEntitiy.length,
+                  totalAzker: zaker.length,
                   currentAzker: currentIndex + 1,
-                  audioUrl: state.akerEntitiy[currentIndex].audioUrl,
+                  audioUrl: zaker[currentIndex].audioUrl,
                 ),
               ),
               CircalNumberZaker(
