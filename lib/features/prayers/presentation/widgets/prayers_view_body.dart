@@ -30,7 +30,7 @@ class PrayersViewBody extends StatelessWidget {
           CustomScrollView(
            
             slivers: [
-              SliverToBoxAdapter(child: CustomeAppbar2(title: 'أدعية من القرآن ')),
+             
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: 10.h,
