@@ -13,6 +13,8 @@ import 'package:hasna/features/hadiths/data/datasources/hadith_local_datasource.
 import 'package:hasna/features/hadiths/data/datasources/hadith_remote_datasource.dart';
 import 'package:hasna/features/hadiths/data/repositories/hadith_repositry_Impl.dart';
 import 'package:hasna/features/hadiths/domain/repositories/hadith_repositry.dart';
+import 'package:hasna/features/hadiths/domain/usecases/hadith_usecase.dart';
+import 'package:hasna/features/hadiths/presentation/cubit/hadiths_cubit.dart';
 import 'package:hasna/features/prayers/data/datasources/prayers_datasource_remote.dart';
 import 'package:hasna/features/prayers/data/datasources/prayers_datasourse_local.dart';
 import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli.dart';
@@ -82,6 +84,7 @@ void setup() async {
   // UseCase
 
    sl.registerLazySingleton(() => PrayersTimersUsecase(prayersTimersRepositry: sl()));
+  sl.registerLazySingleton(() => HadithUsecase( sl()));
     // Repository
 
 
@@ -101,7 +104,7 @@ void setup() async {
   sl.registerLazySingleton(() => CacheHelper());
   //cubit
   sl.registerLazySingleton(() => AzkerCubit(sl()));
-
+  sl.registerFactory(() => HadithsCubit(sl()));
   
 
   sl.registerFactory(() => PrayersCubit(sl()));
