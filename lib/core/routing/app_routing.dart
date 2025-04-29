@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
-import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_azkar.dart';
-import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
+import 'package:hasna/features/azker/presentation/pages/azker_view.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/hadiths/presentation/widgets/fiqh_view_body.dart';
 import 'package:hasna/features/hadiths/presentation/widgets/importance_and_fiqh.dart';

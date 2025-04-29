@@ -6,29 +6,17 @@ import 'package:hasna/core/connections/network_info.dart';
 import 'package:hasna/core/databases/api/dio_consumer.dart';
 import 'package:hasna/core/databases/api/interceptors.dart';
 import 'package:hasna/core/databases/cache/cache_helper.dart';
-import 'package:hasna/features/beforesleepazker/data/datasources/beforesleepazkar_datasource_local.dart';
-import 'package:hasna/features/beforesleepazker/data/datasources/beforesleepazkar_datasource_remote.dart';
-import 'package:hasna/features/beforesleepazker/data/repositories/beforesleepazkar_repositry_impli.dart';
-import 'package:hasna/features/beforesleepazker/domain/repositories/beforesleepazkar_repositry.dart';
-import 'package:hasna/features/beforesleepazker/domain/usecases/beforesleepazkar_usecase.dart';
-import 'package:hasna/features/beforesleepazker/presentation/cubit/beforesleepazkar_cubit.dart';
-import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_local.dart';
-import 'package:hasna/features/eveningazker/data/datasources/eveningazker_datasource_remote.dart';
-import 'package:hasna/features/eveningazker/data/repositories/evening_repositry_impli.dart';
-import 'package:hasna/features/eveningazker/domain/repositories/evening_repositry.dart';
-import 'package:hasna/features/eveningazker/domain/usecases/evening_usecase.dart';
-import 'package:hasna/features/eveningazker/presentation/cubit/eveningazker_cubit.dart';
-import 'package:hasna/features/morningazker/data/datasources/morningazker_datasource_local.dart';
-import 'package:hasna/features/morningazker/data/datasources/morningazker_datasource_remote.dart';
-import 'package:hasna/features/morningazker/data/repositories/morning_repositry_impli.dart';
-import 'package:hasna/features/morningazker/domain/repositories/morning_repositry.dart';
-import 'package:hasna/features/morningazker/domain/usecases/morninging_usecase.dart';
-import 'package:hasna/features/morningazker/presentation/cubit/morningazker_cubit.dart';
+import 'package:hasna/features/azker/data/datasources/azker_datasource_local.dart';
+import 'package:hasna/features/azker/data/datasources/azker_datasource_remote.dart';
+import 'package:hasna/features/azker/presentation/cubit/azker_cubit.dart';
+import 'package:hasna/features/hadiths/data/datasources/hadith_local_datasource.dart';
+import 'package:hasna/features/hadiths/data/datasources/hadith_remote_datasource.dart';
+import 'package:hasna/features/hadiths/data/repositories/hadith_repositry_Impl.dart';
+import 'package:hasna/features/hadiths/domain/repositories/hadith_repositry.dart';
 import 'package:hasna/features/prayers/data/datasources/prayers_datasource_remote.dart';
 import 'package:hasna/features/prayers/data/datasources/prayers_datasourse_local.dart';
 import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli.dart';
 import 'package:hasna/features/prayers/domain/repositories/prayer_repositry.dart';
-import 'package:hasna/features/prayers/domain/usecases/prayers_usecase.dart';
 import 'package:hasna/features/prayers/presentation/cubit/prayers_cubit.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
@@ -92,14 +80,10 @@ void setup() async {
     () => PrayersDatasourseLocal(cache: sl()),
   );
   // UseCase
-   sl.registerLazySingleton(() => BeforesleepazkarUseCase(beforesleepazkarRepositry: sl()));
-  sl.registerLazySingleton(() => EveningUseCase(eveningRepositry: sl()));
-  sl.registerLazySingleton(() => MorningingUsecase(morningRepositry: sl()));
+
    sl.registerLazySingleton(() => PrayersTimersUsecase(prayersTimersRepositry: sl()));
     // Repository
-  sl.registerLazySingleton<EveningRepositry>(
-    () => EveningRepositryImpli(sl(), sl(), networkInfo: sl()),
-  );
+
 
   sl.registerLazySingleton<PrayersTimersRepositry>(
     () => PrayersTimersRepositryImpl(sl(), sl(), networkInfo: sl()),
@@ -122,6 +106,5 @@ void setup() async {
 
   sl.registerFactory(() => PrayersCubit(sl()));
 
-sl.registerLazySingleton(() => BeforesleepazkarCubit(sl()));
 sl.registerFactory(() => PrayerstimersCubit(sl()));
 }
