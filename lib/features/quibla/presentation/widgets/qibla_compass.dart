@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hasna/constants/images.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
-import 'package:hasna/core/themeing/colors.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-import 'package:vibration/vibration.dart'; // جديد: مكتبة الاهتزاز
+import 'package:vibration/vibration.dart';
 
 class QiblaCompass extends StatefulWidget {
   const QiblaCompass({super.key});
@@ -19,7 +18,7 @@ class _QiblaCompassState extends State<QiblaCompass> {
   double? _qiblaDirection;
   double _deviceDirection = 0;
   String _error = '';
-  bool _isAligned = false; // لمراقبة حالة الاهتزاز
+  bool _isAligned = false;
   StreamSubscription<MagnetometerEvent>? _magnetometerSubscription;
 
   @override
@@ -146,79 +145,159 @@ class _QiblaCompassState extends State<QiblaCompass> {
       ),
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.maincolor, AppColors.maincolor, AppColors.maincolor],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        decoration: const BoxDecoration(
+          color: Color(0xFF5A6E5C), // لون أخضر مثل الصورة المرفقة
         ),
         child: _error.isNotEmpty
             ? Center(
                 child: Text(
                   _error,
-                  style: const TextStyle(color: Colors.red, fontSize: 18),
+                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               )
             : (_qiblaDirection == null)
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(color: Colors.white),
+                        SizedBox(height: 20),
+                        Text(
+                          "جاري تحديد اتجاه القبلة...",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : Column(
                     children: [
+                      SizedBox(height: AppBar().preferredSize.height + 20),
+                      // بطاقة اتجاه القبلة
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF8B9E8D),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "اتجاه القبلة: ${_qiblaDirection!.toStringAsFixed(1)}°",
+                              style: const TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            const Icon(
+                              Icons.explore,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // بوصلة اتجاه القبلة
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Center(
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
+                              // البوصلة الدوارة
                               Transform.rotate(
                                 angle: (angleToQibla! * math.pi) / 180,
-                                child: Image.asset(
-                                  'assets/images/compass.png',
-                                  width: 250,
-                                  height: 250,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    // صورة البوصلة
+                                    Image.asset(
+                                      'assets/images/compass.png',
+                                      width: 300,
+                                      height: 300,
+                                    ),
+                                  ],
                                 ),
                               ),
                               
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _isAligned ? Colors.white : Colors.transparent,
-                                ),
-                                child: Center(
-                                  child: Image.asset(
-                                    Assets.imagesKabaa,
-                                    width: 40,
-                                    height: 40,
+                              // النقطة الحمراء (مؤشر القبلة)
+                              Positioned(
+                                top: 45,
+                                child: Container(
+                                  width: 16,
+                                  height: 16,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
                                   ),
                                 ),
                               ),
+                              
+                              // الدائرة الخارجية عندما تكون متحاذية
+                              if (_isAligned)
+                                Container(
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white.withOpacity(0.2),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.white.withOpacity(0.5),
+                                        blurRadius: 20,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                
+                              // صورة الكعبة في المنتصف تماماً
+                             
                             ],
                           ),
                         ),
                       ),
-                        
-                      // نص زاوية القبلة
-                      Text(
-                        "زاوية القبلة: ${_qiblaDirection!.toStringAsFixed(2)}°",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                      // رسالة توجيهية
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF8B9E8D),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Text(
+                          _isAligned 
+                              ? "أنت الآن في اتجاه القبلة الصحيح" 
+                              : "قم بتوجيه هاتفك نحو اتجاه القبلة",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
+                      // صورة توضيحية
                       Expanded(
-                        flex: 1,
-                        child: Image.asset(
-                          Assets.imagesOnbooardingimage,
-                          fit: BoxFit.cover,
-                          width: 280,
-                          height: 230,
+                        flex: 2,
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: Image.asset(
+                            Assets.imagesOnbooardingimage,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
-                      
                     ],
                   ),
       ),
