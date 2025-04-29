@@ -10,7 +10,7 @@ class MainFeatruesInHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = ["الصلاه", "القبله", "العداد", "الاذكار", "التقويم"];
+    List<String> items = ["الصلاه", "القبله", "الحديث", "الاذكار", "التقويم"];
     void handleNavigation(int index) {
       switch (index) {
         case 0:
@@ -21,11 +21,8 @@ class MainFeatruesInHome extends StatelessWidget {
           break;
         case 2:
           GoRouter.of(context).push(
-            Routes.azkar,
-            extra: {
-              "endpoint": Endpoints.eveningazkarsEndpoint,
-              "title": "الاذكار المساء",
-            }, 
+            Routes.hadith,
+          
           ); 
           break;
         case 3:
