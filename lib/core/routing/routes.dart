@@ -11,4 +11,6 @@ class Routes {
   static const String zaker = '/zaker';
   static const String tasbiha = '/tasbiha';
   static const String quibla = '/quibla';
+  static const String importancehadith = '/importancehadith';
+  static const String fiqh = '/fiqh';
 }

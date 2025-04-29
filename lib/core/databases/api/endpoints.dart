@@ -8,4 +8,5 @@ class Endpoints {
   static String aftersleepazkersEndpoint = 'afterprayazkar';
   static String prayerstimersEndpoint = 'prayerstimers';
   static String prayersEndpoint = 'prayers';
+  static String hadithEndpoint = 'hadith';
 }

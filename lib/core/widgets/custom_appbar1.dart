@@ -5,9 +5,10 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 
 class CustomAppbar1 extends StatelessWidget {
-  const CustomAppbar1({super.key, required this.title, this.image});
+  const CustomAppbar1({super.key, required this.title, this.image, this.color});
   final String title;
   final String? image;
+  final Color ? color;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +18,7 @@ class CustomAppbar1 extends StatelessWidget {
      // color: AppColors.maincolor,
       decoration: BoxDecoration(
          
-        color: AppColors.maincolor,
+        color:color?? AppColors.maincolor,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(15.r),
           bottomRight: Radius.circular(15.r),
