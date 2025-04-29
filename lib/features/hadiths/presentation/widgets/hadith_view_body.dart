@@ -11,7 +11,7 @@ class HadithViewBody extends StatelessWidget {
       child: Column(
         children: [
           const CustomAppbar1(title: 'حديث اليوم '),
-          const ContainerHadith(),
+          Center(child: const ContainerHadith()),
         ],
       ),
     );

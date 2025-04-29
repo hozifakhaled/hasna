@@ -1,16 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:hasna/core/errors/error_model.dart';
+import 'package:hasna/core/errors/failure.dart';
 
 
 //!ServerException
-class ServerException implements Exception {
+class ServerException implements Failure {
   final ErrorModel errorModel;
   ServerException(this.errorModel);
+  
+  @override
+  
+  String get errMessage => errorModel.errorMessage;
 }
 //!CacheExeption
-class CacheExeption implements Exception {
+class CacheExeption implements Failure {
   final String errorMessage;
   CacheExeption({required this.errorMessage});
+  @override
+  String get errMessage => errorMessage;
 }
 
 class BadCertificateException extends ServerException {

@@ -6,4 +6,5 @@ class Endpoints {
   static String beforesleepazkersEndpoint = 'beforesleepazkar';
   static String aftersleepazkersEndpoint = 'afterprayazkar';
   static String prayersEndpoint = 'prayers';
+  static String hadithEndpoint = 'hadith';
 }

@@ -15,5 +15,7 @@ static const String dpublicazkar = '/dpublicazkar';
     static const String eveningazkar = '/eveningazkar';
     static const String beforesleepazkar = '/beforesleepazkar';
   static const String quibla = '/quibla';
+  static const String importancehadith = '/importancehadith';
+  static const String fiqh = '/fiqh';
 
 }

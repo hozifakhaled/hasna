@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_azkar.dart';
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
+import 'package:hasna/features/hadiths/domain/entities/hadith_entity.dart';
+import 'package:hasna/features/hadiths/presentation/cubit/hadiths_cubit.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
+import 'package:hasna/features/hadiths/presentation/widgets/fiqh_view_body.dart';
+import 'package:hasna/features/hadiths/presentation/widgets/importance_and_fiqh.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
 import 'package:hasna/features/morningazker/presentation/screens/morning_azkar_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
@@ -70,6 +76,27 @@ class AppRouting {
         path: Routes.quibla,
         builder: (context, state) => const QuiblaView(),
       ),
+   GoRoute(
+  path: Routes.importancehadith,
+  builder: (context, state) {
+    
+
+    
+     final importance = state.extra as Map<String, dynamic>;
+
+      return ImportanceAndFiqh(
+        importance: importance['importance'] as String,
+        fiqh: importance['fiqh'] as String,
+      );
+   
+  },
+),
+GoRoute(path: Routes.fiqh, builder: (context, state) {
+  final fiqh = state.extra as String;
+        return  FiqhPage( fiqh: fiqh,);
+      }),
+
+
     ],
   );
 }
