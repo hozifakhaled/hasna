@@ -17,15 +17,18 @@ class ColumnTextZaker extends StatelessWidget {
       child: GestureDetector(
         
         onTap: onTap,
-        child: Column(
+          child: Column(
           children: [
            
             SizedBox(height: 10.h),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                zaker,
-                style: TextStyles.text15.copyWith(color: Colors.white),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  zaker,
+                  style: TextStyles.textt18.copyWith(color: Colors.white,height: 2),
+                ),
               ),
             ),
              SizedBox(height: 20.h),

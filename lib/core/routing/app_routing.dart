@@ -4,18 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/features/beforesleepazker/presentation/pages/before_sleep_azkar.dart';
 import 'package:hasna/features/eveningazker/presentation/pages/evenazker_view.dart';
-import 'package:hasna/features/hadiths/domain/entities/hadith_entity.dart';
-import 'package:hasna/features/hadiths/presentation/cubit/hadiths_cubit.dart';
 import 'package:hasna/features/hadiths/presentation/screens/hadith_view.dart';
 import 'package:hasna/features/hadiths/presentation/widgets/fiqh_view_body.dart';
 import 'package:hasna/features/hadiths/presentation/widgets/importance_and_fiqh.dart';
 import 'package:hasna/features/home/presentation/screens/home_view.dart';
-import 'package:hasna/features/morningazker/presentation/screens/morning_azkar_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
 import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
-import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
 import 'package:hasna/features/quibla/presentation/screens/quibla_view.dart';
 import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
 
@@ -42,10 +38,7 @@ class AppRouting {
         builder: (context, state) => const PrayersView(),
       ),
       GoRoute(path: Routes.home, builder: (context, state) => const HomeView()),
-      GoRoute(
-        path: Routes.eveningazkar,
-        builder: (context, state) => const EvenazkerView(),
-      ),
+     
       GoRoute(
         path: Routes.splah,
         builder: (context, state) => const SplashView(),
@@ -58,20 +51,13 @@ class AppRouting {
         path: Routes.dpublicazkar,
         builder: (context, state) => const PubliczakerDeatilsView(),
       ),
-      GoRoute(
-        path: Routes.morningazkar,
-        builder: (context, state) {
-          return MorningAzkarView();
-        },
-      ),
+   
       GoRoute(
         path: Routes.azkar,
-        builder: (context, state) => const HomeView(),
+        
+        builder: (context, state) =>  AzkerView(data: state.extra as Map<String,String>,),
       ),
-      GoRoute(
-        path: Routes.beforesleepazkar,
-        builder: (context, state) => const BeforeSleepAzkar(),
-      ),
+      
       GoRoute(
         path: Routes.quibla,
         builder: (context, state) => const QuiblaView(),

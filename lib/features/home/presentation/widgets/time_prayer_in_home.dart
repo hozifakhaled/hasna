@@ -81,6 +81,7 @@ class _TimePrayerinHomeState extends State<TimePrayerinHome> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
+          // ignore: deprecated_member_use
           color: AppColors.maincolor.withOpacity(.30),
           borderRadius: BorderRadius.circular(10.r),
         ),

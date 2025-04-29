@@ -9,9 +9,11 @@ class PrayersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<PrayersCubit>()..initIfNeedes(),
-      child: SafeArea(child: Scaffold(body: PrayersViewBody())),
+    return SafeArea(
+      child: BlocProvider(
+        create: (context) => sl<PrayersCubit>()..initIfNeedes(),
+        child: Scaffold(body: PrayersViewBody()),
+      ),
     );
   }
 }

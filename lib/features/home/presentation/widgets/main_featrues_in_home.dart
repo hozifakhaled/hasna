@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hasna/core/databases/api/endpoints.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
@@ -9,20 +10,41 @@ class MainFeatruesInHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = [
-       "الصلاه",
-      "القبله",
-      "العداد",
-      "الاذكار",
-      "التقويم",
-    ];
-    List<String> nav = [
-        Routes.prayTimers,
-      Routes.quibla,
-      Routes.eveningazkar,
-       Routes.morningazkar,
-        Routes.prayes
-    ];
+    List<String> items = ["الصلاه", "القبله", "العداد", "الاذكار", "التقويم"];
+    void handleNavigation(int index) {
+      switch (index) {
+        case 0:
+          GoRouter.of(context).push(Routes.prayTimers);
+          break;
+        case 1:
+          GoRouter.of(context).push(Routes.prayes);
+          break;
+        case 2:
+          GoRouter.of(context).push(
+            Routes.azkar,
+            extra: {
+              "endpoint": Endpoints.eveningazkarsEndpoint,
+              "title": "الاذكار المساء",
+            }, 
+          ); 
+          break;
+        case 3:
+          GoRouter.of(context).push(
+            Routes.azkar,
+            extra: {
+              "endpoint": Endpoints.morningazkarsEndpoint,
+              "title": "الاذكار الصباح",
+            },
+          );
+          break;
+        case 4:
+          GoRouter.of(context).push(Routes.prayTimers);
+          break;
+        default:
+          GoRouter.of(context).push(Routes.prayTimers);
+          break;
+      }
+    }
 
     return Container(
       width: double.infinity,
@@ -35,8 +57,7 @@ class MainFeatruesInHome extends StatelessWidget {
           children: List.generate(items.length, (index) {
             return InkWell(
               onTap: () {
-                // هنا ممكن تضيف أي أكشن تريده عند الضغط على العنصر
-               GoRouter.of(context).push(nav[index]);
+                handleNavigation(index);
               },
               child: Text(
                 " ${items[index]}",
@@ -44,7 +65,6 @@ class MainFeatruesInHome extends StatelessWidget {
               ),
             );
           }),
-          
         ),
       ),
     );

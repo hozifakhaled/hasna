@@ -24,6 +24,7 @@ class ZakerBottomBar extends StatefulWidget {
 class _ZakerBottomBarState extends State<ZakerBottomBar> {
   late AudioPlayer _audioPlayer;
   bool _isPlaying = false;
+  double _playbackSpeed = 1.0;
 
   @override
   void initState() {
@@ -39,6 +40,21 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
           });
         }
       }
+    });
+  }
+
+  void _changeSpeed() {
+    setState(() {
+      if (_playbackSpeed == 1.0) {
+        _playbackSpeed = 1.25;
+      } else if (_playbackSpeed == 1.25) {
+        _playbackSpeed = 1.5;
+      } else if (_playbackSpeed == 1.5) {
+        _playbackSpeed = 2.0;
+      } else {
+        _playbackSpeed = 1.0; // يرجع للوضع الطبيعي
+      }
+      _audioPlayer.setSpeed(_playbackSpeed); // تطبيق السرعة
     });
   }
 
@@ -66,9 +82,9 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
         setState(() {
           _isPlaying = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("فشل في تشغيل الصوت")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("فشل في تشغيل الصوت")));
       }
     }
   }
@@ -107,9 +123,18 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
                   ),
                 ),
                 SizedBox(width: 10.w),
-                Text(
-                  'x1',
-                  style: TextStyles.text20.copyWith(color: AppColors.maincolor),
+                GestureDetector(
+                  onTap: _changeSpeed,
+                  child: Text(
+                    'x${_playbackSpeed.toStringAsFixed(2) == '1.00'
+                        ? '1'
+                        : _playbackSpeed.toStringAsFixed(2) == '2.00'
+                        ? '2'
+                        : _playbackSpeed.toStringAsFixed(2)}',
+                    style: TextStyles.text20.copyWith(
+                      color: AppColors.maincolor,
+                    ),
+                  ),
                 ),
               ],
             ),

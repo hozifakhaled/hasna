@@ -8,6 +8,10 @@ class TextStyles {
     fontWeight: FontWeight.w900,
 color: Colors.black
   );
+  static  TextStyle textt18 = GoogleFonts.amiri(
+     fontSize: 18.sp,
+    fontWeight: FontWeight.w900,
+  );
   static  TextStyle text16 = GoogleFonts.cairo(
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
