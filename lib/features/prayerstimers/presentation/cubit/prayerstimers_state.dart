@@ -9,11 +9,7 @@ abstract class PrayerstimersState extends Equatable {
 
 class PrayerstimersInitial extends PrayerstimersState {}
 
-class PrayerstimersLoading extends PrayerstimersState {
-  final PrayersTimersEntity prayersTimers;
-
-  const PrayerstimersLoading({required this.prayersTimers});
-}
+class PrayerstimersLoading extends PrayerstimersState {}
 
 class PrayerstimersSuccess extends PrayerstimersState {
   final PrayersTimersEntity prayersTimers;
