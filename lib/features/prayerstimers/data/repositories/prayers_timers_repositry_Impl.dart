@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:hasna/core/connections/network_info.dart';
 import 'package:hasna/core/errors/expentions.dart';
 import 'package:hasna/core/errors/failure.dart';
-import 'package:hasna/features/azker/data/models/azkar_model.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
 import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
 import 'package:hasna/features/prayerstimers/domain/entities/prayers_timers_entity.dart';

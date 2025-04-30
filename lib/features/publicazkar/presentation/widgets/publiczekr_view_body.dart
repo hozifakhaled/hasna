@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/core/widgets/container_in_zekrwidget.dart';
+import 'package:hasna/features/publicazkar/presentation/widgets/bottom_sheet_add_zaker.dart';
 import 'package:hasna/features/publicazkar/presentation/widgets/zekr_wiget.dart';
 
 class PubliczekrViewBody extends StatelessWidget {
@@ -29,11 +30,17 @@ class PubliczekrViewBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, color: AppColors.secondcolor,
-                    child: Icon(Icons.sync, color: AppColors.light,),),
+                    ContainerInZekrWidget(
+                      width: 50.0.w,
+                      height: 50.0.h,
+                      color: AppColors.secondcolor,
+                      child: Icon(Icons.sync, color: AppColors.light),
+                    ),
                     Text(
                       'لَا يَزَالُ لِسَانُكَ رَطْبًا بِذِكْرِ اللَّهِ',
-                      style: TextStyles.textwiget100.copyWith(color: AppColors.maincolor),
+                      style: TextStyles.textwiget100.copyWith(
+                        color: AppColors.maincolor,
+                      ),
                     ),
                     Icon(Icons.arrow_forward, color: AppColors.maincolor),
                   ],
@@ -47,10 +54,14 @@ class PubliczekrViewBody extends StatelessWidget {
                   ListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: 10,
-                    itemBuilder: (context, index) => const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      child: ZekrWiget(),
-                    ),
+                    itemBuilder:
+                        (context, index) => const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
+                          child: ZekrWiget(),
+                        ),
                   ),
                   Positioned(
                     bottom: 10,
@@ -59,17 +70,52 @@ class PubliczekrViewBody extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                          ContainerInZekrWidget(width: 50.0.w,height: 50.0.h, color: AppColors.secondcolor,
-                          child: Icon(Icons.add, color: AppColors.light,),),
-                        ContainerInZekrWidget(width: 120.0.w, height: 50.0.h, color: AppColors.secondcolor,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('المجموع',style: TextStyles.textwiget100.copyWith(color: AppColors.light),),
-                            SizedBox(width: 10.w,),
-                            Text('10',style: TextStyles.textwiget100.copyWith(color: AppColors.light),)
-                          ],
-                        ),), 
+                        InkWell(
+                          onTap:
+                              () => showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                
+                                shape: const RoundedRectangleBorder(
+                                  
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
+                                ),
+                                builder: (_) => BottomSheetAddZaker(),
+                                backgroundColor: AppColors.maincolor
+                              ),
+
+                          child: ContainerInZekrWidget(
+                            width: 50.0.w,
+                            height: 50.0.h,
+                            color: AppColors.secondcolor,
+                            child: Icon(Icons.add, color: AppColors.light),
+                          ),
+                        ),
+                        ContainerInZekrWidget(
+                          width: 120.0.w,
+                          height: 50.0.h,
+                          color: AppColors.secondcolor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'المجموع',
+                                style: TextStyles.textwiget100.copyWith(
+                                  color: AppColors.light,
+                                ),
+                              ),
+                              SizedBox(width: 10.w),
+                              Text(
+                                '10',
+                                style: TextStyles.textwiget100.copyWith(
+                                  color: AppColors.light,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
