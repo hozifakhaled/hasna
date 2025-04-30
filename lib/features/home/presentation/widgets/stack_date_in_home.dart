@@ -35,6 +35,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: 170.h,
+              
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
                 color: AppColors.maincolor.withOpacity(0.6),
@@ -45,7 +46,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
             bottom: 10.h,
             left: context.width * 0.5 - 70.w,
             child: Container(
-              width: 140.w,
+              width: 160.w,
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20.r),

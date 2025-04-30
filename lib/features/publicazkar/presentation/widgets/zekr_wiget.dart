@@ -57,7 +57,7 @@ class ZekrWiget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Image.asset(Assets.imagesMorevertical),
+                  InkWell(child: Image.asset(Assets.imagesMorevertical)),
                 ],
               ),
             ),
