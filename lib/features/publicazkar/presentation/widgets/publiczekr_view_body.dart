@@ -7,6 +7,7 @@ import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/core/widgets/container_in_zekrwidget.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
+import 'package:hasna/features/publicazkar/presentation/widgets/bottom_sheet_add_zaker.dart';
 import 'package:hasna/features/publicazkar/presentation/widgets/zekr_wiget.dart';
 
 class PubliczekrViewBody extends StatefulWidget {
@@ -119,7 +120,7 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                           itemCount: state.tasabih.length,
                           itemBuilder: (context, index) {
                             final tasbih = state.tasabih[index];
-                            return ZekrWiget(title: tasbih.taxt,);
+                            return ZekrWiget(title: tasbih.taxt);
                           },
                         );
                       } else if (state is PublicazkarFailure) {
@@ -135,6 +136,8 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                       );
                     },
                   ),
+                  
+                  // زر الإضافة ومجموع التسابيح في الأسفل
                   Positioned(
                     bottom: 10,
                     left: 10,
@@ -142,10 +145,23 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                           
-                          },
+                        const SizedBox(width: 50), // فراغ متوازن على اليسار
+                        InkWell(
+                          onTap: () => showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            builder: (_) =>  BottomSheetAddZaker(
+                              onTap: () {
+                               
+                              },
+                            ),
+                            backgroundColor: AppColors.maincolor
+                          ),
                           child: ContainerInZekrWidget(
                             width: 50.0.w,
                             height: 50.0.h,
@@ -188,27 +204,23 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
     );
   }
 
-
-  // حوار تأكيد إعادة تعيين المجموع الكلي - تم تعديله لاستخدام BuildContext من الويدجت الحالية
+  // حوار تأكيد إعادة تعيين المجموع الكلي
   void _showResetConfirmationDialog() {
     final PublicazkarCubit cubit = context.read<PublicazkarCubit>();
 
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: Text('إعادة تعيين'),
-        content: Text('هل تريد إعادة تعيين جميع العدادات؟'),
+        title: const Text('إعادة تعيين'),
+        content: const Text('هل تريد إعادة تعيين جميع العدادات؟'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: Text('إلغاء'),
+            child: const Text('إلغاء'),
           ),
           ElevatedButton(
             onPressed: () {
               // إعادة تعيين جميع العدادات
-              // يمكنك إما حذف الجميع أو وضع عدد التسابيح بصفر
-              
-              // نقرأ جميع التسابيح ونعيد تعيين العدادات
               if (cubit.state is PublicazkarSuccess) {
                 final tasabih = (cubit.state as PublicazkarSuccess).tasabih;
                 for (var tasbih in tasabih) {
@@ -219,7 +231,7 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
               
               Navigator.pop(dialogContext);
             },
-            child: Text('تأكيد'),
+            child: const Text('تأكيد'),
           ),
         ],
       ),

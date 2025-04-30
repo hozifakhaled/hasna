@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/constants/images.dart';
-import 'package:hasna/core/widgets/custome_appbar2.dart';
 import 'package:hasna/features/prayers/presentation/widgets/list_item_prayer.dart';
 
 class PrayersViewBody extends StatelessWidget {
