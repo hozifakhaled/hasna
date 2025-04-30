@@ -16,6 +16,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
   List<int>? counts;
+  List<String>? _oldZakerKeys;
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
     _pageController.addListener(_onPageChanged);
   }
 
-  onTap(int index) {
+  void onTap(int index) {
     setState(() {
       if (counts![index] > 0) {
         counts![index] = counts![index] - 1;
@@ -62,38 +63,44 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
         if (state is AzkerLoaded) {
           final zaker = state.akerEntitiy;
 
-          counts ??= zaker.map((e) => e.count).toList();
+          /// استخراج مفاتيح مميزة لكل ذكر (يفضل استخدام `id` لو متاح، وهنا استخدمنا `description`)
+          final newKeys = zaker.map((e) => e.description).toList();
 
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: zaker.length,
-                  itemBuilder: (context, index) {
-                    return Zaker(
+          /// تحديث counts لو البيانات اتغيرت
+          if (_oldZakerKeys == null || !_listEquals(_oldZakerKeys!, newKeys)) {
+            counts = zaker.map((e) => e.count).toList();
+            _oldZakerKeys = newKeys;
+          }
+
+          return PageView.builder(
+            controller: _pageController,
+            itemCount: zaker.length,
+            itemBuilder: (context, index) {
+              return Stack(
+                children: [
+                  Positioned.fill(
+                    child: Zaker(
                       onTap: () => onTap(index),
                       zaker: zaker[index].description,
                       asnad: zaker[index].esnadname,
-
                       numberofzaker: '${zaker[index].count} مرات',
-                    );
-                  },
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: ZakerBottomBar(
-                  totalAzker: zaker.length,
-                  currentAzker: currentIndex + 1,
-                  audioUrl: zaker[currentIndex].audioUrl,
-                ),
-              ),
-              CircalNumberZaker(
-                number: counts![currentIndex],
-                onTap: () => onTap(currentIndex),
-              ),
-            ],
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: ZakerBottomBar(
+                      totalAzker: zaker.length,
+                      currentAzker: currentIndex + 1,
+                      audioUrl: zaker[currentIndex].audioUrl,
+                    ),
+                  ),
+                  CircalNumberZaker(
+                    number: counts![index],
+                    onTap: () => onTap(currentIndex),
+                  ),
+                ],
+              );
+            },
           );
         } else if (state is AzkerError) {
           return const Center(child: Text('تعذر تحميل الأذكار'));
@@ -102,5 +109,13 @@ class _EveningazkerBodyViewState extends State<EveningazkerBodyView> {
         }
       },
     );
+  }
+
+  bool _listEquals(List list1, List list2) {
+    if (list1.length != list2.length) return false;
+    for (int i = 0; i < list1.length; i++) {
+      if (list1[i] != list2[i]) return false;
+    }
+    return true;
   }
 }

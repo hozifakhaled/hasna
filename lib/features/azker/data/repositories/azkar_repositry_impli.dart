@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:hasna/core/connections/network_info.dart';
 import 'package:hasna/core/errors/expentions.dart';
@@ -18,7 +20,7 @@ class AzkerRepositryImpli implements AzkarRepositry {
   Future<Either<List<AzkerModel>, Failure>> getAzker(String endpoint) async {
     try {
       final localAzkar = await local.getLastZaker(endpoint);
-      _tryToUpdateData(endpoint); // لا تؤثر على النتيجة مباشرةً
+   unawaited  ( _updateAzker(endpoint)); // لا تؤثر على النتيجة مباشرةً
       return left(localAzkar);
     } catch (_) {
       // إذا فشل الـ local نحاول عبر الـ remote
@@ -38,14 +40,17 @@ class AzkerRepositryImpli implements AzkarRepositry {
     }
   }
 
-  void _tryToUpdateData(String endpoint) {
-    Future.microtask(() async {
-      if (await networkInfo.isConnected) {
-        try {
-          final remoteModel = await remote.getAzker(endpoint);
-          await local.cacheAzaker(remoteModel, endpoint);
-        } catch (_) {}
-      }
-    });
+  
+
+Future<void> _updateAzker(String endpoint) async {
+  if (await networkInfo.isConnected) {
+    try {
+      final remoteModel = await remote.getAzker(endpoint);
+      await local.cacheAzaker(remoteModel, endpoint);
+    } catch (_) {
+      // تجاهل الخطأ بصمت أو سجل لو حبيت
+    }
   }
+}
+
 }

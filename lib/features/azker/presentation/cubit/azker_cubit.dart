@@ -11,11 +11,7 @@ class AzkerCubit extends Cubit<AzkerState> {
 
   final AzkarUsecase _azkerUseCase;
 
-  void initIfNeedes(String endpoint) {
-    if (state is! AzkerLoaded) {
-      getAzker(endpoint);
-    }
-  }
+ 
 
   void getAzker(String endpoint) async {
 
