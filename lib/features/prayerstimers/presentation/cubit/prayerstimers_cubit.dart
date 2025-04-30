@@ -14,21 +14,10 @@ class PrayerstimersCubit extends Cubit<PrayerstimersState> {
   final PrayersTimersUsecase prayersTimersUsecase;
 
   PrayerstimersCubit(this.prayersTimersUsecase) : super(PrayerstimersInitial());
-  final CacheHelper cache = sl<CacheHelper>();
-  final String keys = "CachedPrayerstimers";
-  // ignore: prefer_typing_uninitialized_variables
-
-  PrayersTimersEntity? loadinig() {
-    final jsonString = cache.getDataString(key: keys);
-    if (jsonString != null) {
-      return PrayersTimersModel.fromJson(json.decode(jsonString));
-    } else {
-      return null;
-    }
-  }
+  
 
   Future<void> getPrayersTimers() async {
-    emit(PrayerstimersLoading(prayersTimers: loadinig()??PrayersTimersEntity(nextPrayer: PrayerInfo(name: 'الفجر', time: '4:30'),hijri: Datehijri(day: "3", month: "ذو القعده", weekday: "الخميس", year: "1446")) ));
+    emit(PrayerstimersLoading());
     final result = await prayersTimersUsecase.getPrayersTimers();
 
     result.fold(
