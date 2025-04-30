@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hasna/core/databases/api/endpoints.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
@@ -10,7 +9,7 @@ class MainFeatruesInHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = ["الصلاه", "القبله", "الحديث", "الاذكار", "التقويم"];
+    List<String> items = ["الصلاه", "القبله", "الحديث", "التسابيح", "التقويم"];
     void handleNavigation(int index) {
       switch (index) {
         case 0:
@@ -27,15 +26,12 @@ class MainFeatruesInHome extends StatelessWidget {
           break;
         case 3:
           GoRouter.of(context).push(
-            Routes.azkar,
-            extra: {
-              "endpoint": Endpoints.morningazkarsEndpoint,
-              "title": "الاذكار الصباح",
-            },
+            Routes.publicazkar,
+          
           );
           break;
         case 4:
-          GoRouter.of(context).push(Routes.prayTimers);
+          GoRouter.of(context).push(Routes.tasbiha);
           break;
         default:
           GoRouter.of(context).push(Routes.prayTimers);
