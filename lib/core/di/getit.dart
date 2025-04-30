@@ -30,6 +30,8 @@ import 'package:hasna/features/prayerstimers/data/repositories/prayers_timers_re
 import 'package:hasna/features/prayerstimers/domain/repositories/prayers_timers_repositry.dart';
 import 'package:hasna/features/prayerstimers/domain/usecases/prayers_timers_usecase.dart';
 import 'package:hasna/features/prayerstimers/presentation/cubit/prayerstimers_cubit.dart';
+import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryImpl.dart';
+import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -98,7 +100,8 @@ void setup() async {
     () => PrayersTimersRepositryImpl(sl(), sl(), networkInfo: sl()),
   );
 
-  
+  sl.registerLazySingleton(()=> PublicAzkarRepositryimpl());
+
   sl.registerLazySingleton<PrayerRepositry>(
     () => PrayersRepositryImpli(local: sl(), remote: sl(), networkInfo: sl()),
   );
@@ -114,7 +117,7 @@ void setup() async {
   //cubit
   sl.registerLazySingleton(() => AzkerCubit(sl()));
   sl.registerFactory(() => HadithsCubit(sl()));
-  
+  sl.registerFactory(() => PublicazkarCubit(sl()));
 
   sl.registerFactory(() => PrayersCubit(sl()));
 

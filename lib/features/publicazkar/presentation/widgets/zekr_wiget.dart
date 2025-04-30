@@ -6,8 +6,8 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 
 class ZekrWiget extends StatelessWidget {
-  const ZekrWiget({super.key});
-
+  const ZekrWiget({super.key, this.title});
+ final String? title;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -38,7 +38,7 @@ class ZekrWiget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّةِ مِنْ شَرِّ مَا خَلَقَ',
+                          title ?? 'تسبيح',
                           style: TextStyles.text20.copyWith(
                             color: AppColors.maincolor,
                             fontWeight: FontWeight.bold,
