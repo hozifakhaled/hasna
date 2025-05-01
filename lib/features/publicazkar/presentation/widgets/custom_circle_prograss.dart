@@ -28,6 +28,7 @@ class _CustomCircleProgressState extends State<CustomCircleProgress> {
 
   void decreaseValue() {
     setState(() {
+      context.read<PublicazkarCubit>().incrementDora(value);
       if (value > 0) {
         value--;
         context.read<PublicazkarCubit>().updateTasabih(

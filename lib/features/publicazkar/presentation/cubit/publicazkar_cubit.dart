@@ -9,8 +9,14 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
   final PublicAzkarRepositryimpl publicAzkarRepositryimpl;
 
   PublicazkarCubit(this.publicAzkarRepositryimpl) : super(PublicazkarInitial());
- final zakerController = TextEditingController();
+  final zakerController = TextEditingController();
   final countController = TextEditingController();
+  int dora = 0;
+  void incrementDora(int value) {
+   if (value ==1) {
+      dora++;
+    } 
+  }
 
   Future<void> getAllTasabih() async {
     emit(PublicazkarLoading());
@@ -62,7 +68,7 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
     try {
       await publicAzkarRepositryimpl.updateTasabih(tasabihModel);
       final updatedList = await publicAzkarRepositryimpl.getAllTasabih();
- await publicAzkarRepositryimpl.getAllTasabih();
+      await publicAzkarRepositryimpl.getAllTasabih();
       emit(PublicazkarSuccess(updatedList));
     } catch (e) {
       emit(PublicazkarFailure('Failed to update tasbih: $e'));
