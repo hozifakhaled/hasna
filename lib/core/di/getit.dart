@@ -117,9 +117,9 @@ void setup() async {
   //cubit
   sl.registerLazySingleton(() => AzkerCubit(sl()));
   sl.registerFactory(() => HadithsCubit(sl()));
-  sl.registerFactory(() => PublicazkarCubit(sl()));
+  sl.registerLazySingleton(() => PublicazkarCubit(sl()));
 
-  sl.registerFactory(() => PrayersCubit(sl()));
+  sl.registerLazySingleton(() => PrayersCubit(sl()));
 
-sl.registerFactory(() => PrayerstimersCubit(sl()));
+sl.registerLazySingleton(() => PrayerstimersCubit(sl()));
 }

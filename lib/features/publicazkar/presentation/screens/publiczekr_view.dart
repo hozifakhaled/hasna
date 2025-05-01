@@ -9,8 +9,8 @@ class PubliczekrView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<PublicazkarCubit>(),
+    return BlocProvider.value(
+      value: sl<PublicazkarCubit>(),
       child: PubliczekrViewBody(),
     );
   }

@@ -6,6 +6,7 @@ import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/core/widgets/container_in_zekrwidget.dart';
+
 import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
 import 'package:hasna/features/publicazkar/presentation/widgets/bottom_sheet_add_zaker.dart';
 import 'package:hasna/features/publicazkar/presentation/widgets/zekr_wiget.dart';
@@ -62,7 +63,7 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        _showResetConfirmationDialog();
+                       _showResetConfirmationDialog();
                       },
                       child: ContainerInZekrWidget(
                         width: 50.0.w,
@@ -120,7 +121,7 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                           itemCount: state.tasabih.length,
                           itemBuilder: (context, index) {
                             final tasbih = state.tasabih[index];
-                            return ZekrWiget(title: tasbih.taxt);
+                            return ZekrWiget(tasabih: tasbih);
                           },
                         );
                       } else if (state is PublicazkarFailure) {
@@ -146,22 +147,24 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                       children: [
                         const SizedBox(width: 50), // فراغ متوازن على اليسار
                         InkWell(
-                          onTap:
-                              () => showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  ),
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: AppColors.maincolor,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
                                 ),
-                                builder:
-                                    (_) => BlocProvider(
-                                      create: (context) => sl<PublicazkarCubit>(),
-                                      child: BottomSheetAddZaker(),
-                                    ),
-                                backgroundColor: AppColors.maincolor,
                               ),
+                              builder: (context) {
+                                return BlocProvider.value(
+                                  value: sl<PublicazkarCubit>(),
+                                  child: BottomSheetAddZaker(),
+                                );
+                              },
+                            );
+                          },
                           child: ContainerInZekrWidget(
                             width: 50.0.w,
                             height: 50.0.h,
@@ -211,31 +214,47 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
     showDialog(
       context: context,
       builder:
-          (dialogContext) => AlertDialog(
-            title: const Text('إعادة تعيين'),
-            content: const Text('هل تريد إعادة تعيين جميع العدادات؟'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(dialogContext),
-                child: const Text('إلغاء'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // إعادة تعيين جميع العدادات
-                  if (cubit.state is PublicazkarSuccess) {
-                    final tasabih = (cubit.state as PublicazkarSuccess).tasabih;
-                    for (var tasbih in tasabih) {
-                      tasbih.number = 0;
-                      cubit.updateTasabih(tasbih);
-                    }
-                  }
+          (dialogContext) => DialogZeroAll(cubit: cubit, dialogContext: dialogContext,),
+    );
+  }
 
-                  Navigator.pop(dialogContext);
-                },
-                child: const Text('تأكيد'),
-              ),
-            ],
-          ),
+ 
+}
+
+class DialogZeroAll extends StatelessWidget {
+  const DialogZeroAll({
+    super.key,
+    required this.cubit, required this.dialogContext,
+  });
+ final BuildContext dialogContext;
+  final PublicazkarCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('إعادة تعيين'),
+      content: const Text('هل تريد إعادة تعيين جميع العدادات؟'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext),
+          child: const Text('إلغاء'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            // إعادة تعيين جميع العدادات
+            if (cubit.state is PublicazkarSuccess) {
+              final tasabih = (cubit.state as PublicazkarSuccess).tasabih;
+              for (var tasbih in tasabih) {
+                tasbih.sumNumber = 0;
+                cubit.updateTasabih(tasbih);
+              }
+            }
+    
+            Navigator.pop(dialogContext);
+          },
+          child: const Text('تأكيد'),
+        ),
+      ],
     );
   }
 }

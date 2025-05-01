@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasna/core/extention/extention.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
+import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
 
 class CustomCircleProgress extends StatefulWidget {
-  const CustomCircleProgress({super.key, required this.value});
-final int value ;
+  const CustomCircleProgress({super.key, required this.model});
+
+  final TasabihModel model;
   @override
   // ignore: library_private_types_in_public_api
   _CustomCircleProgressState createState() => _CustomCircleProgressState();
@@ -18,23 +22,34 @@ class _CustomCircleProgressState extends State<CustomCircleProgress> {
   @override
   void initState() {
     super.initState();
-    value = widget.value; 
-    value2 = widget.value;
+    value = widget.model.number;
+    value2 = widget.model.number;
   }
 
   void decreaseValue() {
     setState(() {
-      if (value > 1) {
-        value--; // تقليل العدد حتى لا يقل عن 1
-      } else {
-        value = value2;
+      if (value > 0) {
+        value--;
+        context.read<PublicazkarCubit>().updateTasabih(
+          TasabihModel(
+            id: widget.model.id,
+            number: widget.model.number,
+            taxt: widget.model.taxt,
+            sumNumber: widget.model.sumNumber + 1,
+          ),
+        );
+        context.read<PublicazkarCubit>().getAllTasabih();
+      }
+
+      if (value == 0) {
+        value = value2; // إعادة التهيئة
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double percentage = (value / 100).clamp(0.0, 1.0); // تحديد نسبة الرسم
+    double percentage = (value / value2).clamp(0.0, 1.0); // تحديد نسبة الرسم
 
     return GestureDetector(
       onTap: decreaseValue, // عند الضغط يتم تقليل القيمة
@@ -69,6 +84,7 @@ class _CustomCircleProgressState extends State<CustomCircleProgress> {
     );
   }
 }
+
 class CircleProgressPainter extends CustomPainter {
   final double percentage;
   CircleProgressPainter(this.percentage);
@@ -78,7 +94,8 @@ class CircleProgressPainter extends CustomPainter {
     final Paint paint =
         Paint()
           ..color =
-              AppColors.secondcolor// لون الجزء المرسوم
+              AppColors
+                  .secondcolor // لون الجزء المرسوم
           ..strokeWidth = 6
           ..style = PaintingStyle.stroke
           ..strokeCap = StrokeCap.round;

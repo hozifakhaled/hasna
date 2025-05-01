@@ -8,6 +8,7 @@ import 'package:hasna/features/home/presentation/screens/home_view.dart';
 import 'package:hasna/features/onboarding/presentation/screens/onboarding_view.dart';
 import 'package:hasna/features/prayers/presentation/screens/prayers_view.dart';
 import 'package:hasna/features/prayerstimers/presentation/screens/prayerstimers_view.dart';
+import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/quibla/presentation/screens/quibla_view.dart';
@@ -53,7 +54,7 @@ class AppRouting {
       ),
       GoRoute(
         path: Routes.dpublicazkar,
-        builder: (context, state) => const PubliczakerDeatilsView(),
+        builder: (context, state) =>  PubliczakerDeatilsView(model: state.extra as TasabihModel,),
       ),
    
       GoRoute(

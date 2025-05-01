@@ -8,24 +8,26 @@ class CustomTextFormFiled extends StatelessWidget {
     super.key,
     required this.text,
     this.controller,
-    this.keyboardType,
+    this.keyboardType, this.onChanged,
   });
   final String text;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'الرجاء إدخال الذكر';
-        }
-        return null;
-      },
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+    
+      
       decoration: InputDecoration(
         hintText: text,
-        hintStyle: GoogleFonts.cairo(color: AppColors.maincolor, fontSize: 16.sp),
+        hintStyle: GoogleFonts.cairo(
+          color: AppColors.maincolor,
+          fontSize: 16.sp,
+        ),
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(

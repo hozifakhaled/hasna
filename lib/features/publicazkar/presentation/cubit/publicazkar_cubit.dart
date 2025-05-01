@@ -7,7 +7,7 @@ part 'publicazkar_state.dart';
 
 class PublicazkarCubit extends Cubit<PublicazkarState> {
   final PublicAzkarRepositryimpl publicAzkarRepositryimpl;
-  
+
   PublicazkarCubit(this.publicAzkarRepositryimpl) : super(PublicazkarInitial());
 
   final TextEditingController zakerController = TextEditingController();
@@ -25,29 +25,28 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
     }
   }
 
-
   Future<void> addTasabih(TasabihModel tasabihModel) async {
-  emit(PublicazkarLoading());
-  try {
-    // إنشاء معرف فريد ضمن الحدود المسموح بها في Hive
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final safeId = timestamp % 0xFFFFFF; // يضمن أن المعرف أقل من 16,777,215
-    
-    final newTasbih = TasabihModel(
-      id: safeId,
-      taxt: tasabihModel.taxt,
-      number: tasabihModel.number,
-      sumNumber: tasabihModel.sumNumber,
-    );
-    
-    await publicAzkarRepositryimpl.addTasabih(newTasbih);
-    final updatedList = await publicAzkarRepositryimpl.getAllTasabih();
-    emit(PublicazkarSuccess(updatedList));
-  } catch (e) {
-    emit(PublicazkarFailure('Failed to add tasbih: $e'));
+    emit(PublicazkarLoading());
+    try {
+      // إنشاء معرف فريد ضمن الحدود المسموح بها في Hive
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final safeId = timestamp % 0xFFFFFF; // يضمن أن المعرف أقل من 16,777,215
+
+      final newTasbih = TasabihModel(
+        id: safeId,
+        taxt: tasabihModel.taxt,
+        number: tasabihModel.number,
+        sumNumber: tasabihModel.sumNumber,
+      );
+
+      await publicAzkarRepositryimpl.addTasabih(newTasbih);
+      final updatedList = await publicAzkarRepositryimpl.getAllTasabih();
+      emit(PublicazkarSuccess(updatedList));
+    } catch (e) {
+      emit(PublicazkarFailure('Failed to add tasbih: $e'));
+    }
   }
-}
-  
+
   Future<void> deleteTasabih(int id) async {
     emit(PublicazkarLoading());
     try {
@@ -59,18 +58,17 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
     }
   }
 
-  
   Future<void> updateTasabih(TasabihModel tasabihModel) async {
     emit(PublicazkarLoading());
     try {
       await publicAzkarRepositryimpl.updateTasabih(tasabihModel);
       final updatedList = await publicAzkarRepositryimpl.getAllTasabih();
+ await publicAzkarRepositryimpl.getAllTasabih();
       emit(PublicazkarSuccess(updatedList));
     } catch (e) {
       emit(PublicazkarFailure('Failed to update tasbih: $e'));
     }
   }
-
 
   Future<void> getTasabihById(int id) async {
     emit(PublicazkarLoading());
@@ -86,7 +84,6 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
     }
   }
 
- 
   Future<int> getTotalSum() async {
     try {
       return await publicAzkarRepositryimpl.getTotalSum();
@@ -95,7 +92,6 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
       return 0;
     }
   }
-
 
   Future<void> deleteAllTasabih() async {
     emit(PublicazkarLoading());
