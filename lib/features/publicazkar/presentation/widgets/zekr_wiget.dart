@@ -74,7 +74,39 @@ final TasabihModel tasabih ;
                       ],
                     ),
                   ),
-                  InkWell(child: Image.asset(Assets.imagesMorevertical)),
+                
+                  ZekrOptionsMenu(
+                    onEdit: (){
+                      _showeditConfirmationDialog(context, tasabih);
+                    },
+                    onDelete: () {
+                      showDialog(
+                        context: context,
+                        builder: (dialogContext) => AlertDialog(
+                          title:  Text('تأكيد الحذف',
+                            style: TextStyles.text20.copyWith(color: Colors.black),
+                           
+                          ),
+                          content: const Text('هل أنت متأكد أنك تريد حذف هذا التسبيح؟'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child:  Text('إلغاء',
+                                style: TextStyles.text15.copyWith(color: Colors.black),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                cubitContext.read<PublicazkarCubit>().deleteTasabih(tasabih.id);
+                                Navigator.pop(dialogContext);
+                              },
+                              child: const Text('حذف', style: TextStyle(color: AppColors.maincolor, fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -83,4 +115,93 @@ final TasabihModel tasabih ;
       ),
     );
   }
+   void _showeditConfirmationDialog(BuildContext context,TasabihModel tasbih) {
+    showDialog(
+      context: context,
+
+      builder:
+          (dialogContext) => AlertDialog(
+            backgroundColor: AppColors.maincolor,
+            title: const Text('تعديل'),
+            content: Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 16,
+                right: 16,
+                top: 20,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    
+                    CustomTextFormFiled(
+                      text: tasbih.taxt ,
+                      controller:
+                          context.read<PublicazkarCubit>().zakerController,
+                    ),
+                    SizedBox(height: 20),
+                    CustomTextFormFiled(
+                      text: tasbih.number.toString(),
+                      controller:
+                          context.read<PublicazkarCubit>().countController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(height: 20),
+                    CustomButton(
+                      text: 'إضافة الذكر',
+                      buttonbodycolor: AppColors.secondcolor,
+                      textcolor: Colors.white,
+                      onTap: () {
+                        final text =
+                            context
+                                .read<PublicazkarCubit>()
+                                .zakerController
+                                .text
+                                .trim();
+                        final number =
+                            int.tryParse(
+                              context
+                                  .read<PublicazkarCubit>()
+                                  .countController
+                                  .text,
+                            ) ??
+                            33;
+
+                        if (text.isNotEmpty) {
+                          final newTasbih = TasabihModel(
+                            taxt: text,
+                            number: number,
+                            sumNumber: tasbih.sumNumber,
+                            id:tasbih. id,
+                          );
+
+                          context.read<PublicazkarCubit>().updateTasabih(
+                            newTasbih,
+                          );
+                          context.read<PublicazkarCubit>().countController.clear();
+                          context.read<PublicazkarCubit>().zakerController.clear();
+                          Navigator.pop(context); // غلق BottomSheet
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('الرجاء إدخال الذكر')),
+                          );
+                        }
+                      },
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: const Text('إلغاء'),
+              ),
+            ],
+          ),
+    );
+  }
+
 }
