@@ -23,7 +23,7 @@ class BottomSheetAddZaker extends StatelessWidget {
             right: 16,
             top: 20,
           ),
-          child: SingleChildScrollView(
+          child:SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -59,7 +59,7 @@ class BottomSheetAddZaker extends StatelessWidget {
                       Navigator.pop(context); // غلق BottomSheet
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('الرجاء إدخال الذكر')),
+                         SnackBar(content: Text('الرجاء إدخال الذكر')),
                       );
                     }
                   },

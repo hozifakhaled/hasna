@@ -5,27 +5,28 @@ import 'package:hasna/constants/images.dart';
 import 'package:hasna/core/routing/routes.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/core/widgets/custom_button.dart';
+import 'package:hasna/core/widgets/custom_textformfiled.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
 
 class ZekrWiget extends StatelessWidget {
   const ZekrWiget({super.key, required this.tasabih});
-final TasabihModel tasabih ;
+  final TasabihModel tasabih;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async{
-     final result = await GoRouter.of(context).push<bool>(
-   Routes.dpublicazkar,
-    extra: tasabih,
-  );
+      onTap: () async {
+        final result = await GoRouter.of(
+          context,
+        ).push<bool>(Routes.dpublicazkar, extra: tasabih);
 
-  if (result == true) {
-    // حصل تعديل في التفاصيل
-    // ignore: use_build_context_synchronously
-    context.read<PublicazkarCubit>().getAllTasabih();
-  }
-},
+        if (result == true) {
+          // حصل تعديل في التفاصيل
+          // ignore: use_build_context_synchronously
+          context.read<PublicazkarCubit>().getAllTasabih();
+        }
+      },
       child: Container(
         width: double.infinity,
         height: 130,
@@ -69,7 +70,12 @@ final TasabihModel tasabih ;
                       ],
                     ),
                   ),
-                  InkWell(child: Image.asset(Assets.imagesMorevertical)),
+                  InkWell(
+                    onTap: () {
+                    
+                    },
+                    child: Image.asset(Assets.imagesMorevertical),
+                  ),
                 ],
               ),
             ),
@@ -78,4 +84,5 @@ final TasabihModel tasabih ;
       ),
     );
   }
-}
+
+ }
