@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryImpl.dart';
 part 'publicazkar_state.dart';
@@ -8,7 +9,8 @@ class PublicazkarCubit extends Cubit<PublicazkarState> {
   final PublicAzkarRepositryimpl publicAzkarRepositryimpl;
 
   PublicazkarCubit(this.publicAzkarRepositryimpl) : super(PublicazkarInitial());
-
+ final zakerController = TextEditingController();
+  final countController = TextEditingController();
 
   Future<void> getAllTasabih() async {
     emit(PublicazkarLoading());

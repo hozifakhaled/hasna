@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/core/widgets/container_in_zekrwidget.dart';
@@ -156,8 +157,8 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                                   ),
                                 ),
                                 builder:
-                                    (_) => BlocProvider(
-                                      create: (context) => sl<PublicazkarCubit>(),
+                                    (_) => BlocProvider.value(
+                                      value:  sl<PublicazkarCubit>(),
                                       child: BottomSheetAddZaker(),
                                     ),
                                 backgroundColor: AppColors.maincolor,
@@ -225,7 +226,7 @@ class _PubliczekrViewBodyState extends State<PubliczekrViewBody> {
                   if (cubit.state is PublicazkarSuccess) {
                     final tasabih = (cubit.state as PublicazkarSuccess).tasabih;
                     for (var tasbih in tasabih) {
-                      tasbih.number = 0;
+                      tasbih.sumNumber = 0;
                       cubit.updateTasabih(tasbih);
                     }
                   }
