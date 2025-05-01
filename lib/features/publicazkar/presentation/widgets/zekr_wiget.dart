@@ -7,25 +7,26 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
+import 'package:hasna/features/publicazkar/presentation/widgets/zekr_options_menu.dart';
 
 class ZekrWiget extends StatelessWidget {
   const ZekrWiget({super.key, required this.tasabih});
-final TasabihModel tasabih ;
+  final TasabihModel tasabih;
+
   @override
   Widget build(BuildContext context) {
+    final cubitContext = context;
+    
     return InkWell(
-      onTap: () async{
-     final result = await GoRouter.of(context).push<bool>(
-   Routes.dpublicazkar,
-    extra: tasabih,
-  );
-
-  if (result == true) {
-    // حصل تعديل في التفاصيل
-    // ignore: use_build_context_synchronously
-    context.read<PublicazkarCubit>().getAllTasabih();
-  }
-},
+      onTap: () async {
+        final result = await GoRouter.of(context).push<bool>(
+          Routes.dpublicazkar,
+          extra: tasabih,
+        );
+        if (result == true) {
+          cubitContext.read<PublicazkarCubit>().getAllTasabih();
+        }
+      },
       child: Container(
         width: double.infinity,
         height: 130,
@@ -50,7 +51,7 @@ final TasabihModel tasabih ;
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          tasabih.taxt ?? 'تسبيح',
+                          tasabih.taxt,
                           style: TextStyles.text20.copyWith(
                             color: AppColors.maincolor,
                             fontWeight: FontWeight.bold,
@@ -69,7 +70,36 @@ final TasabihModel tasabih ;
                       ],
                     ),
                   ),
-                  InkWell(child: Image.asset(Assets.imagesMorevertical)),
+                  ZekrOptionsMenu(
+                    onEdit: (){},
+                    onDelete: () {
+                      showDialog(
+                        context: context,
+                        builder: (dialogContext) => AlertDialog(
+                          title:  Text('تأكيد الحذف',
+                            style: TextStyles.text20.copyWith(color: Colors.black),
+                           
+                          ),
+                          content: const Text('هل أنت متأكد أنك تريد حذف هذا التسبيح؟'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child:  Text('إلغاء',
+                                style: TextStyles.text15.copyWith(color: Colors.black),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                cubitContext.read<PublicazkarCubit>().deleteTasabih(tasabih.id);
+                                Navigator.pop(dialogContext);
+                              },
+                              child: const Text('حذف', style: TextStyle(color: AppColors.maincolor, fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
