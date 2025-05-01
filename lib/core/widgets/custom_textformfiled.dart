@@ -20,7 +20,7 @@ class CustomTextFormFiled extends StatelessWidget {
     return TextField(
       controller: controller,
       onChanged: onChanged,
-    
+      keyboardType: keyboardType,
       
       decoration: InputDecoration(
         hintText: text,
