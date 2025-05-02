@@ -4,20 +4,35 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hasna/constants/images.dart';
 import 'package:hasna/core/extention/extention.dart';
 import 'package:hasna/core/themeing/colors.dart';
-class StackTimePrayerAnddateInHome extends StatelessWidget {
+
+import 'package:hijri/hijri_calendar.dart';
+
+class StackTimePrayerAnddateInHome extends StatefulWidget {
   const StackTimePrayerAnddateInHome({
     super.key, 
-    required this.day, 
-    required this.month, 
-    required this.weekday, 
-    required this.year
+
   });
   
-  final String day; 
-  final String month;
-  final String weekday;
-  final String year;
+ 
 
+  @override
+  State<StackTimePrayerAnddateInHome> createState() => _StackTimePrayerAnddateInHomeState();
+}
+
+class _StackTimePrayerAnddateInHomeState extends State<StackTimePrayerAnddateInHome> {
+  var selectedDate =  HijriCalendar.now();
+  late String day;
+  late String month ;
+  late String weekday ;
+  late String year ;
+  @override
+  void initState() {
+    super.initState();
+    day = selectedDate.hDay.toString();
+    month = selectedDate.longMonthName.toString();
+    weekday = selectedDate.dayWeName.toString();
+    year = selectedDate.hYear.toString();
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -55,7 +70,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
                 spacing: 0,
                 children: [
                   Text(
-                    day,
+                  day,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 35.sp,
@@ -71,7 +86,7 @@ class StackTimePrayerAnddateInHome extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$weekday - $year",
+                    "$weekday - $year  ",
                     style: GoogleFonts.amiri(
                       color: Colors.white,
                       fontSize: 25.sp,

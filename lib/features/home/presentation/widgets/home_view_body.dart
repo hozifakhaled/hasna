@@ -25,10 +25,7 @@ class HomeViewBody extends StatelessWidget {
                 pinned: true,
                 delegate: _StackHeaderDelegate(
                   child: StackTimePrayerAnddateInHome(
-                    day: prayers.hijri?.day ?? "",
-                    month: prayers.hijri?.month ?? "",
-                    weekday: prayers.hijri?.weekday ?? "",
-                    year: prayers.hijri?.year ?? "",
+                  
                   ),
                 ),
               ),

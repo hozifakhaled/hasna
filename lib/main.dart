@@ -8,9 +8,17 @@ import 'package:hasna/core/routing/app_routing.dart';
 import 'package:hasna/core/themeing/themeapp.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hive_flutter/adapters.dart';
+// ignore: depend_on_referenced_packages
+import 'package:hijri/hijri_calendar.dart';
 
 
-void main() async {
+
+
+
+void main() async{
+
+
+
   WidgetsFlutterBinding.ensureInitialized(); // مهم لتأجيل التشغيل
    CacheHelper().init(); // استدعاء دالة إعداد موفر الخدمة
    setup(); // استدعاء الإعدادات وانتظار تهيئة SharedPreferences
@@ -18,6 +26,7 @@ void main() async {
   await Hive.initFlutter();
 Hive.registerAdapter(TasabihModelAdapter());
     await Hive.openBox<TasabihModel>(Kbox);
+    HijriCalendar.setLocal("ar");
   runApp(const Hasna());
 }
 
