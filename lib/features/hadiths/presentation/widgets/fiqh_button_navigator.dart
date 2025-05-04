@@ -26,6 +26,7 @@ class FiqhButtonNavigator extends StatelessWidget {
         );
       },
       gradient: LinearGradient(
+        // ignore: deprecated_member_use
         colors: [AppColors.thirdcolor, AppColors.maincolor.withOpacity(0.5)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,

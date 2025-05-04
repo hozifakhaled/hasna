@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 class PublicAzkarRepositryimpl {
   Future<Box<TasabihModel>> _getBox() {
-    return Hive.openBox<TasabihModel>(Kbox);
+    return Hive.openBox<TasabihModel>(kbox);
   }
 
   Future<void> addTasabih(TasabihModel tasabihModel) async {

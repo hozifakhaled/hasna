@@ -63,6 +63,7 @@ dependencies:
   adhan_dart: ^1.1.2
   hijri_picker: ^3.0.0
   hijri_calendar: ^1.0.7+7
+  adhan: ^2.0.0+1
 
 
 

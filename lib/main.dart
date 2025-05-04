@@ -25,7 +25,7 @@ void main() async{
      WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 Hive.registerAdapter(TasabihModelAdapter());
-    await Hive.openBox<TasabihModel>(Kbox);
+    await Hive.openBox<TasabihModel>(kbox);
     HijriCalendar.setLocal("ar");
   runApp(const Hasna());
 }

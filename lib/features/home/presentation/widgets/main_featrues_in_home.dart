@@ -9,7 +9,7 @@ class MainFeatruesInHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = ["الصلاه", "القبله", "الحديث", "التسابيح", "التقويم"];
+    List<String> items = ["الصلاه", "القبله", "الحديث", "التسابيح", "الحديث"];
     void handleNavigation(int index) {
       switch (index) {
         case 0:
@@ -31,7 +31,7 @@ class MainFeatruesInHome extends StatelessWidget {
           );
           break;
         case 4:
-          GoRouter.of(context).push(Routes.tasbiha);
+          GoRouter.of(context).push(Routes.hadith);
           break;
         default:
           GoRouter.of(context).push(Routes.prayTimers);
@@ -48,7 +48,8 @@ class MainFeatruesInHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(items.length, (index) {
-            return InkWell(
+            return index == 2 ? 
+            Icon(Icons.mosque, color: AppColors.secondcolor) : InkWell(
               onTap: () {
                 handleNavigation(index);
               },
