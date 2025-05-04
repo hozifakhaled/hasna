@@ -12,8 +12,7 @@ import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/quibla/presentation/screens/quibla_view.dart';
-import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
-import 'package:hasna/features/tasbiha/presentation/cubit/tasbiha_cubit.dart';
+
 import 'package:hasna/features/tasbiha/presentation/screens/tasbiha_view.dart';
 
 class AppRouting {
