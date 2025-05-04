@@ -14,6 +14,14 @@ packages:
     description: dart
     source: sdk
     version: "0.3.3"
+  adhan_dart:
+    dependency: "direct main"
+    description:
+      name: adhan_dart
+      sha256: "3510e87a81acd816dfe11df458d236cb33f64a9132d2f5becc57ef6cbfefb565"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   analyzer:
     dependency: transitive
     description:
@@ -482,6 +490,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  hijri:
+    dependency: transitive
+    description:
+      name: hijri
+      sha256: "203eb7341e32789af6429877e88411b1526ef44c5d157ce4d3b930dd32c37ef1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  hijri_calendar:
+    dependency: "direct main"
+    description:
+      name: hijri_calendar
+      sha256: "5b99f8924b738cb7156fff2c679a261cecf4214c324f2529255afb3a9ccfea58"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7+7"
+  hijri_picker:
+    dependency: "direct main"
+    description:
+      name: hijri_picker
+      sha256: "15dd1716f3bd0b72122a71740b3ec9bc623463b11e0c907602d2b7598f851984"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   hive:
     dependency: "direct main"
     description:

@@ -15,16 +15,15 @@ class PubliczakerDetailsViewBody extends StatelessWidget {
   final TasabihModel model;
 
   @override
-  Widget build(BuildContext context) 
-  
-  
-  {
-   
+  Widget build(BuildContext context) {
+       context.read<PublicazkarCubit>().dora= 0;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: BlocBuilder<PublicazkarCubit, PublicazkarState>(
         builder: (context, state) {
+        
           if (state is PublicazkarSuccess) {
+           
             context.read<PublicazkarCubit>().getAllTasabih();
             final TasabihModel updatedModel = state.tasabih.firstWhere(
               (e) => e.id == model.id,
@@ -45,7 +44,15 @@ class PubliczakerDetailsViewBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ColumnTextAndnumberCounter(text: ' دورة ', number: '5'),
+                    BlocBuilder<PublicazkarCubit, PublicazkarState>(
+                      builder: (context, state) {
+                        return ColumnTextAndnumberCounter(
+                          text: ' دورة ',
+                          number:
+                              context.read<PublicazkarCubit>().dora.toString(),
+                        );
+                      },
+                    ),
                     ColumnTextAndnumberCounter(
                       text: 'العدد الكلي ',
                       number: updatedModel.sumNumber.toString(),
@@ -58,9 +65,10 @@ class PubliczakerDetailsViewBody extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: InkWell(
                     onTap: () {
-                   context.read<PublicazkarCubit>().updateTasabih(updatedModel.copyWith(sumNumber: 0));
-                    
-                  },
+                      context.read<PublicazkarCubit>().updateTasabih(
+                        updatedModel.copyWith(sumNumber: 0),
+                      );
+                    },
                     child: ContainerInZekrWidget(
                       width: 50.0.h,
                       height: 50.0.h,
