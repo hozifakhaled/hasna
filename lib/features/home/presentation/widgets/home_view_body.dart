@@ -14,38 +14,33 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrayerstimersCubit, PrayerstimersState>(
-      builder: (context, state) {
-        if (state is PrayerstimersSuccess) {
-          final prayers = state.prayersTimers;
-
-          return CustomScrollView(
-            slivers: [
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _StackHeaderDelegate(
-                  child: StackTimePrayerAnddateInHome(
-                  
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(child: const MainFeatruesInHome()),
-              SliverToBoxAdapter(
-                child: TimePrayerinHome(
-                  prayerName: prayers.nextPrayer?.name ?? "",
-                  timeFromApi: prayers.nextPrayer?.time.toString() ?? "",
-                ),
-              ),
-              const SliverToBoxAdapter(child: GridViewAzkarInHome()),
-            ],
-          );
-        }
-        if (state is PrayerstimersError) {
-          return Center(child: Text("لا يوجد انترنت"));
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+    return CustomScrollView(
+      slivers: [
+        SliverPersistentHeader(
+          pinned: true,
+          delegate: _StackHeaderDelegate(child: StackTimePrayerAnddateInHome()),
+        ),
+        SliverToBoxAdapter(child: const MainFeatruesInHome()),
+        SliverToBoxAdapter(
+          child: BlocBuilder<PrayerstimersCubit, PrayerstimersState>(
+            builder: (context, state) {
+              if (state is PrayerstimersSuccess) {
+  final prayers = state.prayersTimers;
+  ;
+  return TimePrayerinHome(
+    prayerName: prayers.nextPrayer?.name ?? "",
+    timeFromApi: prayers.nextPrayer?.time.toString() ?? "",
+  );
+}else{
+  return const Center(
+   
+  );
+}
+            },
+          ),
+        ),
+        const SliverToBoxAdapter(child: GridViewAzkarInHome()),
+      ],
     );
   }
 }
