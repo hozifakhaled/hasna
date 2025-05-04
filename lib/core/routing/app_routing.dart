@@ -12,14 +12,12 @@ import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczaker_details_view.dart';
 import 'package:hasna/features/publicazkar/presentation/screens/publiczekr_view.dart';
 import 'package:hasna/features/quibla/presentation/screens/quibla_view.dart';
-import 'package:hasna/features/splash/presentation/screens/splash_view.dart';
-import 'package:hasna/features/tasbiha/presentation/cubit/tasbiha_cubit.dart';
 import 'package:hasna/features/tasbiha/presentation/screens/tasbiha_view.dart';
 
 class AppRouting {
   static final GoRouter router = GoRouter(
-    initialLocation:
-        Routes.splah, // التأكد أن initialLocation يطابق Route موجود
+  initialLocation:
+     Routes.onboarding, // التأكد أن initialLocation يطابق Route موجود
     routes: <GoRoute>[
       GoRoute(
         path: Routes.tasbiha,
@@ -43,11 +41,6 @@ class AppRouting {
         builder: (context, state) => const PrayersView(),
       ),
       GoRoute(path: Routes.home, builder: (context, state) => const HomeView()),
-     
-      GoRoute(
-        path: Routes.splah,
-        builder: (context, state) => const SplashView(),
-      ),
       GoRoute(
         path: Routes.publicazkar,
         builder: (context, state) => const PubliczekrView(),

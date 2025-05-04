@@ -1,0 +1,14 @@
+
+flutter_native_splash:
+  # استخدام background_image بدلاً من image + color
+  background_image: "assets/images/splashscreen.png"
+  
+  android_12:
+    # لنظام Android 12، استخدم نفس الصورة
+    image: "assets/images/splashscreen.png"
+    color: "#4F6257"
+  
+  web: false
+  android: true
+  ios: true
+  fullscreen: true
