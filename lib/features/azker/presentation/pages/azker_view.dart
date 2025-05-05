@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hasna/core/di/getit.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/features/azker/data/models/azkar_model.dart';
 import 'package:hasna/features/azker/presentation/cubit/azker_cubit.dart';
 import 'package:hasna/features/azker/presentation/widgets/azker_body_view.dart';
 
@@ -12,6 +13,15 @@ class AzkerView extends StatelessWidget {
 final Map<String, String> data;
   @override
   Widget build(BuildContext context) {
+    final azkerModel = AzkerModel(
+      id: int.tryParse(data['id'] ?? '') ?? 0,
+      description: data['description'] ?? '',
+      audioUrl: data['audioUrl'] ?? '',
+      esnadname: data['esnadname'] ?? '',
+      count: int.tryParse(data['count'] ?? '') ?? 0,
+
+      // Add other required fields from your AzkerModel
+    );
     return BlocProvider.value(
       value:  sl.get<AzkerCubit>()..getAzker(data.values.first),
       child: Scaffold(
@@ -33,7 +43,7 @@ final Map<String, String> data;
             ),
           ),
         ),
-        body: EveningazkerBodyView(),
+        body: EveningazkerBodyView(azkerModel: azkerModel),
       ),
     );
   }

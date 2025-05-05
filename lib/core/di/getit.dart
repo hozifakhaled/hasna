@@ -12,6 +12,8 @@ import 'package:hasna/features/azker/data/repositories/azkar_repositry_impli.dar
 import 'package:hasna/features/azker/domain/repositories/azkar_repositry.dart';
 import 'package:hasna/features/azker/domain/usecases/azkar_usecase.dart';
 import 'package:hasna/features/azker/presentation/cubit/azker_cubit.dart';
+import 'package:hasna/features/favourites/data/repositories/favourite_repositry_Impl.dart';
+import 'package:hasna/features/favourites/presentation/cubit/favourites_cubit.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_local_datasource.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_remote_datasource.dart';
 import 'package:hasna/features/hadiths/data/repositories/hadith_repositry_Impl.dart';
@@ -101,6 +103,9 @@ void setup() async {
   );
 
   sl.registerLazySingleton(()=> PublicAzkarRepositryimpl());
+  sl.registerLazySingleton(
+    () => FavouriteRepositryImpl(),
+  );
 
   sl.registerLazySingleton<PrayerRepositry>(
     () => PrayersRepositryImpli(local: sl(), remote: sl(), networkInfo: sl()),
@@ -118,6 +123,7 @@ void setup() async {
   sl.registerLazySingleton(() => AzkerCubit(sl()));
   sl.registerFactory(() => HadithsCubit(sl()));
   sl.registerLazySingleton(() => PublicazkarCubit(sl()));
+  sl.registerFactory(() => FavouritesCubit(sl()));
 
   sl.registerLazySingleton(() => PrayersCubit(sl()));
 

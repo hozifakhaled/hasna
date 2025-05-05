@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/core/extention/extention.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
+import 'package:hasna/features/favourites/data/models/favourite_model.dart';
+import 'package:hasna/features/favourites/presentation/cubit/favourites_cubit.dart';
 import 'package:just_audio/just_audio.dart';
 
 class ZakerBottomBar extends StatefulWidget {
@@ -11,11 +14,13 @@ class ZakerBottomBar extends StatefulWidget {
     required this.totalAzker,
     required this.currentAzker,
     required this.audioUrl,
+    required this.favouriteModel,
   });
 
   final int totalAzker;
   final int currentAzker;
   final String audioUrl;
+  final FavouriteModel favouriteModel;
 
   @override
   State<ZakerBottomBar> createState() => _ZakerBottomBarState();
@@ -62,17 +67,13 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
     try {
       if (_isPlaying) {
         await _audioPlayer.pause();
-        if (mounted) {
-          setState(() {
-            _isPlaying = false;
-          });
-        }
+        setState(() {
+          _isPlaying = false;
+        });
       } else {
-        if (mounted) {
-          setState(() {
-            _isPlaying = true; // تظهر الأيقونة مباشرة
-          });
-        }
+        setState(() {
+          _isPlaying = true; // تظهر الأيقونة مباشرة
+        });
         await _audioPlayer.setUrl(widget.audioUrl);
         await _audioPlayer.play();
       }
@@ -82,9 +83,9 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
         setState(() {
           _isPlaying = false;
         });
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text("فشل في تشغيل الصوت")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("فشل في تشغيل الصوت"))
+        );
       }
     }
   }
@@ -108,10 +109,11 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // زر التشغيل والإيقاف وزر السرعة
             Row(
               children: [
                 IconButton(
@@ -138,17 +140,36 @@ class _ZakerBottomBarState extends State<ZakerBottomBar> {
                 ),
               ],
             ),
+            
+            // عداد الأذكار وزر المفضلة
             Row(
               children: [
-                IconButton(
-                  onPressed: () {}, // زر المفضلة لاحقًا
-                  icon: const Icon(
-                    Icons.star_border,
-                    color: AppColors.maincolor,
-                    size: 30,
-                  ),
+                // زر المفضلة - يتم تعطيله إذا كان الوصف فارغاً
+                BlocBuilder<FavouritesCubit, FavouritesState>(
+                  builder: (context, state) {
+                    // التحقق من وجود وصف صالح
+                    bool hasValidContent = widget.favouriteModel.description.isNotEmpty;
+                    bool isFav = hasValidContent && 
+                        context.read<FavouritesCubit>().isFavourite(widget.favouriteModel.id);
+                    
+                    return IconButton(
+                      onPressed: hasValidContent ? () {
+                        if (isFav) {
+                          context.read<FavouritesCubit>().removeFromFavourites(widget.favouriteModel.id);
+                        } else {
+                          context.read<FavouritesCubit>().addToFavourites(widget.favouriteModel);
+                        }
+                      } : null, // تطيل الزر إذا كان الوصف فارغاً
+                      icon: Icon(
+                        isFav ? Icons.star : Icons.star_border,
+                        color: hasValidContent ? AppColors.maincolor : AppColors.maincolor.withOpacity(0.5),
+                        size: 30,
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(width: 10.w),
+                // عداد الأذكار
                 Text(
                   '${widget.totalAzker}/${widget.currentAzker}',
                   style: TextStyles.text20.copyWith(color: AppColors.maincolor),
