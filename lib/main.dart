@@ -23,7 +23,7 @@ Hive.registerAdapter(TasabihModelAdapter());
 Hive.registerAdapter(FavouriteModelAdapter());
     await Hive.openBox<TasabihModel>(Kbox);
   await Hive.openBox<FavouriteModel>(boxFavourite);
-    await Hive.openBox<TasabihModel>(kbox);
+  
     HijriCalendar.setLocal("ar");
   runApp(const Hasna());
 }
