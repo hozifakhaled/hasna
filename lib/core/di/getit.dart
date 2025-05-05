@@ -16,7 +16,7 @@ import 'package:hasna/features/favourites/data/repositories/favourite_repositry_
 import 'package:hasna/features/favourites/presentation/cubit/favourites_cubit.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_local_datasource.dart';
 import 'package:hasna/features/hadiths/data/datasources/hadith_remote_datasource.dart';
-import 'package:hasna/features/hadiths/data/repositories/hadith_repositry_Impl.dart';
+import 'package:hasna/features/hadiths/data/repositories/hadith_repositry_impl.dart';
 import 'package:hasna/features/hadiths/domain/repositories/hadith_repositry.dart';
 import 'package:hasna/features/hadiths/domain/usecases/hadith_usecase.dart';
 import 'package:hasna/features/hadiths/presentation/cubit/hadiths_cubit.dart';
@@ -26,13 +26,7 @@ import 'package:hasna/features/prayers/data/repositories/prayers_repositry_impli
 import 'package:hasna/features/prayers/domain/repositories/prayer_repositry.dart';
 import 'package:hasna/features/prayers/domain/usecases/prayers_usecase.dart';
 import 'package:hasna/features/prayers/presentation/cubit/prayers_cubit.dart';
-import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_local.dart';
-import 'package:hasna/features/prayerstimers/data/datasources/prayers_timers_datasource_remote.dart';
-import 'package:hasna/features/prayerstimers/data/repositories/prayers_timers_repositry_impl.dart';
-import 'package:hasna/features/prayerstimers/domain/repositories/prayers_timers_repositry.dart';
-import 'package:hasna/features/prayerstimers/domain/usecases/prayers_timers_usecase.dart';
-import 'package:hasna/features/prayerstimers/presentation/cubit/prayerstimers_cubit.dart';
-import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryImpl.dart';
+import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryimpl.dart';
 import 'package:hasna/features/publicazkar/presentation/cubit/publicazkar_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,12 +60,8 @@ void setup() async {
   );
  
 
-  sl.registerLazySingleton<PrayersTimersDatasourceRemote>(
-    () => PrayersTimersDatasourceRemote(dioConsumer: sl()),
-  );
-  sl.registerLazySingleton<PrayersTimersDatasourceLocal>(
-    () => PrayersTimersDatasourceLocal(cache: sl()),
-  );
+  
+ 
   sl.registerLazySingleton<HadithRemoteDatasource>(
     () => HadithRemoteDatasource(dioConsumer: sl()),
   );
@@ -91,16 +81,13 @@ void setup() async {
   );
   // UseCase
 
-   sl.registerLazySingleton(() => PrayersTimersUsecase(prayersTimersRepositry: sl()));
   sl.registerLazySingleton(() => HadithUsecase( sl()));
     sl.registerLazySingleton(() => AzkarUsecase(repositry: sl()));
       sl.registerLazySingleton(() => PrayersUsecase(repositry: sl()));
     // Repository
 
 
-  sl.registerLazySingleton<PrayersTimersRepositry>(
-    () => PrayersTimersRepositryImpl(sl(), sl(), networkInfo: sl()),
-  );
+
 
   sl.registerLazySingleton(()=> PublicAzkarRepositryimpl());
   sl.registerLazySingleton(
@@ -127,5 +114,4 @@ void setup() async {
 
   sl.registerLazySingleton(() => PrayersCubit(sl()));
 
-sl.registerLazySingleton(() => PrayerstimersCubit(sl()));
 }

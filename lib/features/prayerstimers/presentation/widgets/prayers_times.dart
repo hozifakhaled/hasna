@@ -1,11 +1,43 @@
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:hasna/core/themeing/colors.dart';
-import 'package:hasna/features/prayerstimers/domain/entities/prayers_timers_entity.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart';
 
-class PrayerTimesContainer extends StatelessWidget {
-  final PrayersTimersEntity prayerTimes;
+class PrayerTimesContainer extends StatefulWidget {
+  final PrayerTimes prayerTimes;
 
   const PrayerTimesContainer({super.key, required this.prayerTimes});
+
+  @override
+  State<PrayerTimesContainer> createState() => _PrayerTimesContainerState();
+}
+
+class _PrayerTimesContainerState extends State<PrayerTimesContainer> {
+  late Map<String, String> formattedPrayerTimes;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final formatter = DateFormat('hh:mm ');
+
+    formattedPrayerTimes = {
+      'الفجر': formatter.format(
+        widget.prayerTimes.fajr.add(Duration(hours: 1)),
+      ),
+      'الظهر': formatter.format(
+        widget.prayerTimes.dhuhr.add(Duration(hours: 1)),
+      ),
+      'العصر': formatter.format(widget.prayerTimes.asr.add(Duration(hours: 1))),
+      'المغرب': formatter.format(
+        widget.prayerTimes.maghrib.add(Duration(hours: 1)),
+      ),
+      'العشاء': formatter.format(
+        widget.prayerTimes.isha.add(Duration(hours: 1)),
+      ),
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +76,18 @@ class PrayerTimesContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
-                children: [
-                  _buildPrayerRow('الفجر', prayerTimes.fajr!),
-                  _buildDivider(),
-                  _buildPrayerRow('الظهر', prayerTimes.dhuhr!),
-                  _buildDivider(),
-                  _buildPrayerRow('العصر', prayerTimes.asr!),
-                  _buildDivider(),
-                  _buildPrayerRow('المغرب', prayerTimes.maghrib!),
-                  _buildDivider(),
-                  _buildPrayerRow('العشاء', prayerTimes.isha!),
-                ],
+                children: List.generate(formattedPrayerTimes.length, (index) {
+                  return Column(
+                    children: [
+                      _buildPrayerRow(
+                        formattedPrayerTimes.keys.toList()[index],
+                        formattedPrayerTimes.values.toList()[index],
+                      ),
+                      if (index < formattedPrayerTimes.length - 1)
+                        _buildDivider(),
+                    ],
+                  );
+                }),
               ),
             ),
           ],
@@ -69,7 +102,10 @@ class PrayerTimesContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(prayerName, style: const TextStyle(fontSize: 18, color: Colors.white)),
+          Text(
+            prayerName,
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+          ),
           Text(time, style: const TextStyle(fontSize: 18, color: Colors.white)),
         ],
       ),

@@ -326,9 +326,11 @@ class _QiblaCompassState extends State<QiblaCompass> {
                                   height: 120,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
+                                    // ignore: deprecated_member_use
                                     color: Colors.white.withOpacity(0.2),
                                     boxShadow: [
                                       BoxShadow(
+                                        // ignore: deprecated_member_use
                                         color: Colors.white.withOpacity(0.5),
                                         blurRadius: 20,
                                         spreadRadius: 2,

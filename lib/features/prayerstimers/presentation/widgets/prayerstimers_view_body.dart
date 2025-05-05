@@ -1,16 +1,36 @@
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasna/constants/images.dart';
 import 'package:hasna/core/widgets/custom_appbar1.dart';
-import 'package:hasna/features/prayerstimers/presentation/cubit/prayerstimers_cubit.dart';
 import 'package:hasna/features/prayerstimers/presentation/widgets/before_after_prayer.dart';
 import 'package:hasna/features/prayerstimers/presentation/widgets/prayers_times.dart';
 
-class PrayerstimersViewBody extends StatelessWidget {
+class PrayerstimersViewBody extends StatefulWidget {
   const PrayerstimersViewBody({super.key});
 
   @override
+  State<PrayerstimersViewBody> createState() => _PrayerstimersViewBodyState();
+}
+
+class _PrayerstimersViewBodyState extends State<PrayerstimersViewBody> {
+   
+  final myCoordinates = Coordinates(30.5595, 31.0080); // Replace with your own location lat, lng.
+  final params = CalculationMethod.egyptian.getParameters();
+
+  late final PrayerTimes prayerTimes;
+
+  @override
+  void initState() {
+    super.initState();
+    prayerTimes = PrayerTimes.today(myCoordinates, params);
+     params.madhab = Madhab.shafi;
+  }
+
+ 
+
+  @override
   Widget build(BuildContext context) {
+     
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -23,42 +43,21 @@ class PrayerstimersViewBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
-                // هنا حطينا BlocBuilder في الأول
-                BlocBuilder<PrayerstimersCubit, PrayerstimersState>(
-                  builder: (context, state) {
-                    if (state is PrayerstimersLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is PrayerstimersError) {
-                      return Center(child: Text('خطأ: ${state.message}'));
-                    } else if (state is PrayerstimersSuccess) {
-                      return Column(
+                
+                   Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              BeforeAndAfterPrayer(
-                                prayname: state.prayersTimers.previousPrayer!.name.toString(),
-                                praytime: state.prayersTimers.previousPrayer!.time.toString(),
-                                praytimeday: "الصلاة السابقة",
-                              ),
-                              const SizedBox(width: 10),
-                              BeforeAndAfterPrayer(
-                                prayname: state.prayersTimers.nextPrayer!.name.toString(),
-                                praytime: state.prayersTimers.nextPrayer!.time.toString(),
-                                praytimeday: "الصلاة القادمة",
-                              ),
-                            ],
+                          BeforeAndAfterPrayer(
+                            prayname: prayerTimes.nextPrayer().name,
+                            praytime: prayerTimes.timeForPrayer(prayerTimes.nextPrayer()).toString(),
+                            praytimeday: "الصلاة القادمة",
                           ),
                           const SizedBox(height: 40),
                           PrayerTimesContainer(
-                            prayerTimes: state.prayersTimers,
+                            prayerTimes:prayerTimes ,
                           ),
                         ],
-                      );
-                    }
-                    return Container(); // Default empty container
-                  },
-                ),
+                      )
+                    
               ],
             ),
           ),

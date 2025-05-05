@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasna/core/texts_styleing/text_styles.dart';
 import 'package:hasna/core/themeing/colors.dart';
@@ -7,7 +6,6 @@ import 'package:hasna/features/home/presentation/widgets/gridview_azker_in_home.
 import 'package:hasna/features/home/presentation/widgets/main_featrues_in_home.dart';
 import 'package:hasna/features/home/presentation/widgets/stack_date_in_home.dart';
 import 'package:hasna/features/home/presentation/widgets/time_prayer_in_home.dart';
-import 'package:hasna/features/prayerstimers/presentation/cubit/prayerstimers_cubit.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -22,22 +20,9 @@ class HomeViewBody extends StatelessWidget {
         ),
         SliverToBoxAdapter(child: const MainFeatruesInHome()),
         SliverToBoxAdapter(
-          child: BlocBuilder<PrayerstimersCubit, PrayerstimersState>(
-            builder: (context, state) {
-              if (state is PrayerstimersSuccess) {
-  final prayers = state.prayersTimers;
-  ;
-  return TimePrayerinHome(
-    prayerName: prayers.nextPrayer?.name ?? "",
-    timeFromApi: prayers.nextPrayer?.time.toString() ?? "",
-  );
-}else{
-  return const Center(
-   
-  );
-}
-            },
-          ),
+          child: TimePrayerinHome(
+    
+  )
         ),
         const SliverToBoxAdapter(child: GridViewAzkarInHome()),
       ],

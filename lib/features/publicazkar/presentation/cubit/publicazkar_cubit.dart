@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hasna/features/publicazkar/data/models/tasabih_model.dart';
-import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryImpl.dart';
+import 'package:hasna/features/publicazkar/data/repositories/public_azkar_repositryimpl.dart';
 part 'publicazkar_state.dart';
 
 class PublicazkarCubit extends Cubit<PublicazkarState> {
