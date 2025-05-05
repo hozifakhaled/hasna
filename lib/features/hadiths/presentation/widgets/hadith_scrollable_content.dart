@@ -4,15 +4,15 @@ import 'package:hasna/core/texts_styleing/text_styles.dart';
 
 class HadithScrollableContent extends StatelessWidget {
   final String hadithText;
-
+  
   const HadithScrollableContent({super.key, required this.hadithText});
-
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
