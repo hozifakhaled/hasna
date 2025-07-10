@@ -26,3 +26,7 @@ Accurate prayer times based on location
 Precise Qibla direction
 
 Daily reminders for dhikr, making it easier to gain rewards throughout the day
+
+
+![EZSMART](assets/images/EZSMART.jpg)
+
