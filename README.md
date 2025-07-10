@@ -1,33 +1,28 @@
-# حسنة | Hasna
 
-**تطبيق حسنة** هو تطبيق إسلامي شامل يساعدك على الحفاظ على صلتك اليومية بالله عز وجل 🌙✨
+🇸🇦 حسنة | Hasna
+تطبيق حسنة هو تطبيق إسلامي شامل يهدف إلى مساعدة المستخدمين في الحفاظ على صلتهم اليومية بالله.
+يوفّر التطبيق:
 
----
+أذكار الصباح والمساء
 
-## 📝 الوصف
+مجموعة من الأدعية من السنة النبوية
 
-Hasna is a comprehensive Islamic app designed to help users stay spiritually connected every day. It provides:
+مواقيت الصلاة حسب الموقع الجغرافي
 
-- 🕋 **Morning and evening Adhkar** (أذكار الصباح والمساء)
-- 🤲 **Prophetic supplications** (أدعية من السنة النبوية)
-- 🕰️ **Accurate prayer times based on location** (مواقيت الصلاة حسب الموقع)
-- 🧭 **Precise Qibla direction** (اتجاه القبلة بدقة)
-- 🔔 **Daily dhikr reminders** (تذكيرات يومية للذكر)
+اتجاه القبلة بدقة
 
----
+تذكيرات يومية للذكر، لتسهيل كسب الحسنات في كل وقت
 
-## 📸 Screenshots
-![Uploading WhatsApp Image 2025-07-10 at 15.25.04 (1).jpeg…]()
+🇬🇧 English Description
+Hasna App is a comprehensive Islamic app designed to help users stay spiritually connected every day.
+It provides:
 
+Morning and evening adhkar
 
-> Replace with your actual image path inside your repo.
+A collection of prophetic supplications
 
----
+Accurate prayer times based on location
 
-## 🚀 Getting Started
+Precise Qibla direction
 
-```bash
-git clone https://github.com/hozifakhaled/hasna.git
-cd hasna
-flutter pub get
-flutter run
+Daily reminders for dhikr, making it easier to gain rewards throughout the day
