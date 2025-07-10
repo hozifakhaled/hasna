@@ -17,8 +17,8 @@ Hasna is a comprehensive Islamic app designed to help users stay spiritually con
 ---
 
 ## 📸 Screenshots
+![Uploading WhatsApp Image 2025-07-10 at 15.25.04 (1).jpeg…]()
 
-![Hasna Screenshot](assets\images\WhatsApp Image 2025-07-10 at 15.25.04 (1).jpeg)
 
 > Replace with your actual image path inside your repo.
 
